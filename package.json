@@ -10,7 +10,8 @@
     "start": "webpack-dev-server --open",
     "build": "webpack --mode production",
     "dev": "webpack --mode development --watch",
-    "prettier": "prettier src/ --write"
+    "prettier": "prettier src/ --write",
+    "precommit": "eslint src/**/*.js && stylelint src/**/*.css --syntax css"
   },
   "keywords": [
     "rsschool",
@@ -65,7 +66,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-push": "npm run lint"
+      "pre-commit": "npm run precommit"
     }
   }
 }
