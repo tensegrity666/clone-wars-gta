@@ -80,7 +80,7 @@ module.exports = {
       },
       {
         test: [/\.vert$/, /\.frag$/],
-        use: "raw-loader"
+        use: 'raw-loader',
       },
       {
         test: /\.(gif|png|jpe?g|svg|xml)$/i,
