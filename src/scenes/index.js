@@ -2,7 +2,6 @@ import Phaser from 'phaser';
 
 import Example from '../feature/test';
 
-
 export default class MainScene extends Phaser.Scene {
   constructor() {
     super('game-scene');

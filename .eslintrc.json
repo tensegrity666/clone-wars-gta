@@ -13,11 +13,5 @@
     "parserOptions": {
         "ecmaVersion": 2018,
         "sourceType": "module"
-    },
-    "class-methods-use-this": [
-        "error",
-        {
-            "exceptMethods": ["preload", "create", "update"]
-        }
-    ]
+    }
 }

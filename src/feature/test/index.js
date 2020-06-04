@@ -2,7 +2,6 @@ import IAbstarct from '..';
 
 const TEST_URL = '../assets/sky.png';
 
-
 class Example extends IAbstarct {
   constructor() {
     super();
@@ -17,6 +16,5 @@ class Example extends IAbstarct {
     scene.add.image(400, 300, this.id);
   }
 }
-
 
 export default Example;

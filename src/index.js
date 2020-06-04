@@ -4,7 +4,6 @@ import Phaser from 'phaser';
 import MainScene from './scenes';
 import { PROPERTIES } from './constants';
 
-
 const config = {
   type: Phaser.AUTO,
   width: PROPERTIES.width,
@@ -17,6 +16,5 @@ const config = {
   },
   scene: [MainScene],
 };
-
 
 export default new Phaser.Game(config);
