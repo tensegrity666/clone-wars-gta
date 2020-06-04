@@ -22,10 +22,15 @@ module.exports = {
     maxAssetSize: 900000
   },
   devServer: {
-    contentBase: path.join(__dirname, 'build'),
+    contentBase: path.join(__dirname, 'src'),
   },
   plugins: [
     new CleanWebpackPlugin(),
+    new CopyPlugin({
+      patterns: [
+        { from: 'src/assets/', to: 'assets/' },
+      ],
+    }),
     new HtmlWebpackPlugin({
       template: './src/index.html',
       filename: 'index.html',
