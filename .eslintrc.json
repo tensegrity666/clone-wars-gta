@@ -3,6 +3,7 @@
         "browser": true,
         "es6": true
     },
+    "parser": "babel-eslint",
     "extends": [
         "airbnb-base"
     ],
@@ -13,5 +14,9 @@
     "parserOptions": {
         "ecmaVersion": 2018,
         "sourceType": "module"
+    },
+    "rules": {
+        "class-methods-use-this": "off",
+        "lines-between-class-members":"warn"
     }
 }

@@ -12,6 +12,12 @@
           "regenerator": true,
           "useESModules": true
         }
+    ],
+    [
+      "@babel/plugin-proposal-class-properties",
+      {
+        "loose": true
+      }
     ]
   ]
 }

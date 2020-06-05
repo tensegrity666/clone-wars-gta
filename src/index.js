@@ -2,7 +2,7 @@ import './index.css';
 import Phaser from 'phaser';
 
 import MainScene from './scenes';
-import { PROPERTIES } from './constants';
+import PROPERTIES from './game-props';
 
 const config = {
   type: Phaser.AUTO,
