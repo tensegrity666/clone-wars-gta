@@ -67,7 +67,6 @@
     "netlify": "^4.3.0",
     "phaser": "^3.23.0",
     "uniqid": "^5.2.0"
-
   },
   "husky": {
     "hooks": {

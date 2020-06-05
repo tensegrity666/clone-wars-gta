@@ -1,10 +1,8 @@
-/* eslint-disable import/prefer-default-export */
-
 const PROPERTIES = {
-  width: 2000,
-  height: 2000,
+  width: 800,
+  height: 800,
   phisycs: 'arcade',
-  gravity: { y: 300 },
+  gravity: { y: 0 },
 };
 
 export default PROPERTIES;
