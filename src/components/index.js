@@ -1,9 +1,12 @@
-/* eslint-disable lines-between-class-members */
+const features = [];
 
-class IAbstract {
-  preload() {}
-  create() {}
-  update() {}
-}
+const featuresId = [];
 
-export default IAbstract;
+const featuresMap = features.reduce((acc, FeatureCreater) => {
+  acc[FeatureCreater.id] = new FeatureCreater();
+  featuresId.push(FeatureCreater.id);
+  return acc;
+}, {});
+
+
+export { featuresMap, featuresId };
