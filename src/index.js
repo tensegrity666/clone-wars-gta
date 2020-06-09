@@ -11,6 +11,9 @@ const config = {
   type: Phaser.AUTO,
   width: PROPERTIES.width,
   height: PROPERTIES.height,
+  render: {
+    pixelart: true,
+  },
   physics: {
     default: PROPERTIES.phisycs,
     arcade: {

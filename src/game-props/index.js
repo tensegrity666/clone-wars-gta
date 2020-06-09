@@ -1,7 +1,12 @@
 const PROPERTIES = {
   width: 800,
   height: 600,
-  phisycs: 'arcade',
+  phisycs: {
+    default: 'arcade',
+    arcade: {
+      debug: true,
+    },
+  },
   gravity: { y: 0 },
 };
 

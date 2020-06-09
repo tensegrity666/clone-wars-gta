@@ -1,5 +1,6 @@
-const features = [];
+import Map from './map';
 
+const features = [Map];
 const featuresId = [];
 
 const featuresMap = features.reduce((acc, FeatureCreater) => {

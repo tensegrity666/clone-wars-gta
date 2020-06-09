@@ -25,12 +25,13 @@ class LoadScene extends Phaser.Scene {
     for (let i = 0; i < 100; i++) {
       this.load.image(PARAMS.IMAGES.LOGO.id + i, PARAMS.IMAGES.LOGO.url);
     }
+    // !
 
     this.addLoader();
   }
 
   create() {
-    this.scene.start(PARAMS.SCENES.menuScene, 'Welcome to the game!');
+    this.scene.start(PARAMS.SCENES.menuScene, '%USERNAME%');
   }
 
   loadImages() {

@@ -1,8 +1,11 @@
+/* eslint-disable no-console */
 /* eslint-disable class-methods-use-this */
 
 import Phaser from 'phaser';
 
 import PARAMS from './scenes.constants';
+
+import { featuresMap, featuresId } from '../components';
 
 class MainScene extends Phaser.Scene {
   constructor() {
@@ -11,9 +14,19 @@ class MainScene extends Phaser.Scene {
     });
   }
 
-  preload() {}
+  init(data) {
+    this.data = data;
 
-  create() {}
+    console.log(`${this.data}`);
+  }
+
+  preload() {
+    featuresId.forEach((id) => featuresMap[id].preload(this, featuresMap));
+  }
+
+  create() {
+    featuresId.forEach((id) => featuresMap[id].create(this, featuresMap));
+  }
 }
 
 export default MainScene;
