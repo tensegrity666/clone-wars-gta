@@ -1,4 +1,4 @@
-/* eslint-disable no-plusplus */
+/* eslint-disable no-console */
 /* eslint-disable class-methods-use-this */
 
 import Phaser from 'phaser';
@@ -15,7 +15,12 @@ class LoadScene extends Phaser.Scene {
   init() {}
 
   preload() {
-    this.load.image(PARAMS.IMAGES.LOGO.id, PARAMS.IMAGES.LOGO.url);
+    this.loadImages();
+    this.loadAudio();
+    this.loadSprites({
+      frameHeight: 32,
+      frameWidth: 32,
+    });
 
     const loadingBar = this.add.graphics({
       fillStyle: {
@@ -37,6 +42,8 @@ class LoadScene extends Phaser.Scene {
           this.game.renderer.width * percent,
           50,
         );
+
+        console.log(Math.round(percent * 100));
       },
       this,
     );
@@ -44,6 +51,24 @@ class LoadScene extends Phaser.Scene {
 
   create() {
     this.scene.start(PARAMS.SCENES.menuScene, 'Game is loaded');
+  }
+
+  loadImages() {
+    const img = Object.values(PARAMS.IMAGES);
+
+    img.forEach((element) => this.load.image(element.id, element.url));
+  }
+
+  loadAudio() {
+    const snd = Object.values(PARAMS.SOUNDS);
+
+    snd.forEach((element) => this.load.audio(element.id, element.url));
+  }
+
+  loadSprites(frameConfig) {
+    const sprt = Object.values(PARAMS.SPRITES);
+
+    sprt.forEach((element) => this.load.spritesheet(element.id, element.url, frameConfig));
   }
 }
 
