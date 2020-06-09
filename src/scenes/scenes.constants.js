@@ -12,6 +12,14 @@ const PARAMS = {
       id: uniqid('logo-'),
       url: '../assets/images/logo.png',
     },
+    START: {
+      id: uniqid('start-'),
+      url: '../assets/images/press-start.png',
+    },
+    ICON: {
+      id: uniqid('icon-'),
+      url: '../assets/images/space.png',
+    },
   },
   SOUNDS: {
     MENU: {
