@@ -1,8 +1,11 @@
 import './index.css';
 import Phaser from 'phaser';
 
-import MainScene from './scenes';
 import PROPERTIES from './game-props';
+import MainScene from './scenes';
+import MenuScene from './scenes/menu';
+import LoadScene from './scenes/load';
+import GameOverScene from './scenes/gameover';
 
 const config = {
   type: Phaser.AUTO,
@@ -14,7 +17,7 @@ const config = {
       gravity: PROPERTIES.gravity,
     },
   },
-  scene: [MainScene],
+  scene: [LoadScene, MenuScene, MainScene, GameOverScene],
 };
 
 export default new Phaser.Game(config);

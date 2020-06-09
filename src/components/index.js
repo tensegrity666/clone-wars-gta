@@ -8,5 +8,4 @@ const featuresMap = features.reduce((acc, FeatureCreater) => {
   return acc;
 }, {});
 
-
 export { featuresMap, featuresId };

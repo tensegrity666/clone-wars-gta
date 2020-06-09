@@ -8,5 +8,4 @@ const interactionsMap = interactions.reduce((acc, InteractionCreater) => {
   return acc;
 }, {});
 
-
 export { interactionsMap, interactionsId };

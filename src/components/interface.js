@@ -4,6 +4,7 @@ class IAbstract {
   object = null;
   state = {};
 
+  init() {}
   preload() {}
   create() {}
   update() {}
