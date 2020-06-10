@@ -20,7 +20,6 @@ class LoadScene extends Phaser.Scene {
       frameWidth: 32,
     });
 
-
     // ! large load simulation
     for (let i = 0; i < 100; i++) {
       this.load.image(PARAMS.IMAGES.LOGO.id + i, PARAMS.IMAGES.LOGO.url);
@@ -59,19 +58,16 @@ class LoadScene extends Phaser.Scene {
       },
     });
 
-    this.load.on(
-      'progress',
-      (percent) => {
-        loadingBar.fillRect(
-          0,
-          this.game.renderer.height / 2,
-          this.game.renderer.width * percent,
-          50,
-        );
+    this.load.on('progress', (percent) => {
+      loadingBar.fillRect(
+        0,
+        this.game.renderer.height / 2,
+        this.game.renderer.width * percent,
+        50,
+      );
 
-        console.log(Math.round(percent * 100));
-      },
-    );
+      console.log(Math.round(percent * 100));
+    });
 
     this.load.on('complete', () => console.log('Game is loaded'));
   }

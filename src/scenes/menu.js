@@ -29,12 +29,20 @@ class MenuScene extends Phaser.Scene {
   }
 
   showLogo() {
-    this.add.image(0, 0, PARAMS.IMAGES.LOGO.id).setOrigin(-0.7, -0.5).setDepth(0);
+    this.add
+      .image(0, 0, PARAMS.IMAGES.LOGO.id)
+      .setOrigin(-0.7, -0.5)
+      .setDepth(0);
   }
 
   showMenuButton() {
-    this.startBtn = this.add.image(this.game.renderer.width / 2,
-      this.game.renderer.height * 0.7, PARAMS.IMAGES.START.id).setDepth(1);
+    this.startBtn = this.add
+      .image(
+        this.game.renderer.width / 2,
+        this.game.renderer.height * 0.7,
+        PARAMS.IMAGES.START.id,
+      )
+      .setDepth(1);
 
     this.startBtn.setDisplaySize(200, 100);
   }
