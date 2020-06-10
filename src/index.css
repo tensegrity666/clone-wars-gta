@@ -4,6 +4,7 @@
 
 html {
   -webkit-text-size-adjust: 100%;
+  background-color: #000000;
 }
 
 body {
@@ -155,4 +156,9 @@ template {
 
 [hidden] {
   display: none;
+}
+
+.container {
+  display: block;
+  margin: 0 auto;
 }

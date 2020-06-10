@@ -18,6 +18,9 @@ class MenuScene extends Phaser.Scene {
     console.log(`Hello ${this.data}`);
   }
 
+  preload() {
+  }
+
   create() {
     this.showLogo();
     this.showMenuButton();
@@ -29,33 +32,30 @@ class MenuScene extends Phaser.Scene {
   }
 
   showLogo() {
-    this.add
-      .image(0, 0, PARAMS.IMAGES.LOGO.id)
-      .setOrigin(-0.7, -0.5)
-      .setDepth(0);
+    this.add.image(0, 300, PARAMS.IMAGES.LOGO.id).setOrigin(-1.5).setDepth(0);
   }
 
   showMenuButton() {
     this.startBtn = this.add
       .image(
-        this.game.renderer.width / 2,
-        this.game.renderer.height * 0.7,
+        650,
+        1000,
         PARAMS.IMAGES.START.id,
       )
       .setDepth(1);
 
-    this.startBtn.setDisplaySize(200, 100);
+    this.startBtn.setScale(1);
   }
 
   addMenuInteractive() {
     this.startBtn.setInteractive();
 
     this.startBtn.on('pointerover', () => {
-      this.startBtn.setDisplaySize(220, 120);
+      this.startBtn.setScale(1.3);
     });
 
     this.startBtn.on('pointerout', () => {
-      this.startBtn.setDisplaySize(200, 100);
+      this.startBtn.setScale(1);
     });
 
     this.startBtn.on('pointerup', () => {

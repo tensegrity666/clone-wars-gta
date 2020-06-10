@@ -8,6 +8,7 @@ import LoadScene from './scenes/load';
 import GameOverScene from './scenes/gameover';
 
 const config = {
+  parent: 'container',
   type: Phaser.AUTO,
   width: PROPERTIES.width,
   height: PROPERTIES.height,
@@ -18,7 +19,12 @@ const config = {
     default: PROPERTIES.phisycs,
     arcade: {
       gravity: PROPERTIES.gravity,
+      debug: true,
     },
+  },
+  scale: {
+    // mode: Phaser.Scale.RESIZE,
+    autoCenter: Phaser.Scale.CENTER_BOTH,
   },
   scene: [LoadScene, MenuScene, MainScene, GameOverScene],
 };
