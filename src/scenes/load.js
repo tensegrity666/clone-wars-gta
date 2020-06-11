@@ -4,6 +4,7 @@
 import Phaser from 'phaser';
 
 import PARAMS from './scenes.constants';
+import PROPERTIES from '../game-props';
 
 class LoadScene extends Phaser.Scene {
   constructor() {
@@ -48,8 +49,8 @@ class LoadScene extends Phaser.Scene {
   addLoader() {
     this.loading = this.add
       .text(
-        this.game.renderer.width * 0.4,
-        this.game.renderer.height * 0.4,
+        PROPERTIES.width * 0.4,
+        PROPERTIES.height * 0.4,
         '0%',
         { font: '60px gta', fill: 'orange' },
       )

@@ -4,6 +4,7 @@
 import Phaser from 'phaser';
 
 import PARAMS from './scenes.constants';
+import PROPERTIES from '../game-props';
 
 class MenuScene extends Phaser.Scene {
   constructor() {
@@ -29,12 +30,10 @@ class MenuScene extends Phaser.Scene {
   }
 
   showLogo() {
-    this.screen = this.game.renderer;
-
     this.add
       .image(
-        this.screen.width * 0.33,
-        this.screen.height * 0.2,
+        PROPERTIES.width * 0.33,
+        PROPERTIES.height * 0.2,
         PARAMS.IMAGES.LOGO.id,
       )
       .setDepth(0)
@@ -44,21 +43,21 @@ class MenuScene extends Phaser.Scene {
 
   showButtons() {
     this.btnStart = this.add
-      .text(this.screen.width * 0.35, this.screen.height * 0.5, 'START GAME', {
+      .text(PROPERTIES.width * 0.35, PROPERTIES.height * 0.5, 'START GAME', {
         font: '60px gta',
         fill: 'orange',
       })
       .setOrigin(0);
 
     this.btnMenu = this.add
-      .text(this.screen.width * 0.35, this.screen.height * 0.57, 'MENU', {
+      .text(PROPERTIES.width * 0.35, PROPERTIES.height * 0.57, 'MENU', {
         font: '60px gta',
         fill: 'orange',
       })
       .setOrigin(0);
 
     this.btnScore = this.add
-      .text(this.screen.width * 0.35, this.screen.height * 0.64, 'SCORE', {
+      .text(PROPERTIES.width * 0.35, PROPERTIES.height * 0.64, 'SCORE', {
         font: '60px gta',
         fill: 'orange',
       })
