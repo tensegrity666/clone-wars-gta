@@ -2,7 +2,6 @@
 /* eslint-disable class-methods-use-this */
 /* eslint-disable no-unused-vars */
 
-
 import Phaser from 'phaser';
 import IAbstarct from '../interface';
 
@@ -14,21 +13,21 @@ const playerShootPistolImg = '../../assets/player_pistol.png';
 const playerWithChainGunImg = '../../assets/player_chaingun.png';
 const playerShootChainGunImg = '../../assets/player_chaingun_shoot.png';
 
-let player;
 let controller;
 let bullet;
 const speedPlayer = 160;
 let aim;
-// let worldBounds;
 
 class Player extends IAbstarct {
+  static id = 'player';
+
   state = {
     isRunning: false,
     isShooting: false,
     hp: 100,
-  }
+  };
 
-  preload(scene, featureMap) {
+  preload(scene) {
     scene.load.image('bullet', bomb);
     scene.load.image('aim', aimImg);
 
@@ -58,14 +57,13 @@ class Player extends IAbstarct {
     });
   }
 
-  create(scene) {
-    // worldBounds = scene.physics.world.bounds;
+  create(scene, featuresMap) {
     scene.input.mouse.disableContextMenu();
 
     scene.add.image(700, 300, 'sky').setScale(3);
 
-    player = scene.physics.add.sprite(350, 350, 'player');
-    player.setCollideWorldBounds(true);
+    this.object = scene.physics.add.sprite(350, 350, 'player');
+    this.object.setCollideWorldBounds(true);
 
     aim = scene.physics.add.sprite(0, 0, 'aim');
 
@@ -134,45 +132,47 @@ class Player extends IAbstarct {
       keyObjRun: scene.input.keyboard.addKey('SPACE'),
       keyObjAction: scene.input.keyboard.addKey('ENTER'),
     };
+
+    scene.cameras.main.startFollow(this.object);
   }
 
   update(scene) {
     const pointer = scene.input.activePointer;
 
     if (controller.keyObjLeft.isDown && !this.state.isRunning) {
-      player.setVelocityX(-speedPlayer);
-      player.anims.play('walking', true);
-      player.rotation = 3.14;
+      this.object.setVelocityX(-speedPlayer);
+      this.object.anims.play('walking', true);
+      this.object.rotation = 3.14;
     }
 
     if (controller.keyObjRight.isDown && !this.state.isRunning) {
-      player.setVelocityX(speedPlayer);
-      player.anims.play('walking', true);
-      player.rotation = 0;
+      this.object.setVelocityX(speedPlayer);
+      this.object.anims.play('walking', true);
+      this.object.rotation = 0;
     }
 
     if (controller.keyObjUp.isDown && !this.state.isRunning) {
       if (controller.keyObjRight.isDown) {
-        player.rotation = -0.75;
+        this.object.rotation = -0.75;
       } else if (controller.keyObjLeft.isDown) {
-        player.rotation = (Math.PI * 5) / 4;
+        this.object.rotation = (Math.PI * 5) / 4;
       } else {
-        player.rotation = -Math.PI / 2;
+        this.object.rotation = -Math.PI / 2;
       }
-      player.setVelocityY(-speedPlayer);
-      player.anims.play('walking', true);
+      this.object.setVelocityY(-speedPlayer);
+      this.object.anims.play('walking', true);
     }
 
     if (controller.keyObjDown.isDown && !this.state.isRunning) {
       if (controller.keyObjRight.isDown) {
-        player.rotation = Math.PI / 4;
+        this.object.rotation = Math.PI / 4;
       } else if (controller.keyObjLeft.isDown) {
-        player.rotation = 2.5;
+        this.object.rotation = 2.5;
       } else {
-        player.rotation = Math.PI / 2;
+        this.object.rotation = Math.PI / 2;
       }
-      player.setVelocityY(speedPlayer);
-      player.anims.play('walking', true);
+      this.object.setVelocityY(speedPlayer);
+      this.object.anims.play('walking', true);
     }
 
     if (
@@ -181,31 +181,31 @@ class Player extends IAbstarct {
       && !controller.keyObjUp.isDown
       && !controller.keyObjDown.isDown
     ) {
-      player.anims.play('stand');
+      this.object.anims.play('stand');
     }
 
     if (!controller.keyObjLeft.isDown && !controller.keyObjRight.isDown) {
-      player.setVelocityX(0);
+      this.object.setVelocityX(0);
     }
     if (!controller.keyObjUp.isDown && !controller.keyObjDown.isDown) {
-      player.setVelocityY(0);
+      this.object.setVelocityY(0);
     }
 
     if (controller.keyObjRun.isDown) {
       this.state.isRunning = true;
-      if (player.body.velocity.x > 0) {
-        player.setVelocityX(speedPlayer * 2);
+      if (this.object.body.velocity.x > 0) {
+        this.object.setVelocityX(speedPlayer * 2);
       }
-      if (player.body.velocity.x < 0) {
-        player.setVelocityX(-speedPlayer * 2);
+      if (this.object.body.velocity.x < 0) {
+        this.object.setVelocityX(-speedPlayer * 2);
       }
-      if (player.body.velocity.y > 0) {
-        player.setVelocityY(speedPlayer * 2);
+      if (this.object.body.velocity.y > 0) {
+        this.object.setVelocityY(speedPlayer * 2);
       }
-      if (player.body.velocity.y < 0) {
-        player.setVelocityY(-speedPlayer * 2);
+      if (this.object.body.velocity.y < 0) {
+        this.object.setVelocityY(-speedPlayer * 2);
       }
-      player.anims.play('run', true);
+      this.object.anims.play('run', true);
     }
 
     if (controller.keyObjRun.isUp) {
@@ -218,21 +218,25 @@ class Player extends IAbstarct {
       aim.x = pointer.x;
       aim.y = pointer.y;
       // player.anims.play('shoot_pistol', true);
-      player.anims.play('stand_chaingun', true);
+      this.object.anims.play('stand_chaingun', true);
 
       const angle = Phaser.Math.Angle.Between(
-        player.x,
-        player.y,
+        this.object.x,
+        this.object.y,
         scene.input.x,
         scene.input.y,
       );
-      player.setRotation(angle);
+      this.object.setRotation(angle);
 
       if (pointer.leftButtonDown()) {
-        console.log(player.rotation);
+        console.log(this.object.rotation);
 
-        player.anims.play('shoot_chaingun', true);
-        bullet = scene.physics.add.sprite(player.x + 30, player.y, 'bullet');
+        this.object.anims.play('shoot_chaingun', true);
+        bullet = scene.physics.add.sprite(
+          this.object.x + 30,
+          this.object.y,
+          'bullet',
+        );
         scene.physics.moveTo(bullet, pointer.x, pointer.y, 1000);
       }
     }
@@ -241,7 +245,6 @@ class Player extends IAbstarct {
       aim.x = 0;
       aim.y = 0;
     }
-
 
     // show HP
   }

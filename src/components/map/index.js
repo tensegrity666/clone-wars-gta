@@ -1,6 +1,9 @@
+/* eslint-disable no-console */
 /* eslint-disable no-unused-vars */
+
 import IAbstarct from '../interface';
 import PARAMS from './map.constants';
+import Player from '../player';
 
 class Map extends IAbstarct {
   static id = PARAMS.id;
@@ -10,15 +13,21 @@ class Map extends IAbstarct {
     scene.load.tilemapTiledJSON(this.constructor.id, PARAMS.url);
   }
 
-  create(scene) {
+  create(scene, featuresMap) {
+    this.player = featuresMap[Player.id].object;
+    console.log(this.player);
+
     const map = scene.add.tilemap(this.constructor.id);
 
     const terrain = map.addTilesetImage('gta-tiles', 'terrain');
 
-    const layer = map.createStaticLayer('Ground', [terrain], 0, 0).setDepth(-1);
-    const topLayer = map.createStaticLayer('Top', [terrain], 0, 0);
+    map.createStaticLayer('Ground', [terrain], 0, 0).setDepth(-1);
+    const top = map.createStaticLayer('Top', [terrain], 0, 0).setDepth(-1);
 
-    topLayer.setCollisionByProperty({ collides: true });
+    scene.physics.add.collider(this.player, top);
+    top.setCollision([894, 609]);
+
+    scene.physics.world.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
   }
 }
 

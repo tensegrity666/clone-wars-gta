@@ -27,6 +27,10 @@ class MainScene extends Phaser.Scene {
   create() {
     featuresId.forEach((id) => featuresMap[id].create(this, featuresMap));
   }
+
+  update() {
+    featuresId.forEach((id) => featuresMap[id].update(this, featuresMap));
+  }
 }
 
 export default MainScene;

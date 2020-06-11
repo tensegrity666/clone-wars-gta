@@ -48,12 +48,10 @@ class LoadScene extends Phaser.Scene {
 
   addLoader() {
     this.loading = this.add
-      .text(
-        PROPERTIES.width * 0.4,
-        PROPERTIES.height * 0.4,
-        '0%',
-        { font: '60px gta', fill: 'orange' },
-      )
+      .text(PROPERTIES.width * 0.4, PROPERTIES.height * 0.4, '0%', {
+        font: '60px gta',
+        fill: 'orange',
+      })
       .setOrigin(0);
 
     this.load.on('progress', (percent) => {
