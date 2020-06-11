@@ -18,12 +18,9 @@ class MenuScene extends Phaser.Scene {
     console.log(`Hello ${this.data}`);
   }
 
-  preload() {
-  }
-
   create() {
     this.showLogo();
-    this.showMenuButton();
+    this.showButtons();
 
     this.sound.pauseOnBlur = false;
     this.sound.play(PARAMS.SOUNDS.MENU.id, { loop: true });
@@ -32,33 +29,58 @@ class MenuScene extends Phaser.Scene {
   }
 
   showLogo() {
-    this.add.image(0, 300, PARAMS.IMAGES.LOGO.id).setOrigin(-1.5).setDepth(0);
+    this.screen = this.game.renderer;
+
+    this.add
+      .image(
+        this.screen.width * 0.33,
+        this.screen.height * 0.2,
+        PARAMS.IMAGES.LOGO.id,
+      )
+      .setDepth(0)
+      .setOrigin(0)
+      .setSize(300, 400);
   }
 
-  showMenuButton() {
-    this.startBtn = this.add
-      .image(
-        650,
-        1000,
-        PARAMS.IMAGES.START.id,
-      )
-      .setDepth(1);
+  showButtons() {
+    this.btnStart = this.add
+      .text(this.screen.width * 0.35, this.screen.height * 0.5, 'START GAME', {
+        font: '60px gta',
+        fill: 'orange',
+      })
+      .setOrigin(0);
 
-    this.startBtn.setScale(1);
+    this.btnMenu = this.add
+      .text(this.screen.width * 0.35, this.screen.height * 0.57, 'MENU', {
+        font: '60px gta',
+        fill: 'orange',
+      })
+      .setOrigin(0);
+
+    this.btnScore = this.add
+      .text(this.screen.width * 0.35, this.screen.height * 0.64, 'SCORE', {
+        font: '60px gta',
+        fill: 'orange',
+      })
+      .setOrigin(0);
   }
 
   addMenuInteractive() {
-    this.startBtn.setInteractive();
+    const menu = [this.btnStart, this.btnMenu, this.btnScore];
 
-    this.startBtn.on('pointerover', () => {
-      this.startBtn.setScale(1.3);
+    menu.forEach((element) => {
+      element.setInteractive();
+
+      element.on('pointerover', () => {
+        element.setScale(1.05);
+      });
+
+      element.on('pointerout', () => {
+        element.setScale(1);
+      });
     });
 
-    this.startBtn.on('pointerout', () => {
-      this.startBtn.setScale(1);
-    });
-
-    this.startBtn.on('pointerup', () => {
+    this.btnStart.on('pointerup', () => {
       this.scene.start(PARAMS.SCENES.gameScene, 'start');
       this.sound.stopByKey(PARAMS.SOUNDS.MENU.id);
     });

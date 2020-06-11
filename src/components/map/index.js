@@ -15,7 +15,10 @@ class Map extends IAbstarct {
 
     const terrain = map.addTilesetImage('gta-tiles', 'terrain');
 
-    const layer = map.createStaticLayer('Ground', [terrain], 0, 0);
+    const layer = map.createStaticLayer('Ground', [terrain], 0, 0).setDepth(-1);
+    const topLayer = map.createStaticLayer('Top', [terrain], 0, 0);
+
+    topLayer.setCollisionByProperty({ collides: true });
   }
 }
 

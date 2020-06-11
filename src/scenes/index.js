@@ -21,8 +21,6 @@ class MainScene extends Phaser.Scene {
   }
 
   preload() {
-    this.canvas = this.sys.game.canvas;
-
     featuresId.forEach((id) => featuresMap[id].preload(this, featuresMap));
   }
 

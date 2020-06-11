@@ -96,6 +96,13 @@ module.exports = {
         ],
       },
       {
+        test: /\.(png|jpe?g|gif|svg|eot|ttf|woff|woff2)$/i,
+        loader: 'url-loader',
+        options: {
+          limit: 8192,
+        },
+      },
+      {
         test: /\.html$/,
         loader: 'html-loader',
         options: {

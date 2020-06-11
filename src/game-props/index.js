@@ -1,6 +1,6 @@
 const PROPERTIES = {
-  width: 1280,
-  height: 1280,
+  width: 1024,
+  height: 768,
   phisycs: 'arcade',
   gravity: { y: 0 },
 };
