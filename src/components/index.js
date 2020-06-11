@@ -1,6 +1,7 @@
 import Map from './map';
+import Player from './player';
 
-const features = [Map];
+const features = [Map, Player];
 const featuresId = [];
 
 const featuresMap = features.reduce((acc, FeatureCreater) => {
