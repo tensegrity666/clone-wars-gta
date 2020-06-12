@@ -21,13 +21,14 @@ class Map extends IAbstarct {
 
     const terrain = map.addTilesetImage('gta-tiles', 'terrain');
 
-    map.createStaticLayer('Ground', [terrain], 0, 0).setDepth(-1);
-    const top = map.createStaticLayer('Top', [terrain], 0, 0).setDepth(-1);
+    map.createStaticLayer('water', [terrain], 0, 0);
+    map.createStaticLayer('ground', [terrain], 0, 0);
+    const top = map.createStaticLayer('roads', [terrain], 0, 0);
 
     scene.physics.add.collider(this.player, top);
 
     // top.setCollisionByProperty({ collides: true });
-    top.setCollision([894, 609]);
+    // top.setCollision([894, 609]);
 
     scene.physics.world.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
   }

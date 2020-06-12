@@ -2,7 +2,7 @@ import uniqid from 'uniqid';
 
 const PARAMS = {
   id: uniqid('platforms-'),
-  url: '../assets/map/map.json',
+  url: '../assets/map/liberty-city.json',
   pic: '../assets/map/gta-tiles.jpg',
 };
 

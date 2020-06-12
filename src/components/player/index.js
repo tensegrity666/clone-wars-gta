@@ -62,7 +62,7 @@ class Player extends IAbstarct {
 
     scene.add.image(700, 300, 'sky').setScale(3);
 
-    this.object = scene.physics.add.sprite(350, 350, 'player');
+    this.object = scene.physics.add.sprite(2100, 3350, 'player').setDepth(1);
     this.object.setCollideWorldBounds(true);
 
     aim = scene.physics.add.sprite(0, 0, 'aim');
