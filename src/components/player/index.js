@@ -133,6 +133,8 @@ class Player extends IAbstarct {
       keyObjAction: scene.input.keyboard.addKey('ENTER'),
     };
 
+    scene.cameras.main.setZoom(0.6);
+    scene.cameras.main.zoomTo(1, 550);
     scene.cameras.main.startFollow(this.object);
   }
 
@@ -206,10 +208,13 @@ class Player extends IAbstarct {
         this.object.setVelocityY(-speedPlayer * 2);
       }
       this.object.anims.play('run', true);
+
+      scene.cameras.main.zoomTo(0.95, 250);
     }
 
     if (controller.keyObjRun.isUp) {
       this.state.isRunning = false;
+      scene.cameras.main.zoomTo(1, 150);
     }
 
     // SHOOTING
@@ -230,6 +235,8 @@ class Player extends IAbstarct {
 
       if (pointer.leftButtonDown()) {
         console.log(this.object.rotation);
+
+        // scene.cameras.main.shake(); ВЗРЫВ
 
         this.object.anims.play('shoot_chaingun', true);
         bullet = scene.physics.add.sprite(

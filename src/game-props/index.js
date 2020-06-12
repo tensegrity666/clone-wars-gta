@@ -1,5 +1,5 @@
 const PROPERTIES = {
-  width: 1024,
+  width: 1440,
   height: 768,
   phisycs: 'arcade',
   gravity: { y: 0 },

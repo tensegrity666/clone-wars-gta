@@ -25,6 +25,8 @@ class Map extends IAbstarct {
     const top = map.createStaticLayer('Top', [terrain], 0, 0).setDepth(-1);
 
     scene.physics.add.collider(this.player, top);
+
+    // top.setCollisionByProperty({ collides: true });
     top.setCollision([894, 609]);
 
     scene.physics.world.setBounds(0, 0, map.widthInPixels, map.heightInPixels);

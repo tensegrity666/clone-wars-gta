@@ -13,7 +13,7 @@ const config = {
   width: PROPERTIES.width,
   height: PROPERTIES.height,
   render: {
-    pixelart: true,
+    pixelart: false,
   },
   physics: {
     default: PROPERTIES.phisycs,
@@ -23,7 +23,7 @@ const config = {
     },
   },
   scale: {
-    // mode: Phaser.Scale.RESIZE,
+    // mode: Phaser.Scale.FIT,
     autoCenter: Phaser.Scale.CENTER_BOTH,
   },
   scene: [LoadScene, MenuScene, MainScene, GameOverScene],
