@@ -1,35 +1,41 @@
-/* eslint-disable no-console */
-/* eslint-disable class-methods-use-this */
 /* eslint-disable no-unused-vars */
 
 import Phaser from 'phaser';
 import IAbstarct from '../interface';
 
+const skyBg = '../../assets/sky.png';
 const bomb = '../../assets/bomb.png';
 const playerImg = '../../assets/player_walk.png';
 const playerRunImg = '../../assets/player_run.png';
-const aimImg = '../../assets/aim.png';
 const playerShootPistolImg = '../../assets/player_pistol.png';
 const playerWithChainGunImg = '../../assets/player_chaingun.png';
 const playerShootChainGunImg = '../../assets/player_chaingun_shoot.png';
 
+let player;
 let controller;
 let bullet;
 const speedPlayer = 160;
-let aim;
+// let worldBounds;
 
 class Player extends IAbstarct {
-  static id = 'player';
+  static get id() {
+    return 'player';
+  }
+
+  constructor() {
+    super();
+    this.id = 'player';
+  }
 
   state = {
     isRunning: false,
     isShooting: false,
-    hp: 100,
-  };
+    health: 100,
+  }
 
-  preload(scene) {
+  preload(scene, featureMap) {
+    scene.load.image('sky', skyBg);
     scene.load.image('bullet', bomb);
-    scene.load.image('aim', aimImg);
 
     scene.load.spritesheet('player', playerImg, {
       frameWidth: 35,
@@ -57,15 +63,18 @@ class Player extends IAbstarct {
     });
   }
 
-  create(scene, featuresMap) {
+  create(scene) {
     scene.input.mouse.disableContextMenu();
+    // worldBounds = scene.physics.world.bounds;
 
     scene.add.image(700, 300, 'sky').setScale(3);
 
-    this.object = scene.physics.add.sprite(2100, 3350, 'player').setDepth(1);
-    this.object.setCollideWorldBounds(true);
+    player = scene.physics.add.sprite(scene.game.config.width / 2, scene.game.config.height / 2, 'player');
+    player.setCollideWorldBounds(true);
 
-    aim = scene.physics.add.sprite(0, 0, 'aim');
+    scene.physics.add.collider(player);
+
+    scene.cameras.main.startFollow(player);
 
     scene.anims.create({
       key: 'walking',
@@ -131,50 +140,47 @@ class Player extends IAbstarct {
       keyObjDown: scene.input.keyboard.addKey('S'),
       keyObjRun: scene.input.keyboard.addKey('SPACE'),
       keyObjAction: scene.input.keyboard.addKey('ENTER'),
+      keyObjAttack: scene.input.keyboard.addKey('J'),
     };
-
-    scene.cameras.main.setZoom(0.6);
-    scene.cameras.main.zoomTo(1, 550);
-    scene.cameras.main.startFollow(this.object);
   }
 
   update(scene) {
     const pointer = scene.input.activePointer;
 
     if (controller.keyObjLeft.isDown && !this.state.isRunning) {
-      this.object.setVelocityX(-speedPlayer);
-      this.object.anims.play('walking', true);
-      this.object.rotation = 3.14;
+      player.setVelocityX(-speedPlayer);
+      player.anims.play('walking', true);
+      player.rotation = 3.14;
     }
 
     if (controller.keyObjRight.isDown && !this.state.isRunning) {
-      this.object.setVelocityX(speedPlayer);
-      this.object.anims.play('walking', true);
-      this.object.rotation = 0;
+      player.setVelocityX(speedPlayer);
+      player.anims.play('walking', true);
+      player.rotation = 0;
     }
 
     if (controller.keyObjUp.isDown && !this.state.isRunning) {
       if (controller.keyObjRight.isDown) {
-        this.object.rotation = -0.75;
+        player.rotation = -0.75;
       } else if (controller.keyObjLeft.isDown) {
-        this.object.rotation = (Math.PI * 5) / 4;
+        player.rotation = Math.PI * 5 / 4;
       } else {
-        this.object.rotation = -Math.PI / 2;
+        player.rotation = -Math.PI / 2;
       }
-      this.object.setVelocityY(-speedPlayer);
-      this.object.anims.play('walking', true);
+      player.setVelocityY(-speedPlayer);
+      player.anims.play('walking', true);
     }
 
     if (controller.keyObjDown.isDown && !this.state.isRunning) {
       if (controller.keyObjRight.isDown) {
-        this.object.rotation = Math.PI / 4;
+        player.rotation = Math.PI / 4;
       } else if (controller.keyObjLeft.isDown) {
-        this.object.rotation = 2.5;
+        player.rotation = 2.5;
       } else {
-        this.object.rotation = Math.PI / 2;
+        player.rotation = Math.PI / 2;
       }
-      this.object.setVelocityY(speedPlayer);
-      this.object.anims.play('walking', true);
+      player.setVelocityY(speedPlayer);
+      player.anims.play('walking', true);
     }
 
     if (
@@ -183,75 +189,45 @@ class Player extends IAbstarct {
       && !controller.keyObjUp.isDown
       && !controller.keyObjDown.isDown
     ) {
-      this.object.anims.play('stand');
+      player.anims.play('stand');
     }
 
     if (!controller.keyObjLeft.isDown && !controller.keyObjRight.isDown) {
-      this.object.setVelocityX(0);
+      player.setVelocityX(0);
     }
     if (!controller.keyObjUp.isDown && !controller.keyObjDown.isDown) {
-      this.object.setVelocityY(0);
+      player.setVelocityY(0);
     }
 
     if (controller.keyObjRun.isDown) {
       this.state.isRunning = true;
-      if (this.object.body.velocity.x > 0) {
-        this.object.setVelocityX(speedPlayer * 2);
+      if (player.body.velocity.x > 0) {
+        player.setVelocityX(speedPlayer * 2);
       }
-      if (this.object.body.velocity.x < 0) {
-        this.object.setVelocityX(-speedPlayer * 2);
+      if (player.body.velocity.x < 0) {
+        player.setVelocityX(-speedPlayer * 2);
       }
-      if (this.object.body.velocity.y > 0) {
-        this.object.setVelocityY(speedPlayer * 2);
+      if (player.body.velocity.y > 0) {
+        player.setVelocityY(speedPlayer * 2);
       }
-      if (this.object.body.velocity.y < 0) {
-        this.object.setVelocityY(-speedPlayer * 2);
+      if (player.body.velocity.y < 0) {
+        player.setVelocityY(-speedPlayer * 2);
       }
-      this.object.anims.play('run', true);
-
-      scene.cameras.main.zoomTo(0.95, 250);
+      player.anims.play('run', true);
     }
 
     if (controller.keyObjRun.isUp) {
       this.state.isRunning = false;
-      scene.cameras.main.zoomTo(1, 150);
     }
 
     // SHOOTING
-    if (pointer.rightButtonDown()) {
+    if (controller.keyObjAttack.isDown) {
       this.state.isShooting = true;
-      aim.x = pointer.x;
-      aim.y = pointer.y;
-      // player.anims.play('shoot_pistol', true);
-      this.object.anims.play('stand_chaingun', true);
-
-      const angle = Phaser.Math.Angle.Between(
-        this.object.x,
-        this.object.y,
-        scene.input.x,
-        scene.input.y,
-      );
-      this.object.setRotation(angle);
-
-      if (pointer.leftButtonDown()) {
-        console.log(this.object.rotation);
-
-        // scene.cameras.main.shake(); ВЗРЫВ
-
-        this.object.anims.play('shoot_chaingun', true);
-        bullet = scene.physics.add.sprite(
-          this.object.x + 30,
-          this.object.y,
-          'bullet',
-        );
-        scene.physics.moveTo(bullet, pointer.x, pointer.y, 1000);
-      }
+      player.anims.play('stand_chaingun', true);
+      bullet = scene.physics.add.sprite(player.x + Math.cos(player.rotation) * 20, player.y + Math.sin(player.rotation) * 20, 'bullet');
+      scene.physics.moveTo(bullet, player.x + Math.cos(player.rotation) * 1000, player.y + Math.sin(player.rotation) * 1000, 1000);
     }
-    if (!pointer.rightButtonDown()) {
-      // aim.disableInteractive();
-      aim.x = 0;
-      aim.y = 0;
-    }
+
 
     // show HP
   }
