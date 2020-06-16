@@ -1,6 +1,6 @@
 {
   "name": "gta",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "RSSchool Final Task",
   "main": "index.js",
   "scripts": {
