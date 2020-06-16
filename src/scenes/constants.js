@@ -1,5 +1,8 @@
 import { nanoid } from 'nanoid';
 
+import logo from './assets/images/logo.png';
+import music from './assets/sounds/title.mp3';
+
 const PARAMS = {
   SCENES: {
     gameScene: nanoid(),
@@ -10,13 +13,13 @@ const PARAMS = {
   IMAGES: {
     LOGO: {
       id: nanoid(),
-      path: '../assets/images/logo.png',
+      img: logo,
     },
   },
   SOUNDS: {
     MENU: {
       id: nanoid(),
-      path: '../assets/sounds/title.mp3',
+      file: music,
     },
   },
   // SPRITES: {

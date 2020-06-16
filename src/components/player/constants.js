@@ -8,10 +8,7 @@ import chaingunShoot from './assets/player_chaingun_shoot.png';
 import bomb from './assets/bomb.png';
 
 const PARAMS = {
-  INITIAL_COORDINATES: {
-    x: 6240,
-    y: 6300,
-  },
+  INITIAL_COORDINATES: [6240, 6300],
   IMAGES: {
     PLAYER: {
       walk: {

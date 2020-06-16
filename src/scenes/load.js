@@ -31,13 +31,13 @@ class LoadScene extends Phaser.Scene {
   loadImages() {
     const img = Object.values(PARAMS.IMAGES);
 
-    img.forEach((element) => this.load.image(element.id, element.path));
+    img.forEach((element) => this.load.image(element.id, element.img));
   }
 
   loadAudio() {
     const snd = Object.values(PARAMS.SOUNDS);
 
-    snd.forEach((element) => this.load.audio(element.id, element.path));
+    snd.forEach((element) => this.load.audio(element.id, element.file));
   }
 
   // loadSprites(frameConfig) {

@@ -33,15 +33,12 @@ class Player extends IAbstarct {
     this.car = featureMap[Car.id].object;
 
     this.object = scene.physics.add
-      .sprite(
-        PARAMS.INITIAL_COORDINATES.x,
-        PARAMS.INITIAL_COORDINATES.y,
-        this.constructor.id,
-      )
+      .sprite(...PARAMS.INITIAL_COORDINATES, this.constructor.id)
       .setDepth(1);
 
     this.object.setCollideWorldBounds(true);
     scene.physics.add.collider(this.object, this.car);
+    // нужно перенести создание bullet сюда в метод create
     // scene.physics.add.collider(this.bullet, this.car);
 
     scene.cameras.main.setZoom(0.6);

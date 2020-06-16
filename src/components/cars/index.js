@@ -17,7 +17,7 @@ class Car extends IAbstarct {
 
   preload(scene) {
     scene.load.spritesheet(
-      this.constructor.id,
+      PARAMS.IMAGES.PLAYER_CAR.id,
       PARAMS.IMAGES.PLAYER_CAR.img,
       PARAMS.IMAGES.PLAYER_CAR.frameSize,
     );
@@ -25,11 +25,7 @@ class Car extends IAbstarct {
 
   create(scene, featureMap) {
     this.object = scene.physics.add
-      .sprite(
-        PARAMS.INITIAL_COORDINATES.x,
-        PARAMS.INITIAL_COORDINATES.y,
-        this.constructor.id,
-      )
+      .sprite(...PARAMS.INITIAL_COORDINATES, PARAMS.IMAGES.PLAYER_CAR.id)
       .setDepth(1);
 
     this.object.setCollideWorldBounds(true);

@@ -16,20 +16,25 @@ class Map extends IAbstarct {
   create(scene, featuresMap) {
     this.player = featuresMap[Player.id].object;
 
-    const map = scene.add.tilemap(this.constructor.id);
+    this.object = scene.add.tilemap(this.constructor.id);
 
-    const terrain = map.addTilesetImage('gta-tiles', PARAMS.id);
+    const terrain = this.object.addTilesetImage('gta-tiles', PARAMS.id);
 
-    map.createStaticLayer('water', [terrain], 0, 0);
-    map.createStaticLayer('ground', [terrain], 0, 0);
-    const top = map.createStaticLayer('roads', [terrain], 0, 0);
+    this.object.createStaticLayer('water', [terrain], 0, 0);
+    this.object.createStaticLayer('ground', [terrain], 0, 0);
+    const top = this.object.createStaticLayer('roads', [terrain], 0, 0);
 
     // scene.physics.add.collider(this.player, top);
 
     // top.setCollisionByProperty({ collides: true });
     // top.setCollision([894, 609]);
 
-    scene.physics.world.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
+    scene.physics.world.setBounds(
+      0,
+      0,
+      this.object.widthInPixels,
+      this.object.heightInPixels,
+    );
   }
 }
 

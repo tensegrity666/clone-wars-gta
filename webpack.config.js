@@ -94,7 +94,11 @@ module.exports = {
         loader: 'file-loader'
       },
       {
-        test: /\.(gif|png|jpe?g|svg|xml)$/i,
+        test: /\.mp3$/,
+        loader: 'file-loader'
+      },
+      {
+        test: /\.(gif|png|jpe?g|svg)$/i,
         loader: 'file-loader',
         options: {
           name(resourcePath, resourceQuery) {
