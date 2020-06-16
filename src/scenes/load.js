@@ -16,10 +16,10 @@ class LoadScene extends Phaser.Scene {
   preload() {
     this.loadImages();
     this.loadAudio();
-    this.loadSprites({
-      frameHeight: 32,
-      frameWidth: 32,
-    });
+    // this.loadSprites({
+    //   frameHeight: 32,
+    //   frameWidth: 32,
+    // });
 
     this.addLoader();
   }
@@ -31,24 +31,24 @@ class LoadScene extends Phaser.Scene {
   loadImages() {
     const img = Object.values(PARAMS.IMAGES);
 
-    img.forEach((element) => this.load.image(element.id, element.url));
+    img.forEach((element) => this.load.image(element.id, element.path));
   }
 
   loadAudio() {
     const snd = Object.values(PARAMS.SOUNDS);
 
-    snd.forEach((element) => this.load.audio(element.id, element.url));
+    snd.forEach((element) => this.load.audio(element.id, element.path));
   }
 
-  loadSprites(frameConfig) {
-    const sprt = Object.values(PARAMS.SPRITES);
+  // loadSprites(frameConfig) {
+  //   const sprt = Object.values(PARAMS.SPRITES);
 
-    sprt.forEach((element) => this.load.spritesheet(element.id, element.url, frameConfig));
-  }
+  //   sprt.forEach((element) => this.load.spritesheet(element.id, element.path, frameConfig));
+  // }
 
   addLoader() {
     this.loading = this.add
-      .text(PROPERTIES.width * 0.4, PROPERTIES.height * 0.4, '0%', {
+      .text(PROPERTIES.width * 0.4, PROPERTIES.height * 0.4, '', {
         font: '60px gta',
         fill: 'orange',
       })

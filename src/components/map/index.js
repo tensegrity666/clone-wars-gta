@@ -10,19 +10,18 @@ class Map extends IAbstarct {
 
   preload(scene) {
     scene.load.image('terrain', PARAMS.pic);
-    scene.load.tilemapTiledJSON(this.constructor.id, PARAMS.url);
+    scene.load.tilemapTiledJSON(this.constructor.id, PARAMS.path);
   }
 
   create(scene, featuresMap) {
     this.player = featuresMap[Player.id].object;
-    console.log(this.player);
 
     const map = scene.add.tilemap(this.constructor.id);
 
     const terrain = map.addTilesetImage('gta-tiles', 'terrain');
 
-    map.createStaticLayer('water', [terrain], 0, 0);
-    map.createStaticLayer('ground', [terrain], 0, 0);
+    map.createStaticLayer('water', [terrain], 0, 0).setDepth(-1);
+    map.createStaticLayer('ground', [terrain], 0, 0).setDepth(-1);
     const top = map.createStaticLayer('roads', [terrain], 0, 0);
 
     scene.physics.add.collider(this.player, top);

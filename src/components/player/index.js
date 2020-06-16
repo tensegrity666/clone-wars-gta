@@ -1,235 +1,240 @@
 /* eslint-disable no-unused-vars */
 
-import Phaser from 'phaser';
+import uniqid from 'uniqid';
+
 import IAbstarct from '../interface';
 
-const skyBg = '../../assets/sky.png';
-const bomb = '../../assets/bomb.png';
-const playerImg = '../../assets/player_walk.png';
-const playerRunImg = '../../assets/player_run.png';
-const playerShootPistolImg = '../../assets/player_pistol.png';
-const playerWithChainGunImg = '../../assets/player_chaingun.png';
-const playerShootChainGunImg = '../../assets/player_chaingun_shoot.png';
-
-let player;
-let controller;
-let bullet;
-const speedPlayer = 160;
-// let worldBounds;
+import { PARAMS, MOVING_PARAMS, controlKeys } from './player.constants';
 
 class Player extends IAbstarct {
-  static get id() {
-    return 'player';
-  }
-
-  constructor() {
-    super();
-    this.id = 'player';
-  }
+  static id = uniqid('player-');
 
   state = {
     isRunning: false,
     isShooting: false,
     health: 100,
-  }
+  };
 
-  preload(scene, featureMap) {
-    scene.load.image('sky', skyBg);
-    scene.load.image('bullet', bomb);
+  preload(scene) {
+    scene.load.image(
+      PARAMS.IMAGES.BULLET.bomb.id,
+      PARAMS.IMAGES.BULLET.bomb.path,
+    );
 
-    scene.load.spritesheet('player', playerImg, {
-      frameWidth: 35,
-      frameHeight: 57,
-    });
-
-    scene.load.spritesheet('player_run', playerRunImg, {
-      frameWidth: 80,
-      frameHeight: 87,
-    });
-
-    scene.load.spritesheet('player_shoot_pistol', playerShootPistolImg, {
-      frameWidth: 60,
-      frameHeight: 60,
-    });
-
-    scene.load.spritesheet('player_with_chaingun', playerWithChainGunImg, {
-      frameWidth: 54,
-      frameHeight: 32,
-    });
-
-    scene.load.spritesheet('player_shoot_chaingun', playerShootChainGunImg, {
-      frameWidth: 53,
-      frameHeight: 30,
+    const sprites = Object.values(PARAMS.IMAGES.PLAYER);
+    sprites.forEach((sprite) => {
+      scene.load.spritesheet(sprite.id, sprite.path, sprite.frameSize);
     });
   }
 
-  create(scene) {
-    scene.input.mouse.disableContextMenu();
-    // worldBounds = scene.physics.world.bounds;
+  create(scene, featureMap) {
+    this.object = scene.physics.add
+      .sprite(
+        PARAMS.INITIAL_COORDINATES.x,
+        PARAMS.INITIAL_COORDINATES.y,
+        this.constructor.id,
+      )
+      .setDepth(1);
 
-    scene.add.image(700, 300, 'sky').setScale(3);
+    this.object.setCollideWorldBounds(true);
+    scene.physics.add.collider(this.object);
 
-    player = scene.physics.add.sprite(scene.game.config.width / 2, scene.game.config.height / 2, 'player');
-    player.setCollideWorldBounds(true);
+    scene.cameras.main.setZoom(0.6);
+    scene.cameras.main.zoomTo(1, 550);
+    scene.cameras.main.startFollow(this.object);
 
-    scene.physics.add.collider(player);
-
-    scene.cameras.main.startFollow(player);
-
-    scene.anims.create({
-      key: 'walking',
-      frames: scene.anims.generateFrameNumbers('player', {
-        start: 0,
-        end: 5,
-      }),
-      frameRate: 10,
-      repeat: -1,
-    });
-
-    scene.anims.create({
-      key: 'stand',
-      frames: scene.anims.generateFrameNumbers('player', {
-        start: 0,
-        end: 0,
-      }),
-      frameRate: 10,
-      repeat: -1,
-    });
-
-    scene.anims.create({
-      key: 'run',
-      frames: scene.anims.generateFrameNumbers('player_run', {
-        start: 0,
-        end: 5,
-      }),
-      frameRate: 10,
-      repeat: -1,
-    });
-
-    scene.anims.create({
-      key: 'shoot_pistol',
-      frames: scene.anims.generateFrameNumbers('player_shoot_pistol', {
-        start: 0,
-        end: 0,
-      }),
-    });
-
-    scene.anims.create({
-      key: 'stand_chaingun',
-      frames: scene.anims.generateFrameNumbers('player_with_chaingun', {
-        start: 0,
-        end: 0,
-      }),
-    });
-
-    scene.anims.create({
-      key: 'shoot_chaingun',
-      frames: scene.anims.generateFrameNumbers('player_shoot_chaingun', {
-        start: 0,
-        end: 1,
-      }),
-      frameRate: 10,
-      repeat: -1,
-    });
-
-    // Get keys object
-    controller = {
-      keyObjLeft: scene.input.keyboard.addKey('A'),
-      keyObjRight: scene.input.keyboard.addKey('D'),
-      keyObjUp: scene.input.keyboard.addKey('W'),
-      keyObjDown: scene.input.keyboard.addKey('S'),
-      keyObjRun: scene.input.keyboard.addKey('SPACE'),
-      keyObjAction: scene.input.keyboard.addKey('ENTER'),
-      keyObjAttack: scene.input.keyboard.addKey('J'),
-    };
+    this.addAnimation(scene);
   }
 
   update(scene) {
-    const pointer = scene.input.activePointer;
+    this.actionsWithPlayer(scene);
+  }
 
-    if (controller.keyObjLeft.isDown && !this.state.isRunning) {
-      player.setVelocityX(-speedPlayer);
-      player.anims.play('walking', true);
-      player.rotation = 3.14;
+  addAnimation(scene) {
+    this.animations = {
+      stand: {
+        key: 'stand',
+        frames: scene.anims.generateFrameNumbers(PARAMS.IMAGES.PLAYER.walk.id, {
+          start: 0,
+          end: 0,
+        }),
+        frameRate: 10,
+        repeat: -1,
+      },
+      walk: {
+        key: 'walking',
+        frames: scene.anims.generateFrameNumbers(PARAMS.IMAGES.PLAYER.walk.id, {
+          start: 0,
+          end: 5,
+        }),
+        frameRate: 10,
+        repeat: -1,
+      },
+      run: {
+        key: 'run',
+        frames: scene.anims.generateFrameNumbers(PARAMS.IMAGES.PLAYER.run.id, {
+          start: 0,
+          end: 5,
+        }),
+        frameRate: 10,
+        repeat: -1,
+      },
+      pistol: {
+        key: 'shoot_pistol',
+        frames: scene.anims.generateFrameNumbers(
+          PARAMS.IMAGES.PLAYER.pistol.id,
+          {
+            start: 0,
+            end: 0,
+          },
+        ),
+      },
+      chaingun: {
+        key: 'stand_chaingun',
+        frames: scene.anims.generateFrameNumbers(
+          PARAMS.IMAGES.PLAYER.chaingun.id,
+          {
+            start: 0,
+            end: 0,
+          },
+        ),
+      },
+      chaingunShoot: {
+        key: 'shoot_chaingun',
+        frames: scene.anims.generateFrameNumbers(
+          PARAMS.IMAGES.PLAYER.chaingunShoot.id,
+          {
+            start: 0,
+            end: 1,
+          },
+        ),
+        frameRate: 10,
+        repeat: -1,
+      },
+    };
+
+    const animConfig = Object.values(this.animations);
+
+    animConfig.forEach((a) => scene.anims.create(a));
+  }
+
+  actionsWithPlayer(scene) {
+    this.controller = {
+      moveUp: scene.input.keyboard.addKey(controlKeys.up),
+      moveRight: scene.input.keyboard.addKey(controlKeys.rigth),
+      moveDown: scene.input.keyboard.addKey(controlKeys.down),
+      moveLeft: scene.input.keyboard.addKey(controlKeys.left),
+      run: scene.input.keyboard.addKey(controlKeys.run),
+      doMainAttack: scene.input.keyboard.addKey(controlKeys.attackMain),
+      doAction: scene.input.keyboard.addKey(controlKeys.action),
+    };
+
+    if (this.controller.moveLeft.isDown && !this.state.isRunning) {
+      this.object.setVelocityX(-MOVING_PARAMS.PLAYER_SPEED);
+      this.object.anims.play(this.animations.walk.key, true);
+
+      this.object.rotation = MOVING_PARAMS.ROTATION.rotate;
     }
 
-    if (controller.keyObjRight.isDown && !this.state.isRunning) {
-      player.setVelocityX(speedPlayer);
-      player.anims.play('walking', true);
-      player.rotation = 0;
+    if (this.controller.moveRight.isDown && !this.state.isRunning) {
+      this.object.setVelocityX(MOVING_PARAMS.PLAYER_SPEED);
+      this.object.anims.play(this.animations.walk.key, true);
+
+      this.object.rotation = MOVING_PARAMS.ROTATION.noRotate;
     }
 
-    if (controller.keyObjUp.isDown && !this.state.isRunning) {
-      if (controller.keyObjRight.isDown) {
-        player.rotation = -0.75;
-      } else if (controller.keyObjLeft.isDown) {
-        player.rotation = Math.PI * 5 / 4;
+    if (this.controller.moveUp.isDown && !this.state.isRunning) {
+      if (this.controller.moveRight.isDown) {
+        this.object.rotation = -0.75;
+      } else if (this.controller.moveLeft.isDown) {
+        this.object.rotation = (Math.PI * 5) / 4;
       } else {
-        player.rotation = -Math.PI / 2;
+        this.object.rotation = -(Math.PI / 2);
       }
-      player.setVelocityY(-speedPlayer);
-      player.anims.play('walking', true);
+
+      this.object.setVelocityY(-MOVING_PARAMS.PLAYER_SPEED);
+
+      this.object.anims.play(this.animations.walk.key, true);
     }
 
-    if (controller.keyObjDown.isDown && !this.state.isRunning) {
-      if (controller.keyObjRight.isDown) {
-        player.rotation = Math.PI / 4;
-      } else if (controller.keyObjLeft.isDown) {
-        player.rotation = 2.5;
+    if (this.controller.moveDown.isDown && !this.state.isRunning) {
+      if (this.controller.moveRight.isDown) {
+        this.object.rotation = Math.PI / 4;
+      } else if (this.controller.moveLeft.isDown) {
+        this.object.rotation = 2.5;
       } else {
-        player.rotation = Math.PI / 2;
+        this.object.rotation = Math.PI / 2;
       }
-      player.setVelocityY(speedPlayer);
-      player.anims.play('walking', true);
+
+      this.object.setVelocityY(MOVING_PARAMS.PLAYER_SPEED);
+
+      this.object.anims.play(this.animations.walk.key, true);
     }
 
     if (
-      !controller.keyObjLeft.isDown
-      && !controller.keyObjRight.isDown
-      && !controller.keyObjUp.isDown
-      && !controller.keyObjDown.isDown
+      !this.controller.moveLeft.isDown
+      && !this.controller.moveRight.isDown
+      && !this.controller.moveUp.isDown
+      && !this.controller.moveDown.isDown
     ) {
-      player.anims.play('stand');
+      this.object.anims.play(this.animations.stand.key);
     }
 
-    if (!controller.keyObjLeft.isDown && !controller.keyObjRight.isDown) {
-      player.setVelocityX(0);
+    if (!this.controller.moveLeft.isDown && !this.controller.moveRight.isDown) {
+      this.object.setVelocityX(0);
     }
-    if (!controller.keyObjUp.isDown && !controller.keyObjDown.isDown) {
-      player.setVelocityY(0);
+    if (!this.controller.moveUp.isDown && !this.controller.moveDown.isDown) {
+      this.object.setVelocityY(0);
     }
 
-    if (controller.keyObjRun.isDown) {
+    if (this.controller.run.isDown) {
       this.state.isRunning = true;
-      if (player.body.velocity.x > 0) {
-        player.setVelocityX(speedPlayer * 2);
+
+      if (this.object.body.velocity.x > 0) {
+        this.object.setVelocityX(
+          MOVING_PARAMS.PLAYER_SPEED * MOVING_PARAMS.SPEED_COF,
+        );
       }
-      if (player.body.velocity.x < 0) {
-        player.setVelocityX(-speedPlayer * 2);
+      if (this.object.body.velocity.x < 0) {
+        this.object.setVelocityX(
+          -(MOVING_PARAMS.PLAYER_SPEED * MOVING_PARAMS.SPEED_COF),
+        );
       }
-      if (player.body.velocity.y > 0) {
-        player.setVelocityY(speedPlayer * 2);
+      if (this.object.body.velocity.y > 0) {
+        this.object.setVelocityY(
+          MOVING_PARAMS.PLAYER_SPEED * MOVING_PARAMS.SPEED_COF,
+        );
       }
-      if (player.body.velocity.y < 0) {
-        player.setVelocityY(-speedPlayer * 2);
+      if (this.object.body.velocity.y < 0) {
+        this.object.setVelocityY(
+          -(MOVING_PARAMS.PLAYER_SPEED * MOVING_PARAMS.SPEED_COF),
+        );
       }
-      player.anims.play('run', true);
+      this.object.anims.play(this.animations.run.key, true);
     }
 
-    if (controller.keyObjRun.isUp) {
+    if (this.controller.run.isUp) {
       this.state.isRunning = false;
     }
 
-    // SHOOTING
-    if (controller.keyObjAttack.isDown) {
+    if (this.controller.doMainAttack.isDown) {
       this.state.isShooting = true;
-      player.anims.play('stand_chaingun', true);
-      bullet = scene.physics.add.sprite(player.x + Math.cos(player.rotation) * 20, player.y + Math.sin(player.rotation) * 20, 'bullet');
-      scene.physics.moveTo(bullet, player.x + Math.cos(player.rotation) * 1000, player.y + Math.sin(player.rotation) * 1000, 1000);
+
+      this.object.anims.play(this.animations.chaingunShoot.key, true);
+
+      this.bullet = scene.physics.add.sprite(
+        this.object.x + Math.cos(this.object.rotation) * 20,
+        this.object.y + Math.sin(this.object.rotation) * 20,
+        PARAMS.IMAGES.BULLET.bomb.id,
+      );
+
+      scene.physics.moveTo(
+        this.bullet,
+        this.object.x + Math.cos(this.object.rotation) * 1000,
+        this.object.y + Math.sin(this.object.rotation) * 1000,
+        1000,
+      );
     }
-
-
-    // show HP
   }
 }
 

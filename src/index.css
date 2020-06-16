@@ -169,6 +169,7 @@ template {
 /* project styles */
 
 :root {
+  overflow: hidden;
   font-size: 62.5%;
   background-color: #000000;
 }

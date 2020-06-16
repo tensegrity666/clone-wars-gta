@@ -10,21 +10,18 @@ const PARAMS = {
   IMAGES: {
     LOGO: {
       id: uniqid('logo-'),
-      url: '../assets/images/logo.png',
+      path: '../assets/images/logo.png',
     },
   },
   SOUNDS: {
     MENU: {
       id: uniqid('menusnd-'),
-      url: '../assets/sounds/title.mp3',
+      path: '../assets/sounds/title.mp3',
     },
   },
-  SPRITES: {
-    PLAYER: {
-      id: uniqid('plyr-'),
-      url: '../assets/sprites/player.png',
-    },
-  },
+  // SPRITES: {
+
+  // }
 };
 
 export default PARAMS;
