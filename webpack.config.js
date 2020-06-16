@@ -89,6 +89,11 @@ module.exports = {
         loader: 'raw-loader',
       },
       {
+        type: 'javascript/auto',
+        test: /\.json$/,
+        loader: 'file-loader'
+      },
+      {
         test: /\.(gif|png|jpe?g|svg|xml)$/i,
         loader: 'file-loader',
         options: {

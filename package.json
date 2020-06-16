@@ -7,7 +7,7 @@
     "test": "jest",
     "lint": "npm run prettier && eslint src/**/*.js --fix && stylelint src/**/*.css --syntax css --fix",
     "deploy": "npm run lint && npm run build && netlify deploy --prod",
-    "start": "webpack-dev-server --open",
+    "start": "webpack-dev-server",
     "build": "webpack --mode production",
     "watch": "webpack --mode development --watch",
     "prettier": "prettier src/ --write",
