@@ -1,16 +1,16 @@
-/* eslint-disable no-console */
 /* eslint-disable no-unused-vars */
+import uniqid from 'uniqid';
 
 import IAbstarct from '../interface';
-import PARAMS from './map.constants';
+import PARAMS from './constants';
 import Player from '../player';
 
 class Map extends IAbstarct {
-  static id = PARAMS.id;
+  static id = uniqid('map-');
 
   preload(scene) {
-    scene.load.image('terrain', PARAMS.pic);
-    scene.load.tilemapTiledJSON(this.constructor.id, PARAMS.path);
+    scene.load.image(PARAMS.id, PARAMS.pic);
+    scene.load.tilemapTiledJSON(this.constructor.id, PARAMS.mapJSON);
   }
 
   create(scene, featuresMap) {
@@ -18,13 +18,13 @@ class Map extends IAbstarct {
 
     const map = scene.add.tilemap(this.constructor.id);
 
-    const terrain = map.addTilesetImage('gta-tiles', 'terrain');
+    const terrain = map.addTilesetImage('gta-tiles', PARAMS.id);
 
-    map.createStaticLayer('water', [terrain], 0, 0).setDepth(-1);
-    map.createStaticLayer('ground', [terrain], 0, 0).setDepth(-1);
+    map.createStaticLayer('water', [terrain], 0, 0);
+    map.createStaticLayer('ground', [terrain], 0, 0);
     const top = map.createStaticLayer('roads', [terrain], 0, 0);
 
-    scene.physics.add.collider(this.player, top);
+    // scene.physics.add.collider(this.player, top);
 
     // top.setCollisionByProperty({ collides: true });
     // top.setCollision([894, 609]);

@@ -1,5 +1,12 @@
 import uniqid from 'uniqid';
 
+import walk from './assets/player_walk.png';
+import run from './assets/player_run.png';
+import pistol from './assets/player_pistol.png';
+import chaingun from './assets/player_chaingun.png';
+import chaingunShoot from './assets/player_chaingun_shoot.png';
+import bomb from './assets/bomb.png';
+
 const PARAMS = {
   INITIAL_COORDINATES: {
     x: 6240,
@@ -9,7 +16,7 @@ const PARAMS = {
     PLAYER: {
       walk: {
         id: uniqid(),
-        path: '../../assets/player/player_walk.png',
+        img: walk,
         frameSize: {
           frameWidth: 35,
           frameHeight: 57,
@@ -17,7 +24,7 @@ const PARAMS = {
       },
       run: {
         id: uniqid(),
-        path: '../../assets/player/player_run.png',
+        img: run,
         frameSize: {
           frameWidth: 80,
           frameHeight: 87,
@@ -25,7 +32,7 @@ const PARAMS = {
       },
       pistol: {
         id: uniqid(),
-        path: '../../assets/player/player_pistol.png',
+        img: pistol,
         frameSize: {
           frameWidth: 60,
           frameHeight: 60,
@@ -33,7 +40,7 @@ const PARAMS = {
       },
       chaingun: {
         id: uniqid(),
-        path: '../../assets/player/player_chaingun.png',
+        img: chaingun,
         frameSize: {
           frameWidth: 54,
           frameHeight: 32,
@@ -41,7 +48,7 @@ const PARAMS = {
       },
       chaingunShoot: {
         id: uniqid(),
-        path: '../../assets/player/player_chaingun_shoot.png',
+        img: chaingunShoot,
         frameSize: {
           frameWidth: 53,
           frameHeight: 30,
@@ -51,7 +58,7 @@ const PARAMS = {
     BULLET: {
       bomb: {
         id: uniqid(),
-        path: '../../assets/player/bomb.png',
+        img: bomb,
       },
     },
   },

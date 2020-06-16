@@ -5,7 +5,7 @@ import uniqid from 'uniqid';
 import IAbstarct from '../interface';
 import Player from '../player';
 
-import { PARAMS, controlKeys } from './car.constants';
+import { PARAMS, controlKeys } from './constants';
 
 class Car extends IAbstarct {
   static id = uniqid('car-');
@@ -20,7 +20,7 @@ class Car extends IAbstarct {
     // ! НЕ РАБОТАЕТ
     scene.load.spritesheet(
       PARAMS.IMAGES.PLAYER_CAR.id,
-      PARAMS.IMAGES.PLAYER_CAR.path,
+      PARAMS.IMAGES.PLAYER_CAR.img,
       PARAMS.IMAGES.PLAYER_CAR.frameSize,
     );
   }

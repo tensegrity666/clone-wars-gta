@@ -1,5 +1,7 @@
 import uniqid from 'uniqid';
 
+import car from './assets/car.png';
+
 const PARAMS = {
   INITIAL_COORDINATES: {
     x: 6000,
@@ -8,7 +10,7 @@ const PARAMS = {
   IMAGES: {
     PLAYER_CAR: {
       id: uniqid(),
-      path: '../../assets/cars/car.png',
+      img: car,
       frameSize: {
         frameWidth: 256,
         frameHeight: 256,

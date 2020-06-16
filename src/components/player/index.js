@@ -4,7 +4,7 @@ import uniqid from 'uniqid';
 
 import IAbstarct from '../interface';
 
-import { PARAMS, MOVING_PARAMS, controlKeys } from './player.constants';
+import { PARAMS, MOVING_PARAMS, controlKeys } from './constants';
 
 class Player extends IAbstarct {
   static id = uniqid('player-');
@@ -18,13 +18,13 @@ class Player extends IAbstarct {
   preload(scene) {
     scene.load.image(
       PARAMS.IMAGES.BULLET.bomb.id,
-      PARAMS.IMAGES.BULLET.bomb.path,
+      PARAMS.IMAGES.BULLET.bomb.img,
     );
 
     const sprites = Object.values(PARAMS.IMAGES.PLAYER);
 
     sprites.forEach((sprite) => {
-      scene.load.spritesheet(sprite.id, sprite.path, sprite.frameSize);
+      scene.load.spritesheet(sprite.id, sprite.img, sprite.frameSize);
     });
   }
 
