@@ -22,6 +22,7 @@ module.exports = {
     maxAssetSize: 900000
   },
   devServer: {
+    open: false,
     contentBase: path.join(__dirname, 'src'),
   },
   plugins: [
@@ -85,22 +86,23 @@ module.exports = {
       },
       {
         test: [/\.vert$/, /\.frag$/],
-        use: 'raw-loader',
+        loader: 'raw-loader',
       },
       {
         test: /\.(gif|png|jpe?g|svg|xml)$/i,
-        use: [
-          {
-            loader: 'file-loader',
+        loader: 'file-loader',
+        options: {
+          name(resourcePath, resourceQuery) {
+            if (process.env.NODE_ENV === 'development') {
+              return '[path][name].[ext]';
+            }
+            return '[contenthash].[ext]';
           },
-        ],
+        },
       },
       {
-        test: /\.(png|jpe?g|gif|svg|eot|ttf|woff|woff2)$/i,
+        test: /\.(ttf|woff|woff2)$/i,
         loader: 'url-loader',
-        options: {
-          limit: 8192,
-        },
       },
       {
         test: /\.html$/,
