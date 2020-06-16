@@ -1,4 +1,4 @@
-import uniqid from 'uniqid';
+import { nanoid } from 'nanoid';
 
 import walk from './assets/player_walk.png';
 import run from './assets/player_run.png';
@@ -15,7 +15,7 @@ const PARAMS = {
   IMAGES: {
     PLAYER: {
       walk: {
-        id: uniqid(),
+        id: nanoid(),
         img: walk,
         frameSize: {
           frameWidth: 35,
@@ -23,7 +23,7 @@ const PARAMS = {
         },
       },
       run: {
-        id: uniqid(),
+        id: nanoid(),
         img: run,
         frameSize: {
           frameWidth: 80,
@@ -31,7 +31,7 @@ const PARAMS = {
         },
       },
       pistol: {
-        id: uniqid(),
+        id: nanoid(),
         img: pistol,
         frameSize: {
           frameWidth: 60,
@@ -39,7 +39,7 @@ const PARAMS = {
         },
       },
       chaingun: {
-        id: uniqid(),
+        id: nanoid(),
         img: chaingun,
         frameSize: {
           frameWidth: 54,
@@ -47,7 +47,7 @@ const PARAMS = {
         },
       },
       chaingunShoot: {
-        id: uniqid(),
+        id: nanoid(),
         img: chaingunShoot,
         frameSize: {
           frameWidth: 53,
@@ -57,7 +57,7 @@ const PARAMS = {
     },
     BULLET: {
       bomb: {
-        id: uniqid(),
+        id: nanoid(),
         img: bomb,
       },
     },

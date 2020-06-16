@@ -1,13 +1,14 @@
 /* eslint-disable no-unused-vars */
 
-import uniqid from 'uniqid';
+import { nanoid } from 'nanoid';
 
 import IAbstarct from '../interface';
 
 import { PARAMS, MOVING_PARAMS, controlKeys } from './constants';
+import Car from '../cars';
 
 class Player extends IAbstarct {
-  static id = uniqid('player-');
+  static id = nanoid();
 
   state = {
     isRunning: false,
@@ -29,6 +30,8 @@ class Player extends IAbstarct {
   }
 
   create(scene, featureMap) {
+    this.car = featureMap[Car.id].object;
+
     this.object = scene.physics.add
       .sprite(
         PARAMS.INITIAL_COORDINATES.x,
@@ -38,7 +41,8 @@ class Player extends IAbstarct {
       .setDepth(1);
 
     this.object.setCollideWorldBounds(true);
-    scene.physics.add.collider(this.object);
+    scene.physics.add.collider(this.object, this.car);
+    // scene.physics.add.collider(this.bullet, this.car);
 
     scene.cameras.main.setZoom(0.6);
     scene.cameras.main.zoomTo(1, 550);

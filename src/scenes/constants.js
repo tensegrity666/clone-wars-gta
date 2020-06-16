@@ -1,21 +1,21 @@
-import uniqid from 'uniqid';
+import { nanoid } from 'nanoid';
 
 const PARAMS = {
   SCENES: {
-    gameScene: uniqid('game-'),
-    loadScene: uniqid('load-'),
-    menuScene: uniqid('menu-'),
-    gameOverScene: uniqid('gameover-'),
+    gameScene: nanoid(),
+    loadScene: nanoid(),
+    menuScene: nanoid(),
+    gameOverScene: nanoid(),
   },
   IMAGES: {
     LOGO: {
-      id: uniqid('logo-'),
+      id: nanoid(),
       path: '../assets/images/logo.png',
     },
   },
   SOUNDS: {
     MENU: {
-      id: uniqid('menusnd-'),
+      id: nanoid(),
       path: '../assets/sounds/title.mp3',
     },
   },

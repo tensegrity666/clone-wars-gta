@@ -1,4 +1,4 @@
-import uniqid from 'uniqid';
+import { nanoid } from 'nanoid';
 
 import car from './assets/car.png';
 
@@ -9,7 +9,7 @@ const PARAMS = {
   },
   IMAGES: {
     PLAYER_CAR: {
-      id: uniqid(),
+      id: nanoid(),
       img: car,
       frameSize: {
         frameWidth: 256,

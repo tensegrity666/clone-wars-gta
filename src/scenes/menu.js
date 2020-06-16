@@ -1,9 +1,8 @@
-/* eslint-disable class-methods-use-this */
 /* eslint-disable no-console */
 
 import Phaser from 'phaser';
 
-import PARAMS from './scenes.constants';
+import PARAMS from './constants';
 import PROPERTIES from '../game-props';
 
 class MenuScene extends Phaser.Scene {

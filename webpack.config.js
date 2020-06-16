@@ -108,6 +108,9 @@ module.exports = {
       {
         test: /\.(ttf|woff|woff2)$/i,
         loader: 'url-loader',
+        options: {
+          limit: 8192,
+        },
       },
       {
         test: /\.html$/,

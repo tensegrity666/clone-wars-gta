@@ -1,12 +1,12 @@
 /* eslint-disable no-unused-vars */
-import uniqid from 'uniqid';
+import { nanoid } from 'nanoid';
 
 import IAbstarct from '../interface';
 import PARAMS from './constants';
 import Player from '../player';
 
 class Map extends IAbstarct {
-  static id = uniqid('map-');
+  static id = nanoid();
 
   preload(scene) {
     scene.load.image(PARAMS.id, PARAMS.pic);

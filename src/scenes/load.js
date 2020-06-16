@@ -3,7 +3,7 @@
 
 import Phaser from 'phaser';
 
-import PARAMS from './scenes.constants';
+import PARAMS from './constants';
 import PROPERTIES from '../game-props';
 
 class LoadScene extends Phaser.Scene {

@@ -2,7 +2,7 @@ import Map from './map';
 import Player from './player';
 import Car from './cars';
 
-const features = [Player, Car, Map];
+const features = [Car, Player, Map];
 const featuresId = [];
 
 const featuresMap = features.reduce((acc, FeatureCreater) => {

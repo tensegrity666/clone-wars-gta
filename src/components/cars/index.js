@@ -1,14 +1,13 @@
 /* eslint-disable no-unused-vars */
 
-import uniqid from 'uniqid';
+import { nanoid } from 'nanoid';
 
 import IAbstarct from '../interface';
-import Player from '../player';
 
 import { PARAMS, controlKeys } from './constants';
 
 class Car extends IAbstarct {
-  static id = uniqid('car-');
+  static id = nanoid();
 
   state = {
     health: 100,
@@ -17,17 +16,14 @@ class Car extends IAbstarct {
   };
 
   preload(scene) {
-    // ! НЕ РАБОТАЕТ
     scene.load.spritesheet(
-      PARAMS.IMAGES.PLAYER_CAR.id,
+      this.constructor.id,
       PARAMS.IMAGES.PLAYER_CAR.img,
       PARAMS.IMAGES.PLAYER_CAR.frameSize,
     );
   }
 
   create(scene, featureMap) {
-    this.player = featureMap[Player.id].object;
-
     this.object = scene.physics.add
       .sprite(
         PARAMS.INITIAL_COORDINATES.x,
@@ -37,7 +33,6 @@ class Car extends IAbstarct {
       .setDepth(1);
 
     this.object.setCollideWorldBounds(true);
-    scene.physics.add.collider(this.object, this.player);
 
     scene.cameras.main.setZoom(0.6);
     scene.cameras.main.zoomTo(1, 550);

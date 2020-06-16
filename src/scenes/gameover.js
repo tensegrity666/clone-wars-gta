@@ -2,7 +2,7 @@
 
 import Phaser from 'phaser';
 
-import PARAMS from './scenes.constants';
+import PARAMS from './constants';
 
 class GameOverScene extends Phaser.Scene {
   constructor() {
