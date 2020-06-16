@@ -22,6 +22,7 @@ class Player extends IAbstarct {
     );
 
     const sprites = Object.values(PARAMS.IMAGES.PLAYER);
+
     sprites.forEach((sprite) => {
       scene.load.spritesheet(sprite.id, sprite.path, sprite.frameSize);
     });
