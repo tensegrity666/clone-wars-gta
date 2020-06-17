@@ -7,7 +7,7 @@
 
 * "git pull" выполняется автоматически перед выполнением "git push".
 
-* текст коммита должен соответствовать [соглашению, принятому в RSSchool](https://docs.rs.school/#/git-convention)
+* текст коммита должен соответствовать [соглашению, принятому в RSSchool](https://docs.rs.school/#/git-convention), иначе будет отклонён линтером.
 
 ### Install
 * npm i
