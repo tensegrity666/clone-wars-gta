@@ -7,6 +7,7 @@
 * текст коммита должен соответствовать [соглашению, принятому в RSSchool](https://docs.rs.school/#/git-convention)
 
 # [Changelog ](https://github.com/rolling-scopes-school/clonewars-gta/blob/dev/CHANGELOG.md)
+# [Deployed sample (updated as it develops)](https://phaser-demo-arcade.netlify.app/)
 
 ## Install
 * npm i
