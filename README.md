@@ -6,6 +6,7 @@
 
 * текст коммита должен соответствовать [соглашению, принятому в RSSchool](https://docs.rs.school/#/git-convention)
 
+# [Changelog ](https://github.com/rolling-scopes-school/clonewars-gta/blob/dev/CHANGELOG.md)
 
 ## Install
 * npm i
