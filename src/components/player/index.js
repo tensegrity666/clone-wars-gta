@@ -37,7 +37,7 @@ class Player extends IAbstarct {
       .setDepth(1);
 
     this.object
-      .enableBody(true, ...PARAMS.INITIAL_COORDINATES)
+      .enableBody()
       .setBounce(10, 10)
       .setCircle(12)
       .setOffset(5, 12);
@@ -47,9 +47,9 @@ class Player extends IAbstarct {
     // нужно перенести создание bullet сюда в метод create
     // scene.physics.add.collider(this.bullet, this.car);
 
-    scene.cameras.main.setZoom(0.6);
-    scene.cameras.main.zoomTo(1, 550);
-    scene.cameras.main.startFollow(this.object);
+    // scene.cameras.main.setZoom(0.6);
+    // scene.cameras.main.zoomTo(1, 550);
+    // scene.cameras.main.startFollow(this.object);
 
     this.addAnimation(scene);
   }

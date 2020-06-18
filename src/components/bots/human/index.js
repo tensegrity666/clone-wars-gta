@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 /* eslint-disable no-unused-vars */
 
 import Phaser from 'phaser';
@@ -10,7 +9,7 @@ import Player from '../../player';
 
 import { PARAMS, MOVING_PARAMS } from './constants';
 
-class Citizen extends IAbstarct {
+class Human extends IAbstarct {
   static id = nanoid();
 
   state = {
@@ -39,15 +38,9 @@ class Citizen extends IAbstarct {
     this.addAnimation(scene);
   }
 
-  update(scene) {
-    this.object.playAnimation(this.animations.walk.key, true);
+  update() {}
 
-    const cam = scene.cameras.main;
-    const p = scene.input.activePointer.positionToCamera(cam);
-    console.log(`px: ${p.x} py: ${p.y}`);
-  }
-
-  addAnimation(scene) {
+  addAnimation(scene, character) {
     this.animations = {
       stand: {
         key: 'stand',
@@ -112,4 +105,4 @@ class Citizen extends IAbstarct {
   }
 }
 
-export default Citizen;
+export default Human;
