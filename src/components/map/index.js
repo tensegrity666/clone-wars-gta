@@ -1,53 +1,46 @@
 /* eslint-disable no-unused-vars */
-import { nanoid } from 'nanoid';
+import {
+  nanoid,
+} from 'nanoid';
 
 import IAbstarct from '../interface';
 import PARAMS from './constants';
 import Player from '../player';
 
 class Map extends IAbstarct {
-  static idRoad = nanoid();
-
-  static idBuild = nanoid();
+  static id = nanoid();
 
   preload(scene) {
-    scene.load.image(PARAMS.idRoad, PARAMS.picRoad);
-    scene.load.tilemapTiledJSON(this.constructor.idRoad, PARAMS.mapRoadJSON);
-
-    scene.load.image(PARAMS.idBuild, PARAMS.picBuild);
-    scene.load.tilemapTiledJSON(this.constructor.idBuild, PARAMS.mapBuildJSON);
+    scene.load.image(PARAMS.id, PARAMS.pic);
+    scene.load.tilemapTiledJSON(this.constructor.id, PARAMS.mapJSON);
   }
 
   create(scene, featuresMap) {
     this.player = featuresMap[Player.id].object;
 
-    this.object = scene.add.tilemap(this.constructor.idRoad);
+    this.object = scene.add.tilemap(this.constructor.id);
 
-    const terrain = this.object.addTilesetImage('gta-tiles', PARAMS.idRoad);
+    const terrain = this.object.addTilesetImage('gta-tiles', PARAMS.id);
 
     this.object.createStaticLayer('water', [terrain], 0, 0);
     this.object.createStaticLayer('ground', [terrain], 0, 0);
-    const roadObject = this.object.createStaticLayer('roads', [terrain], 0, 0);
+    this.object.createStaticLayer('roads', [terrain], 0, 0);
 
-    this.object_build = scene.add.tilemap(this.constructor.idBuild);
+    const boxes = this.object.createStaticLayer('box', [terrain], 0, 0);
 
-    const build = this.object.addTilesetImage('build', PARAMS.idRoad);
+    scene.physics.add.collider(this.player, boxes);
 
-    this.object_build.createStaticLayer('green', [build], 0, 0);
-    this.object_build.createStaticLayer('build', [build], 0, 0);
-    this.object_build.createStaticLayer('tree', [build], 0, 0);
-    this.object_build.createStaticLayer('top', [build], 0, 0);
+    boxes.setCollisionByProperty({
+      collides: true,
+    });
 
-    // scene.physics.add.collider(this.player, top);
-
-    // top.setCollisionByProperty({ collides: true });
-    // top.setCollision([894, 609]);
+    boxes.setCollision([894, 609]);
 
     scene.physics.world.setBounds(
       0,
       0,
       this.object.widthInPixels,
-      this.object.heightInPixels
+      this.object.heightInPixels,
     );
   }
 }

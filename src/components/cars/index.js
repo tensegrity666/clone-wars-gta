@@ -19,7 +19,7 @@ class Car extends IAbstarct {
     scene.load.spritesheet(
       PARAMS.IMAGES.PLAYER_CAR.id,
       PARAMS.IMAGES.PLAYER_CAR.img,
-      PARAMS.IMAGES.PLAYER_CAR.frameSize
+      PARAMS.IMAGES.PLAYER_CAR.frameSize,
     );
   }
 
@@ -54,9 +54,9 @@ class Car extends IAbstarct {
     };
 
     if (
-      this.controller.moveUp.isDown &&
-      this.state.isPlayerInside &&
-      this.state.speed <= 500
+      this.controller.moveUp.isDown
+      && this.state.isPlayerInside
+      && this.state.speed <= 500
     ) {
       this.state.speed += 10;
     }
@@ -104,13 +104,13 @@ class Car extends IAbstarct {
     // console.log('rotation:', this.object.rotation);
 
     this.object.setVelocityY(
-      -this.state.speed *
-        Math.cos(((this.object.rotation * 180) / Math.PI - 360) * 0.01745)
+      -this.state.speed
+        * Math.cos(((this.object.rotation * 180) / Math.PI - 360) * 0.01745),
     );
 
     this.object.setVelocityX(
-      this.state.speed *
-        Math.sin(((this.object.rotation * 180) / Math.PI - 360) * 0.01745)
+      this.state.speed
+        * Math.sin(((this.object.rotation * 180) / Math.PI - 360) * 0.01745),
     );
   }
 }
