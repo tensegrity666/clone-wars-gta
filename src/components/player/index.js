@@ -36,8 +36,14 @@ class Player extends IAbstarct {
       .sprite(...PARAMS.INITIAL_COORDINATES, this.constructor.id)
       .setDepth(1);
 
-    this.object.setCollideWorldBounds(true);
+    this.object
+      .enableBody(true, ...PARAMS.INITIAL_COORDINATES)
+      .setBounce(10, 10)
+      .setCircle(12)
+      .setOffset(5, 12);
+
     scene.physics.add.collider(this.object, this.car);
+
     // нужно перенести создание bullet сюда в метод create
     // scene.physics.add.collider(this.bullet, this.car);
 

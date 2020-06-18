@@ -1,4 +1,6 @@
-const interactions = [];
+import Interaction from './player';
+
+const interactions = [Interaction];
 
 const interactionsId = [];
 

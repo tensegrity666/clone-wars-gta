@@ -26,13 +26,8 @@ class Car extends IAbstarct {
   create(scene, featureMap) {
     this.object = scene.physics.add
       .sprite(...PARAMS.INITIAL_COORDINATES, PARAMS.IMAGES.PLAYER_CAR.id)
-      .setDepth(1);
-
-    this.object.setCollideWorldBounds(true);
-
-    scene.cameras.main.setZoom(0.6);
-    scene.cameras.main.zoomTo(1, 550);
-    scene.cameras.main.startFollow(this.object);
+      .setDepth(1)
+      .setImmovable();
   }
 
   update(scene) {
