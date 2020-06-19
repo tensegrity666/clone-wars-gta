@@ -94,7 +94,11 @@ class Citizen extends IAbstarct {
 
     for (let i = 0; i <= qnt; i++) {
       this.bot = scene.physics.add
-        .sprite(Phaser.Math.Between(4500, 6500), Phaser.Math.Between(4500, 6500), nanoid())
+        .sprite(
+          Phaser.Math.Between(4500, 6500),
+          Phaser.Math.Between(4500, 6500),
+          nanoid(),
+        )
         // .setRandomPosition()
         .setDepth(1)
         .setScale(0.8)

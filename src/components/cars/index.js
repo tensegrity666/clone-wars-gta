@@ -29,6 +29,7 @@ class Car extends IAbstarct {
       .setDepth(1)
       .enableBody()
       .setDrag(100, 100)
+      .setScale(0.4)
       .setImmovable();
 
     scene.cameras.main.setZoom(0.6);
