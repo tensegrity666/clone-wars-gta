@@ -34,7 +34,8 @@ class Player extends IAbstarct {
 
     this.object = scene.physics.add
       .sprite(...PARAMS.INITIAL_COORDINATES, this.constructor.id)
-      .setDepth(1);
+      .setDepth(1)
+      .setScale(0.7);
 
     this.object.setCollideWorldBounds(true);
     scene.physics.add.collider(this.object, this.car);
@@ -135,23 +136,23 @@ class Player extends IAbstarct {
       this.object.setVelocityX(-MOVING_PARAMS.PLAYER_SPEED);
       this.object.anims.play(this.animations.walk.key, true);
 
-      this.object.rotation = MOVING_PARAMS.ROTATION.rotate;
+      this.object.rotation = MOVING_PARAMS.ROTATION.rotateLeft;
     }
 
     if (this.controller.moveRight.isDown && !this.state.isRunning) {
       this.object.setVelocityX(MOVING_PARAMS.PLAYER_SPEED);
       this.object.anims.play(this.animations.walk.key, true);
 
-      this.object.rotation = MOVING_PARAMS.ROTATION.noRotate;
+      this.object.rotation = MOVING_PARAMS.ROTATION.rotateRight;
     }
 
     if (this.controller.moveUp.isDown && !this.state.isRunning) {
       if (this.controller.moveRight.isDown) {
-        this.object.rotation = -0.75;
+        this.object.rotation = MOVING_PARAMS.ROTATION.rotateUpAndRight;
       } else if (this.controller.moveLeft.isDown) {
-        this.object.rotation = (Math.PI * 5) / 4;
+        this.object.rotation = MOVING_PARAMS.ROTATION.rotateUpAndLeft;
       } else {
-        this.object.rotation = -(Math.PI / 2);
+        this.object.rotation = MOVING_PARAMS.ROTATION.rotateUp;
       }
 
       this.object.setVelocityY(-MOVING_PARAMS.PLAYER_SPEED);
@@ -161,11 +162,11 @@ class Player extends IAbstarct {
 
     if (this.controller.moveDown.isDown && !this.state.isRunning) {
       if (this.controller.moveRight.isDown) {
-        this.object.rotation = Math.PI / 4;
+        this.object.rotation = MOVING_PARAMS.ROTATION.rotateDownAndRight;
       } else if (this.controller.moveLeft.isDown) {
-        this.object.rotation = 2.5;
+        this.object.rotation = MOVING_PARAMS.ROTATION.rotateDownAndLeft;
       } else {
-        this.object.rotation = Math.PI / 2;
+        this.object.rotation = MOVING_PARAMS.ROTATION.rotateDown;
       }
 
       this.object.setVelocityY(MOVING_PARAMS.PLAYER_SPEED);

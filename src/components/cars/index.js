@@ -26,7 +26,8 @@ class Car extends IAbstarct {
   create(scene, featureMap) {
     this.object = scene.physics.add
       .sprite(...PARAMS.INITIAL_COORDINATES, PARAMS.IMAGES.PLAYER_CAR.id)
-      .setDepth(1);
+      .setDepth(1)
+      .setScale(0.5);
 
     this.object.setCollideWorldBounds(true);
 
@@ -36,9 +37,6 @@ class Car extends IAbstarct {
   }
 
   update(scene) {
-    // ! не нашёл, где это используется
-    // const pointer = scene.input.activePointer;
-
     this.actionsWithCar(scene);
   }
 
@@ -66,7 +64,7 @@ class Car extends IAbstarct {
     }
 
     if (this.controller.stop.isDown && this.state.isPlayerInside) {
-      this.state.speed = 0;
+      this.state.speed += (0 - this.state.speed) * 0.07;
       this.object.setAngularVelocity(0);
     }
 
@@ -75,33 +73,12 @@ class Car extends IAbstarct {
     }
 
     if (this.controller.moveLeft.isDown && this.state.isPlayerInside) {
-      this.object.setAngularVelocity(-10 * (this.state.speed / 100));
+      this.object.setAngularVelocity(-30 * (this.state.speed / 100));
     }
 
     if (this.controller.moveRight.isDown && this.state.isPlayerInside) {
-      this.object.setAngularVelocity(10 * (this.state.speed / 100));
+      this.object.setAngularVelocity(30 * (this.state.speed / 100));
     }
-
-    // const speedsquared = (this.object.body.velocity.x
-    // * this.object.body.velocity.x) + (this.object.body.velocity.y * this.object.body.velocity.y);
-
-    // if (speedsquared > staticFriction) {
-    // this.object.setAngularVelocity(steeringWheelRotation * 0.05 * Math.exp(-speedsquared / 100));
-    // this.object.setAngularVelocity(this.speed
-    // * Math.cos((this.sprite.body.angle - 360) * 0.01745));
-    // }
-
-    // this.object.setVelocityX(Math.sin(this.object.rotation
-    // - this.object.body.angularVelocity / 0.1) * this.state.speed);
-    // this.object.setVelocityY(-Math.cos(this.object.rotation
-    // - this.object.body.angularVelocity / 0.1) * this.state.speed);
-
-    // console.log(car);
-
-    // this.object.setVelocityX(this.state.speed
-    // * Math.cos((this.object.rotation - 360) * 0.01745));
-    // console.log(Math.sin((this.object.rotation - 360) * 0.01745));
-    // console.log('rotation:', this.object.rotation);
 
     this.object.setVelocityY(
       -this.state.speed
@@ -112,6 +89,10 @@ class Car extends IAbstarct {
       this.state.speed
         * Math.sin(((this.object.rotation * 180) / Math.PI - 360) * 0.01745),
     );
+
+    if (this.controller.moveUp.isUp && this.controller.moveDown.isUp) {
+      this.state.speed += (0 - this.state.speed) * 0.01;
+    }
   }
 }
 
