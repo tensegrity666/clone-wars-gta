@@ -71,6 +71,7 @@
     "netlify": "^4.3.0",
     "phaser": "^3.23.0",
     "phaser-animated-tiles": "^2.0.2",
+    "phaser3-rex-plugins": "^1.1.19",
     "uniqid": "^5.2.0"
   },
   "husky": {
