@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 /* eslint-disable no-unused-vars */
 
 import { nanoid } from 'nanoid';
@@ -13,6 +14,7 @@ class Player extends IAbstarct {
   state = {
     isRunning: false,
     isShooting: false,
+    isInsideCar: false,
     health: 100,
   };
 
@@ -39,6 +41,7 @@ class Player extends IAbstarct {
 
     this.object.setCollideWorldBounds(true);
     scene.physics.add.collider(this.object, this.car);
+
     // нужно перенести создание bullet сюда в метод create
     // scene.physics.add.collider(this.bullet, this.car);
 
@@ -49,8 +52,8 @@ class Player extends IAbstarct {
     this.addAnimation(scene);
   }
 
-  update(scene) {
-    this.actionsWithPlayer(scene);
+  update(scene, featureMap) {
+    this.actionsWithPlayer(scene, featureMap);
   }
 
   addAnimation(scene) {
@@ -121,7 +124,24 @@ class Player extends IAbstarct {
     animConfig.forEach((a) => scene.anims.create(a));
   }
 
-  actionsWithPlayer(scene) {
+  isCarClose(car) {
+    if (car.x + 100 < this.object.x || car.x - 100 > this.object.x) {
+      return false;
+    }
+    if (car.y + 100 < this.object.y || car.y - 100 > this.object.y) {
+      return false;
+    }
+    return true;
+  }
+
+  changePosition() {
+    this.state.isInsideCar = true;
+  }
+
+  actionsWithPlayer(scene, featureMap) {
+    const carContainer = scene.add.container(this.car.x, this.car.y);
+    this.car = featureMap[Car.id].object;
+
     this.controller = {
       moveUp: scene.input.keyboard.addKey(controlKeys.up),
       moveRight: scene.input.keyboard.addKey(controlKeys.rigth),
@@ -131,6 +151,27 @@ class Player extends IAbstarct {
       doMainAttack: scene.input.keyboard.addKey(controlKeys.attackMain),
       doAction: scene.input.keyboard.addKey(controlKeys.action),
     };
+
+    if (
+      this.controller.doAction.isDown
+      && this.isCarClose(this.car)
+      && !this.state.isInsideCar
+    ) {
+      carContainer.add(this.object);
+      featureMap[Car.id].state.isPlayerInside = true;
+      scene.cameras.main.startFollow(this.car);
+      setTimeout(this.changePosition.bind(this), 2000);
+    }
+
+    if (this.controller.doAction.isDown && this.state.isInsideCar) {
+      carContainer.removeAll(this.object);
+      featureMap[Car.id].state.isPlayerInside = false;
+      this.state.isInsideCar = false;
+      scene.add.existing(this.object);
+      scene.cameras.main.startFollow(this.object);
+      this.object.x = this.car.x + 100;
+      this.object.y = this.car.y;
+    }
 
     if (this.controller.moveLeft.isDown && !this.state.isRunning) {
       this.object.setVelocityX(-MOVING_PARAMS.PLAYER_SPEED);

@@ -3,6 +3,7 @@
 import { nanoid } from 'nanoid';
 
 import IAbstarct from '../interface';
+// import Player from '../player';
 
 import { PARAMS, controlKeys } from './constants';
 
@@ -11,7 +12,7 @@ class Car extends IAbstarct {
 
   state = {
     health: 100,
-    isPlayerInside: true,
+    isPlayerInside: false,
     speed: 0,
   };
 
@@ -24,12 +25,15 @@ class Car extends IAbstarct {
   }
 
   create(scene, featureMap) {
+    // this.player = featureMap[Player.id].object;
     this.object = scene.physics.add
       .sprite(...PARAMS.INITIAL_COORDINATES, PARAMS.IMAGES.PLAYER_CAR.id)
       .setDepth(1)
       .setScale(0.5);
 
     this.object.setCollideWorldBounds(true);
+
+    // scene.physics.add.collider(this.object, this.player);
 
     scene.cameras.main.setZoom(0.6);
     scene.cameras.main.zoomTo(1, 550);
