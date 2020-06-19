@@ -5,6 +5,7 @@ import Phaser from 'phaser';
 import PathFollower from 'phaser3-rex-plugins/plugins/pathfollower';
 
 import IAbstarct from '../interface';
+import Car from '../cars';
 
 import PARAMS from './constants';
 
@@ -24,6 +25,8 @@ class Ways extends IAbstarct {
   }
 
   create(scene, featureMap) {
+    this.car = featureMap[Car.id].object;
+
     this.graphics = scene.add.graphics();
 
     // prettier-ignore
@@ -42,54 +45,33 @@ class Ways extends IAbstarct {
 
     this.object = scene.physics.add
       .sprite(5050, 6530, PARAMS.IMAGES.PLAYER_CAR.id)
+      .setScale(0.5)
       .enableBody()
-      .detVelocity(200, 200)
-      .setDepth(1)
-      .setScale(0.5);
+      .setImmovable()
+      .setMass(1000);
+
+    scene.physics.add.collider(this.object, this.car);
 
     const pathFollower = new PathFollower(this.object, {
       path: this.path,
       t: 0,
       rotateToPath: true,
-      rotationOffset: (Math.PI * 0.5),
+      rotationOffset: Math.PI * 0.5,
     });
 
     scene.tweens.add({
       targets: pathFollower,
       t: 1,
-      ease: 'Linear', // 'Cubic', 'Elastic', 'Bounce', 'Back'
+      ease: 'Linear',
       duration: 50000,
       repeat: -1,
       yoyo: false,
     });
-
-    // const car = scene.physics.add.existing(this.object);
-    // car.setAlpha(0.7)
-    //   .setScale(0.8);
-
-    // const { body } = car;
-    // body.transform.rotation = 1;
-
-    // body.moves = true;
-
-    // console.group(car, car.body, this.object);
-
-    // this.object.startFollow({
-    //   ease: 'Linear',
-    //   duration: 30000,
-    //   positionOnPath: true,
-    //   yoyo: false,
-    //   repeat: -1,
-    //   rotateToPath: true,
-    //   verticalAdjust: false,
-    // });
   }
 
   update(scene) {
     this.graphics.clear();
-
     this.graphics.lineStyle(1, 0x00ff00, 1).strokeRectShape(this.bounds);
-
     this.graphics.lineStyle(2, 0xffffff, 1);
 
     this.path.draw(this.graphics);
