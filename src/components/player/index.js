@@ -34,7 +34,9 @@ class Player extends IAbstarct {
 
     this.object = scene.physics.add
       .sprite(...PARAMS.INITIAL_COORDINATES, this.constructor.id)
-      .setDepth(1);
+      .setDepth(1)
+      .enableBody()
+      .setMass(80);
 
     this.object.setCollideWorldBounds(true);
     scene.physics.add.collider(this.object, this.car);
