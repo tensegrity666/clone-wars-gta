@@ -5,73 +5,39 @@ import Phaser from 'phaser';
 import PathFollower from 'phaser3-rex-plugins/plugins/pathfollower';
 
 import IAbstarct from '../interface';
-import Car from '../cars';
-import Player from '../player';
+import OrangeCar from '../cars/orange-car';
+import BlueCar from '../cars/blue-car';
 
 import PARAMS from './constants';
 
 class Ways extends IAbstarct {
   static id = nanoid();
 
-  state = {
-    speed: 0,
-  };
-
-  preload(scene) {
-    scene.load.spritesheet(
-      PARAMS.IMAGES.PLAYER_CAR.id,
-      PARAMS.IMAGES.PLAYER_CAR.img,
-      PARAMS.IMAGES.PLAYER_CAR.frameSize,
-    );
-  }
+  preload(scene) {}
 
   create(scene, featureMap) {
-    this.car = featureMap[Car.id].object;
-    this.player = featureMap[Player.id].object;
+    this.orangeCar = featureMap[OrangeCar.id].object;
+    this.blueCar = featureMap[BlueCar.id].object;
 
     this.graphics = scene.add.graphics();
 
-    this.path = new Phaser.Curves.Spline(PARAMS.WAYPOINTS.square);
-    this.path2 = new Phaser.Curves.Spline(PARAMS.WAYPOINTS.bigCircle);
+    this.path = new Phaser.Curves.Spline(PARAMS.WAYPOINTS.zigzag);
+    this.path2 = new Phaser.Curves.Spline(PARAMS.WAYPOINTS.square);
 
     this.bounds = new Phaser.Geom.Rectangle();
     this.path.getBounds(this.bounds);
     this.path2.getBounds(this.bounds);
 
-    this.object = scene.physics.add
-      .sprite(PARAMS.WAYPOINTS.square[0],
-        PARAMS.WAYPOINTS.square[1],
-        PARAMS.IMAGES.PLAYER_CAR.id)
-      .setScale(0.5)
-      .setDepth(1)
-      .enableBody()
-      .setImmovable()
-      .setVelocity(10, -5)
-      .setMass(1000);
+    scene.physics.add.collider(this.blueCar, this.orangeCar);
 
-    this.object2 = scene.physics.add
-      .sprite(PARAMS.WAYPOINTS.square[0],
-        PARAMS.WAYPOINTS.square[1],
-        PARAMS.IMAGES.PLAYER_CAR.id)
-      .setScale(0.5)
-      .setDepth(1)
-      .enableBody()
-      .setImmovable()
-      .setVelocity(10, -5)
-      .setMass(1000);
-
-    scene.physics.add.collider(this.object, [this.player, this.object2, this.car]);
-
-    const pathFollower2 = new PathFollower(this.object2, {
-      path: this.path2,
-      t: 0,
+    const pathFollower = new PathFollower(this.orangeCar, {
+      path: this.path,
       rotateToPath: true,
-      rotationOffset: Math.PI * 0.5,
+      rotationOffset: Math.PI / 2,
     });
 
-    const pathFollower = new PathFollower(this.object, {
-      path: this.path,
-      t: 0,
+    const pathFollower2 = new PathFollower(this.blueCar, {
+      path: this.path2,
       rotateToPath: true,
       rotationOffset: Math.PI * 0.5,
     });
@@ -80,10 +46,10 @@ class Ways extends IAbstarct {
       targets: [pathFollower, pathFollower2],
       t: 1,
       ease: 'Linear',
-      duration: 30000,
+      duration: 35000,
       repeat: -1,
       yoyo: false,
-      repeatDelay: 100,
+      repeatDelay: 0,
     });
   }
 
@@ -93,7 +59,6 @@ class Ways extends IAbstarct {
     this.graphics.lineStyle(2, 0xffffff, 1);
 
     this.path.draw(this.graphics);
-
     this.path2.draw(this.graphics);
   }
 }
