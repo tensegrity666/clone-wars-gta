@@ -6,6 +6,7 @@ import IAbstarct from '../interface';
 
 import { PARAMS, MOVING_PARAMS, controlKeys } from './constants';
 import Car from '../cars';
+import Weapons from '../weapons';
 
 class Player extends IAbstarct {
   static id = nanoid();
@@ -14,13 +15,14 @@ class Player extends IAbstarct {
     isRunning: false,
     isShooting: false,
     health: 100,
+    ammo: 0,
   };
 
   preload(scene) {
-    scene.load.image(
-      PARAMS.IMAGES.BULLET.bomb.id,
-      PARAMS.IMAGES.BULLET.bomb.img,
-    );
+    // scene.load.image(
+    //   PARAMS.IMAGES.BULLET.bomb.id,
+    //   PARAMS.IMAGES.BULLET.bomb.img,
+    // );
 
     const sprites = Object.values(PARAMS.IMAGES.PLAYER);
 
@@ -30,6 +32,7 @@ class Player extends IAbstarct {
   }
 
   create(scene, featureMap) {
+    this.weapons = featureMap[Weapons.id];
     this.car = featureMap[Car.id].object;
 
     this.object = scene.physics.add
@@ -38,8 +41,16 @@ class Player extends IAbstarct {
 
     this.object.setCollideWorldBounds(true);
     scene.physics.add.collider(this.object, this.car);
-    // нужно перенести создание bullet сюда в метод create
-    // scene.physics.add.collider(this.bullet, this.car);
+
+    scene.physics.add.collider(this.object, this.weapons.object, () => {
+      featureMap[Weapons.id].object.destroy();
+      this.state.ammo += featureMap[Weapons.id].state.pistol;
+    });
+    // scene.physics.add.collider(this.object, this.weapons.object,
+    //  this.addWeapon(scene, featureMap[Weapons.id]));
+    // this.weapons.object.forEach((weapon) => {
+    //   scene.physics.add.collider(this.object, weapon, this.addWeapon(scene, weapon));
+    // });
 
     scene.cameras.main.setZoom(0.6);
     scene.cameras.main.zoomTo(1, 550);
@@ -219,23 +230,14 @@ class Player extends IAbstarct {
       this.state.isRunning = false;
     }
 
-    if (this.controller.doMainAttack.isDown) {
+    if (this.controller.doMainAttack.isDown && this.state.ammo) {
       this.state.isShooting = true;
 
-      this.object.anims.play(this.animations.chaingunShoot.key, true);
+      this.object.anims.play(this.animations.pistol.key, true);
+      // this.state.ammo -= 1;
 
-      this.bullet = scene.physics.add.sprite(
-        this.object.x + Math.cos(this.object.rotation) * 20,
-        this.object.y + Math.sin(this.object.rotation) * 20,
-        PARAMS.IMAGES.BULLET.bomb.id,
-      );
-
-      scene.physics.moveTo(
-        this.bullet,
-        this.object.x + Math.cos(this.object.rotation) * 1000,
-        this.object.y + Math.sin(this.object.rotation) * 1000,
-        1000,
-      );
+      // console.log(Weapons);
+      Weapons.shooting(scene, this, 'pistol');
     }
   }
 }

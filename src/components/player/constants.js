@@ -5,7 +5,7 @@ import run from './assets/player_run.png';
 import pistol from './assets/player_pistol.png';
 import chaingun from './assets/player_chaingun.png';
 import chaingunShoot from './assets/player_chaingun_shoot.png';
-import bomb from './assets/bomb.png';
+// import bomb from './assets/bomb.png';
 
 const PARAMS = {
   INITIAL_COORDINATES: [6240, 6300],
@@ -52,12 +52,12 @@ const PARAMS = {
         },
       },
     },
-    BULLET: {
-      bomb: {
-        id: nanoid(),
-        img: bomb,
-      },
-    },
+    // BULLET: {
+    //   bomb: {
+    //     id: nanoid(),
+    //     img: bomb,
+    //   },
+    // },
   },
 };
 
