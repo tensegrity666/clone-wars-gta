@@ -5,12 +5,9 @@ import Phaser from 'phaser';
 import { nanoid } from 'nanoid';
 
 import IAbstarct from '../../interface';
-import Car from '../../cars';
-import Player from '../../player';
+import PARAMS from './constants';
 
-import { PARAMS, MOVING_PARAMS } from './constants';
-
-class Citizen extends IAbstarct {
+class Citizens extends IAbstarct {
   static id = nanoid();
 
   state = {
@@ -27,24 +24,15 @@ class Citizen extends IAbstarct {
   }
 
   create(scene, featureMap) {
-    this.car = featureMap[Car.id].object;
-    this.player = featureMap[Player.id].object;
-
     this.bots = this.createBots(scene, 199);
 
     this.object = scene.physics.add.group(this.bots);
-
-    scene.physics.add.collider(this.object, [this.car, this.player]);
 
     this.addAnimation(scene);
   }
 
   update(scene) {
     this.object.playAnimation(this.animations.walk.key, true);
-
-    const cam = scene.cameras.main;
-    const p = scene.input.activePointer.positionToCamera(cam);
-    console.log(`px: ${p.x} py: ${p.y}`);
   }
 
   addAnimation(scene) {
@@ -93,22 +81,24 @@ class Citizen extends IAbstarct {
     const arr = [];
 
     for (let i = 0; i <= qnt; i++) {
+      const SPEED_X = Phaser.Math.Between(10, 100);
+      const SPEED_Y = Phaser.Math.Between(10, 100);
+      const COORD_X = Phaser.Math.Between(4000, 7000);
+      const COORD_Y = Phaser.Math.Between(4000, 7000);
+
       this.bot = scene.physics.add
-        .sprite(
-          Phaser.Math.Between(4500, 6500),
-          Phaser.Math.Between(4500, 6500),
-          nanoid()
-        )
+        .sprite(COORD_X, COORD_Y, nanoid())
         // .setRandomPosition()
         .setDepth(1)
         .setScale(0.8)
         .enableBody()
-        .setMaxVelocity(5, 5)
-        .setBounce(10, 10)
         .setCircle(12)
         .setOffset(5, 12)
-        .setVelocity(Phaser.Math.Between(100, 150))
-        .setRotation(Phaser.Math.Between(0, 1));
+        .setBounce(2, 2)
+        .setMass(70)
+        .setVelocity(SPEED_X, SPEED_Y)
+        .setAngle()
+        .setMaxVelocity(120);
 
       arr.push(this.bot);
     }
@@ -116,4 +106,4 @@ class Citizen extends IAbstarct {
   }
 }
 
-export default Citizen;
+export default Citizens;

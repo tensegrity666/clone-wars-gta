@@ -4,7 +4,6 @@ import walk from '../assets/player_walk.png';
 import run from '../assets/player_run.png';
 
 const PARAMS = {
-  INITIAL_COORDINATES: [6040, 6100],
   IMAGES: {
     CITIZEN: {
       walk: {
@@ -27,13 +26,4 @@ const PARAMS = {
   },
 };
 
-const MOVING_PARAMS = {
-  PLAYER_SPEED: 160,
-  SPEED_COF: 2,
-  ROTATION: {
-    noRotate: 0,
-    rotate: Math.PI,
-  },
-};
-
-export { PARAMS, MOVING_PARAMS };
+export default PARAMS;
