@@ -49,7 +49,7 @@ class Human extends IAbstarct {
           {
             start: 0,
             end: 0,
-          },
+          }
         ),
         frameRate: 10,
         repeat: -1,
@@ -61,7 +61,7 @@ class Human extends IAbstarct {
           {
             start: 0,
             end: 5,
-          },
+          }
         ),
         frameRate: 10,
         repeat: -1,
@@ -90,7 +90,7 @@ class Human extends IAbstarct {
         .sprite(
           Phaser.Math.Between(4500, 6500),
           Phaser.Math.Between(4500, 6500),
-          nanoid(),
+          nanoid()
         )
         // .setRandomPosition()
         .setDepth(1)
