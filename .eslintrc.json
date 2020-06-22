@@ -5,8 +5,7 @@
     },
     "parser": "babel-eslint",
     "extends": [
-        "airbnb-base",
-        "prettier"
+        "airbnb-base"
     ],
     "globals": {
         "Atomics": "readonly",

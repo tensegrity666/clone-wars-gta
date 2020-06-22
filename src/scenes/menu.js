@@ -33,7 +33,7 @@ class MenuScene extends Phaser.Scene {
       .image(
         PROPERTIES.width * 0.33,
         PROPERTIES.height * 0.2,
-        PARAMS.IMAGES.LOGO.id
+        PARAMS.IMAGES.LOGO.id,
       )
       .setDepth(0)
       .setOrigin(0)

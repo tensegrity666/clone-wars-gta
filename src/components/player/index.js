@@ -19,7 +19,7 @@ class Player extends IAbstarct {
   preload(scene) {
     scene.load.image(
       PARAMS.IMAGES.BULLET.bomb.id,
-      PARAMS.IMAGES.BULLET.bomb.img
+      PARAMS.IMAGES.BULLET.bomb.img,
     );
 
     const sprites = Object.values(PARAMS.IMAGES.PLAYER);
@@ -34,9 +34,12 @@ class Player extends IAbstarct {
 
     this.object = scene.physics.add
       .sprite(...PARAMS.INITIAL_COORDINATES, this.constructor.id)
-      .setDepth(1);
-
-    this.object.enableBody().setBounce(10, 10).setCircle(12).setOffset(5, 12);
+      .setCircle(12)
+      .setOffset(5, 12)
+      .setDepth(1)
+      .enableBody()
+      .setMass(90)
+      .setBounce(-1, -1);
 
     scene.physics.add.collider(this.object, this.car);
 
@@ -90,7 +93,7 @@ class Player extends IAbstarct {
           {
             start: 0,
             end: 0,
-          }
+          },
         ),
       },
       chaingun: {
@@ -100,7 +103,7 @@ class Player extends IAbstarct {
           {
             start: 0,
             end: 0,
-          }
+          },
         ),
       },
       chaingunShoot: {
@@ -110,7 +113,7 @@ class Player extends IAbstarct {
           {
             start: 0,
             end: 1,
-          }
+          },
         ),
         frameRate: 10,
         repeat: -1,
@@ -176,10 +179,10 @@ class Player extends IAbstarct {
     }
 
     if (
-      !this.controller.moveLeft.isDown &&
-      !this.controller.moveRight.isDown &&
-      !this.controller.moveUp.isDown &&
-      !this.controller.moveDown.isDown
+      !this.controller.moveLeft.isDown
+      && !this.controller.moveRight.isDown
+      && !this.controller.moveUp.isDown
+      && !this.controller.moveDown.isDown
     ) {
       this.object.anims.play(this.animations.stand.key);
     }
@@ -196,22 +199,22 @@ class Player extends IAbstarct {
 
       if (this.object.body.velocity.x > 0) {
         this.object.setVelocityX(
-          MOVING_PARAMS.PLAYER_SPEED * MOVING_PARAMS.SPEED_COF
+          MOVING_PARAMS.PLAYER_SPEED * MOVING_PARAMS.SPEED_COF,
         );
       }
       if (this.object.body.velocity.x < 0) {
         this.object.setVelocityX(
-          -(MOVING_PARAMS.PLAYER_SPEED * MOVING_PARAMS.SPEED_COF)
+          -(MOVING_PARAMS.PLAYER_SPEED * MOVING_PARAMS.SPEED_COF),
         );
       }
       if (this.object.body.velocity.y > 0) {
         this.object.setVelocityY(
-          MOVING_PARAMS.PLAYER_SPEED * MOVING_PARAMS.SPEED_COF
+          MOVING_PARAMS.PLAYER_SPEED * MOVING_PARAMS.SPEED_COF,
         );
       }
       if (this.object.body.velocity.y < 0) {
         this.object.setVelocityY(
-          -(MOVING_PARAMS.PLAYER_SPEED * MOVING_PARAMS.SPEED_COF)
+          -(MOVING_PARAMS.PLAYER_SPEED * MOVING_PARAMS.SPEED_COF),
         );
       }
       this.object.anims.play(this.animations.run.key, true);
@@ -229,14 +232,14 @@ class Player extends IAbstarct {
       this.bullet = scene.physics.add.sprite(
         this.object.x + Math.cos(this.object.rotation) * 20,
         this.object.y + Math.sin(this.object.rotation) * 20,
-        PARAMS.IMAGES.BULLET.bomb.id
+        PARAMS.IMAGES.BULLET.bomb.id,
       );
 
       scene.physics.moveTo(
         this.bullet,
         this.object.x + Math.cos(this.object.rotation) * 1000,
         this.object.y + Math.sin(this.object.rotation) * 1000,
-        1000
+        1000,
       );
     }
   }

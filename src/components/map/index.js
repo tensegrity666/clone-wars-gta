@@ -33,7 +33,7 @@ class Map extends IAbstarct {
       0,
       0,
       this.object.widthInPixels,
-      this.object.heightInPixels
+      this.object.heightInPixels,
     );
   }
 }

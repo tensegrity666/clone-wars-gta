@@ -6,13 +6,14 @@ import { nanoid } from 'nanoid';
 
 import IAbstarct from '../../interface';
 import PARAMS from './constants';
+import Car from '../../cars';
+import Player from '../../player';
 
 class Citizens extends IAbstarct {
   static id = nanoid();
 
   state = {
-    isRunning: false,
-    health: 100,
+    health: 90,
   };
 
   preload(scene) {
@@ -24,9 +25,14 @@ class Citizens extends IAbstarct {
   }
 
   create(scene, featureMap) {
+    this.car = featureMap[Car.id].object;
+    this.player = featureMap[Player.id].object;
+
     this.bots = this.createBots(scene, 199);
 
     this.object = scene.physics.add.group(this.bots);
+
+    scene.physics.add.collider(this.object, [this.car, this.player]);
 
     this.addAnimation(scene);
   }
@@ -44,7 +50,7 @@ class Citizens extends IAbstarct {
           {
             start: 0,
             end: 0,
-          }
+          },
         ),
         frameRate: 10,
         repeat: -1,
@@ -56,7 +62,7 @@ class Citizens extends IAbstarct {
           {
             start: 0,
             end: 5,
-          }
+          },
         ),
         frameRate: 10,
         repeat: -1,
@@ -85,6 +91,7 @@ class Citizens extends IAbstarct {
       const SPEED_Y = Phaser.Math.Between(10, 100);
       const COORD_X = Phaser.Math.Between(4000, 7000);
       const COORD_Y = Phaser.Math.Between(4000, 7000);
+      const MASS = Phaser.Math.Between(50, 140);
 
       this.bot = scene.physics.add
         .sprite(COORD_X, COORD_Y, nanoid())
@@ -92,15 +99,17 @@ class Citizens extends IAbstarct {
         .setDepth(1)
         .setScale(0.8)
         .enableBody()
-        .setCircle(12)
-        .setOffset(5, 12)
-        .setBounce(2, 2)
-        .setMass(70)
+        .setSize(15, 25)
+        .setOffset(10, 15)
+        .setBounce(-1, -1)
+        .setMass(MASS)
         .setVelocity(SPEED_X, SPEED_Y)
-        .setAngle()
-        .setMaxVelocity(120);
+        // .setAngle()
+        .setMaxVelocity(100, 100);
 
       arr.push(this.bot);
+
+      scene.physics.add.collider(this.bot, arr);
     }
     return arr;
   }
