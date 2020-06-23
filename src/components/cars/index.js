@@ -30,6 +30,7 @@ class Car extends IAbstarct {
       .setScale(0.4)
       .enableBody()
       .setImmovable()
+      .setSize(80, 220)
       .setMass(1200)
       .setBounce(10, 10);
 
