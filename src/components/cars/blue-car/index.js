@@ -11,8 +11,6 @@ class BlueCar extends Car {
 
   state = {
     health: 150,
-    isPlayerInside: false,
-    speed: 0,
   };
 
   preload(scene) {

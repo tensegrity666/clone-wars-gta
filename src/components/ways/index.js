@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /* eslint-disable no-unused-vars */
 
 import { nanoid } from 'nanoid';
@@ -60,6 +61,12 @@ class Ways extends IAbstarct {
 
     this.path.draw(this.graphics);
     this.path2.draw(this.graphics);
+
+    // ! показывает координаты на карте
+    const cam = scene.cameras.main;
+    const p = scene.input.activePointer.positionToCamera(cam);
+
+    console.log(`x: ${p.x} y: ${p.y}`);
   }
 }
 

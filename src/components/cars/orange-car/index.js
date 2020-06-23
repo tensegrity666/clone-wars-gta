@@ -11,8 +11,6 @@ class OrangeCar extends Car {
 
   state = {
     health: 100,
-    isPlayerInside: false,
-    speed: 0,
   };
 
   preload(scene) {
