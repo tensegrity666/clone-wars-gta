@@ -24,12 +24,12 @@ class Map extends IAbstarct {
     this.object.createStaticLayer('ground', [terrain], 0, 0);
     const top = this.object.createStaticLayer('roads', [terrain], 0, 0);
 
-    // scene.physics.add.collider(this.player, top);
+    // scene.matter.add.collider(this.player, top);
 
     // top.setCollisionByProperty({ collides: true });
     // top.setCollision([894, 609]);
 
-    scene.physics.world.setBounds(
+    scene.matter.world.setBounds(
       0,
       0,
       this.object.widthInPixels,

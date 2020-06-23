@@ -1,5 +1,7 @@
 /* eslint-disable no-unused-vars */
 
+import RotateTo from 'phaser3-rex-plugins/plugins/rotateto';
+
 import { nanoid } from 'nanoid';
 
 import IAbstarct from '../interface';
@@ -24,19 +26,41 @@ class Car extends IAbstarct {
   }
 
   create(scene, featureMap) {
-    this.object = scene.physics.add
-      .sprite(...PARAMS.INITIAL_COORDINATES, PARAMS.IMAGES.PLAYER_CAR.id)
-      .setDepth(1)
-      .setScale(0.4)
-      .enableBody()
-      .setImmovable()
-      .setSize(80, 220)
-      .setMass(1200)
-      .setBounce(10, 10);
+    this.object = scene.matter.add.sprite(
+      ...PARAMS.INITIAL_COORDINATES,
+      PARAMS.IMAGES.PLAYER_CAR.id,
+    );
+    // .setDepth(1)
+    // .setScale(0.4)
+    // .enableBody()
+    // .setImmovable()
+    // .setSize(80, 220)
+    // .setMass(1200)
+    // .setBounce(10, 10);
+
+    // const container = scene.add.container(80, 220);
+    // container.add(this.object);
+    // container.setDepth(1);
+    // container.angle = 45;
 
     scene.cameras.main.setZoom(0.6);
     scene.cameras.main.zoomTo(1, 550);
     scene.cameras.main.startFollow(this.object);
+
+    const rotateTo = new RotateTo(this.object, {
+      speed: 180,
+    });
+
+    // this.object.body.angle = 180;
+
+    // this.object.setAngle(90);
+    // rotateTo.rotateTo(90);
+
+    // this.input.on('pointerdown', (pointer) => {
+    //   const touchX = pointer.x;
+    //   const touchY = pointer.y;
+    //   this.rotateTo.rotateTowardsPosition(touchX, touchY);
+    // });
   }
 
   update(scene) {
@@ -44,6 +68,12 @@ class Car extends IAbstarct {
     // const pointer = scene.input.activePointer;
 
     this.actionsWithCar(scene);
+
+    // const cam = scene.cameras.main;
+    // const p = scene.input.activePointer.positionToCamera(cam);
+
+    // console.log(`x: ${p.x} y: ${p.y}`);
+    // this.rotateTo.rotateTowardsPosition(p.x, p.y);
   }
 
   actionsWithCar(scene) {
