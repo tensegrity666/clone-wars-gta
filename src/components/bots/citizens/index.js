@@ -32,7 +32,7 @@ class Citizens extends IAbstarct {
 
     this.object = scene.physics.add.group(this.bots);
 
-    scene.physics.add.collider(this.object, [this.car, this.player]);
+    scene.physics.add.collider(this.object, [this.car]);
 
     this.addAnimation(scene);
   }
@@ -101,7 +101,7 @@ class Citizens extends IAbstarct {
         .enableBody()
         .setSize(15, 25)
         .setOffset(10, 15)
-        .setBounce(-1, -1)
+        .setBounce(1, 1)
         .setMass(MASS)
         .setVelocity(SPEED_X, SPEED_Y)
         // .setAngle()

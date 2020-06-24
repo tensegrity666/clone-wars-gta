@@ -37,12 +37,12 @@ class Player extends IAbstarct {
 
     this.object = scene.physics.add
       .sprite(...PARAMS.INITIAL_COORDINATES, this.constructor.id)
-      .setCircle(22.5, -4, 7)
       .setScale(0.7)
       .setDepth(1)
       .enableBody()
+      .setCircle(22.5, -4, 7)
       .setMass(90)
-      .setBounce(-1, -1);
+      .setBounce(1, 1);
 
     scene.physics.add.collider(this.object, this.car);
 

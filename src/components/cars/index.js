@@ -25,16 +25,17 @@ class Car extends IAbstarct {
 
   create(scene, featureMap) {
     // this.player = featureMap[Player.id].object;
+
     this.object = scene.physics.add
       .sprite(...PARAMS.INITIAL_COORDINATES, PARAMS.IMAGES.PLAYER_CAR.id)
       .setDepth(1)
       .setScale(0.5)
+      .setCircle(100, 25, 25)
       .enableBody()
+      // .setSize(105, 125)
       .setImmovable()
       .setMass(1200)
-      .setBounce(10, 10)
-      .setCircle(100, 25, 25);
-    // this.object.body.setSize(90, 180);
+      .setBounce(1, 1);
 
     this.object.setCollideWorldBounds(true);
 
