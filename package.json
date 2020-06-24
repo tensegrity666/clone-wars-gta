@@ -70,8 +70,7 @@
     "nanoid": "^3.1.10",
     "netlify": "^4.3.2",
     "phaser": "^3.23.0",
-    "phaser-animated-tiles": "^2.0.2",
-    "phaser3-rex-plugins": "^1.1.19"
+    "phaser-animated-tiles": "^2.0.2"
   },
   "husky": {
     "hooks": {

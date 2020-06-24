@@ -32,21 +32,19 @@ class Player extends IAbstarct {
   create(scene, featureMap) {
     this.car = featureMap[Car.id].object;
 
-    this.object = scene.matter.add.sprite(
-      ...PARAMS.INITIAL_COORDINATES,
-      this.constructor.id,
-    );
-    // .setCircle(12)
-    // .setOffset(5, 12)
-    // .setDepth(1)
-    // .enableBody()
-    // .setMass(90)
-    // .setBounce(-1, -1);
+    this.object = scene.physics.add
+      .sprite(...PARAMS.INITIAL_COORDINATES, this.constructor.id)
+      .setCircle(12)
+      .setOffset(5, 12)
+      .setDepth(1)
+      .enableBody()
+      .setMass(90)
+      .setBounce(-1, -1);
 
-    // scene.matter.add.collider(this.object, this.car);
+    scene.physics.add.collider(this.object, this.car);
 
     // нужно перенести создание bullet сюда в метод create
-    // scene.matter.add.collider(this.bullet, this.car);
+    // scene.physics.add.collider(this.bullet, this.car);
 
     // scene.cameras.main.setZoom(0.6);
     // scene.cameras.main.zoomTo(1, 550);
@@ -231,13 +229,13 @@ class Player extends IAbstarct {
 
       this.object.anims.play(this.animations.chaingunShoot.key, true);
 
-      this.bullet = scene.matter.add.sprite(
+      this.bullet = scene.physics.add.sprite(
         this.object.x + Math.cos(this.object.rotation) * 20,
         this.object.y + Math.sin(this.object.rotation) * 20,
         PARAMS.IMAGES.BULLET.bomb.id,
       );
 
-      scene.matter.moveTo(
+      scene.physics.moveTo(
         this.bullet,
         this.object.x + Math.cos(this.object.rotation) * 1000,
         this.object.y + Math.sin(this.object.rotation) * 1000,

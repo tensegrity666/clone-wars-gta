@@ -16,17 +16,14 @@ const config = {
     pixelart: false,
   },
   physics: {
-    default: 'matter',
-    matter: {
-      enabled: true,
-      positionIterations: 6,
-      velocityIterations: 4,
+    default: PROPERTIES.phisycs,
+    arcade: {
+      gravity: PROPERTIES.gravity,
       debug: true,
-      gravity: { y: 0 },
     },
   },
   scale: {
-    mode: Phaser.Scale.FIT,
+    // mode: Phaser.Scale.FIT,
     autoCenter: Phaser.Scale.CENTER_BOTH,
   },
   scene: [LoadScene, MenuScene, MainScene, GameOverScene],

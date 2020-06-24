@@ -30,15 +30,15 @@ class Citizens extends IAbstarct {
 
     this.bots = this.createBots(scene, 199);
 
-    // this.object = scene.matter.add.group(this.bots);
+    this.object = scene.physics.add.group(this.bots);
 
-    // scene.matter.add.collider(this.object, [this.car, this.player]);
+    scene.physics.add.collider(this.object, [this.car, this.player]);
 
     this.addAnimation(scene);
   }
 
   update(scene) {
-    // this.object.playAnimation(this.animations.walk.key, true);
+    this.object.playAnimation(this.animations.walk.key, true);
   }
 
   addAnimation(scene) {
@@ -93,22 +93,23 @@ class Citizens extends IAbstarct {
       const COORD_Y = Phaser.Math.Between(4000, 7000);
       const MASS = Phaser.Math.Between(50, 140);
 
-      this.bot = scene.matter.add.sprite(COORD_X, COORD_Y, nanoid());
-      // .setRandomPosition()
-      // .setDepth(1)
-      // .setScale(0.8)
-      // .enableBody()
-      // .setSize(15, 25)
-      // .setOffset(10, 15)
-      // .setBounce(-1, -1)
-      // .setMass(MASS)
-      // .setVelocity(SPEED_X, SPEED_Y)
-      // // .setAngle()
-      // .setMaxVelocity(100, 100);
+      this.bot = scene.physics.add
+        .sprite(COORD_X, COORD_Y, nanoid())
+        // .setRandomPosition()
+        .setDepth(1)
+        .setScale(0.8)
+        .enableBody()
+        .setSize(15, 25)
+        .setOffset(10, 15)
+        .setBounce(-1, -1)
+        .setMass(MASS)
+        .setVelocity(SPEED_X, SPEED_Y)
+        // .setAngle()
+        .setMaxVelocity(100, 100);
 
       arr.push(this.bot);
 
-      // scene.matter.add.collider(this.bot, arr);
+      scene.physics.add.collider(this.bot, arr);
     }
     return arr;
   }

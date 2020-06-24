@@ -30,14 +30,14 @@ class Rednecks extends IAbstarct {
 
     this.bots = this.createBots(scene, 99);
 
-    // this.object = scene.matter.add.group(this.bots);
-    // scene.matter.add.collider(this.object, [this.citizens, this.car]);
+    this.object = scene.physics.add.group(this.bots);
+    scene.physics.add.collider(this.object, [this.citizens, this.car]);
 
     this.addAnimation(scene);
   }
 
   update(scene) {
-    // this.object.playAnimation(this.animations.walk.key, true);
+    this.object.playAnimation(this.animations.walk.key, true);
   }
 
   addAnimation(scene) {
@@ -92,22 +92,23 @@ class Rednecks extends IAbstarct {
       const COORD_Y = Phaser.Math.Between(4000, 7000);
       const MASS = Phaser.Math.Between(80, 150);
 
-      this.bot = scene.matter.add.sprite(COORD_X, COORD_Y, nanoid());
-      // .setRandomPosition()
-      // .setDepth(1)
-      // .setScale(0.8)
-      // .setTint(0xff0000)
-      // .enableBody()
-      // .setCircle(12, 5, 12)
-      // .setBounce(1, 1)
-      // .setMass(MASS)
-      // .setVelocity(SPEED_X, SPEED_Y)
-      // .setMaxVelocity(90, 90);
+      this.bot = scene.physics.add
+        .sprite(COORD_X, COORD_Y, nanoid())
+        // .setRandomPosition()
+        .setDepth(1)
+        .setScale(0.8)
+        .setTint(0xff0000)
+        .enableBody()
+        .setCircle(12, 5, 12)
+        .setBounce(1, 1)
+        .setMass(MASS)
+        .setVelocity(SPEED_X, SPEED_Y)
+        .setMaxVelocity(90, 90);
       // .setAngle()
 
       arr.push(this.bot);
 
-      // scene.matter.add.collider(this.bot, arr);
+      scene.physics.add.collider(this.bot, arr);
     }
     return arr;
   }
