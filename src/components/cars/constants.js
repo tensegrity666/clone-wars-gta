@@ -14,12 +14,11 @@ const PARAMS = {
 };
 
 const controlKeys = {
-  up: 'UP',
-  down: 'DOWN',
-  left: 'LEFT',
-  rigth: 'RIGHT',
+  up: 'W',
+  down: 'S',
+  left: 'A',
+  rigth: 'D',
   stop: 'SPACE',
-  attackMain: 'J',
   action: 'ENTER',
 };
 

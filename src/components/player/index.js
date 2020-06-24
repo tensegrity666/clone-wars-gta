@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 /* eslint-disable no-unused-vars */
 
 import { nanoid } from 'nanoid';
@@ -13,6 +14,7 @@ class Player extends IAbstarct {
   state = {
     isRunning: false,
     isShooting: false,
+    isInsideCar: false,
     health: 100,
   };
 
@@ -30,21 +32,19 @@ class Player extends IAbstarct {
   }
 
   create(scene, featureMap) {
+    this.carContainer = scene.add.container();
     this.car = featureMap[Car.id].object;
 
     this.object = scene.physics.add
       .sprite(...PARAMS.INITIAL_COORDINATES, this.constructor.id)
-      .setCircle(12)
-      .setOffset(5, 12)
+      .setCircle(22.5, -4, 7)
+      .setScale(0.7)
       .setDepth(1)
       .enableBody()
       .setMass(90)
       .setBounce(-1, -1);
 
     scene.physics.add.collider(this.object, this.car);
-
-    // нужно перенести создание bullet сюда в метод create
-    // scene.physics.add.collider(this.bullet, this.car);
 
     // scene.cameras.main.setZoom(0.6);
     // scene.cameras.main.zoomTo(1, 550);
@@ -53,8 +53,8 @@ class Player extends IAbstarct {
     this.addAnimation(scene);
   }
 
-  update(scene) {
-    this.actionsWithPlayer(scene);
+  update(scene, featureMap) {
+    this.actionsWithPlayer(scene, featureMap);
   }
 
   addAnimation(scene) {
@@ -125,7 +125,23 @@ class Player extends IAbstarct {
     animConfig.forEach((a) => scene.anims.create(a));
   }
 
-  actionsWithPlayer(scene) {
+  isCarClose(car) {
+    if (car.x + 100 < this.object.x || car.x - 100 > this.object.x) {
+      return false;
+    }
+    if (car.y + 100 < this.object.y || car.y - 100 > this.object.y) {
+      return false;
+    }
+    return true;
+  }
+
+  changePosition() {
+    this.state.isInsideCar = true;
+  }
+
+  actionsWithPlayer(scene, featureMap) {
+    this.car = featureMap[Car.id].object;
+
     this.controller = {
       moveUp: scene.input.keyboard.addKey(controlKeys.up),
       moveRight: scene.input.keyboard.addKey(controlKeys.rigth),
@@ -136,27 +152,51 @@ class Player extends IAbstarct {
       doAction: scene.input.keyboard.addKey(controlKeys.action),
     };
 
+    if (
+      this.controller.doAction.isDown
+      && this.isCarClose(this.car)
+      && !this.state.isInsideCar
+    ) {
+      this.object.body.enable = false;
+      this.carContainer.add(this.object);
+      featureMap[Car.id].state.isPlayerInside = true;
+      scene.cameras.main.startFollow(this.car);
+      setTimeout(this.changePosition.bind(this), 2000);
+    }
+
+    if (this.controller.doAction.isDown && this.state.isInsideCar) {
+      this.object.body.enable = true;
+      this.object = this.carContainer.getAt(0);
+      this.carContainer.removeAll();
+      featureMap[Car.id].state.isPlayerInside = false;
+      this.state.isInsideCar = false;
+      scene.add.existing(this.object);
+      scene.cameras.main.startFollow(this.object);
+      this.object.x = this.car.x + 100;
+      this.object.y = this.car.y + 100;
+    }
+
     if (this.controller.moveLeft.isDown && !this.state.isRunning) {
       this.object.setVelocityX(-MOVING_PARAMS.PLAYER_SPEED);
       this.object.anims.play(this.animations.walk.key, true);
 
-      this.object.rotation = MOVING_PARAMS.ROTATION.rotate;
+      this.object.rotation = MOVING_PARAMS.ROTATION.rotateLeft;
     }
 
     if (this.controller.moveRight.isDown && !this.state.isRunning) {
       this.object.setVelocityX(MOVING_PARAMS.PLAYER_SPEED);
       this.object.anims.play(this.animations.walk.key, true);
 
-      this.object.rotation = MOVING_PARAMS.ROTATION.noRotate;
+      this.object.rotation = MOVING_PARAMS.ROTATION.rotateRight;
     }
 
     if (this.controller.moveUp.isDown && !this.state.isRunning) {
       if (this.controller.moveRight.isDown) {
-        this.object.rotation = -0.75;
+        this.object.rotation = MOVING_PARAMS.ROTATION.rotateUpAndRight;
       } else if (this.controller.moveLeft.isDown) {
-        this.object.rotation = (Math.PI * 5) / 4;
+        this.object.rotation = MOVING_PARAMS.ROTATION.rotateUpAndLeft;
       } else {
-        this.object.rotation = -(Math.PI / 2);
+        this.object.rotation = MOVING_PARAMS.ROTATION.rotateUp;
       }
 
       this.object.setVelocityY(-MOVING_PARAMS.PLAYER_SPEED);
@@ -166,11 +206,11 @@ class Player extends IAbstarct {
 
     if (this.controller.moveDown.isDown && !this.state.isRunning) {
       if (this.controller.moveRight.isDown) {
-        this.object.rotation = Math.PI / 4;
+        this.object.rotation = MOVING_PARAMS.ROTATION.rotateDownAndRight;
       } else if (this.controller.moveLeft.isDown) {
-        this.object.rotation = 2.5;
+        this.object.rotation = MOVING_PARAMS.ROTATION.rotateDownAndLeft;
       } else {
-        this.object.rotation = Math.PI / 2;
+        this.object.rotation = MOVING_PARAMS.ROTATION.rotateDown;
       }
 
       this.object.setVelocityY(MOVING_PARAMS.PLAYER_SPEED);
