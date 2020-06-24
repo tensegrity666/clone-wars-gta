@@ -4,9 +4,13 @@ import { nanoid } from 'nanoid';
 
 import IAbstarct from '../interface';
 
-import { PARAMS, MOVING_PARAMS, controlKeys } from './constants';
+import {
+  PARAMS, MOVING_PARAMS, controlKeys, WEAPONS,
+} from './constants';
 import Car from '../cars';
-import Weapons from '../weapons';
+import Pistol from '../weapons/pistol';
+import MachineGun from '../weapons/machine gun';
+import Chaingun from '../weapons/chaingun';
 
 class Player extends IAbstarct {
   static id = nanoid();
@@ -16,14 +20,10 @@ class Player extends IAbstarct {
     isShooting: false,
     health: 100,
     ammo: 0,
+    currentWeapon: '',
   };
 
   preload(scene) {
-    // scene.load.image(
-    //   PARAMS.IMAGES.BULLET.bomb.id,
-    //   PARAMS.IMAGES.BULLET.bomb.img,
-    // );
-
     const sprites = Object.values(PARAMS.IMAGES.PLAYER);
 
     sprites.forEach((sprite) => {
@@ -32,7 +32,10 @@ class Player extends IAbstarct {
   }
 
   create(scene, featureMap) {
-    this.weapons = featureMap[Weapons.id];
+    this.featureMap = featureMap;
+    this.pistol = featureMap[Pistol.id];
+    this.machineGun = featureMap[MachineGun.id];
+    this.chaingun = featureMap[Chaingun.id];
     this.car = featureMap[Car.id].object;
 
     this.object = scene.physics.add
@@ -42,15 +45,21 @@ class Player extends IAbstarct {
     this.object.setCollideWorldBounds(true);
     scene.physics.add.collider(this.object, this.car);
 
-    scene.physics.add.collider(this.object, this.weapons.object, () => {
-      featureMap[Weapons.id].object.destroy();
-      this.state.ammo += featureMap[Weapons.id].state.pistol;
+    scene.physics.add.collider(this.object, this.pistol.object, () => {
+      this.state.currentWeapon = WEAPONS.pistol;
+      featureMap[Pistol.id].object.destroy();
+      this.state.ammo += featureMap[Pistol.id].state.ammo;
     });
-    // scene.physics.add.collider(this.object, this.weapons.object,
-    //  this.addWeapon(scene, featureMap[Weapons.id]));
-    // this.weapons.object.forEach((weapon) => {
-    //   scene.physics.add.collider(this.object, weapon, this.addWeapon(scene, weapon));
-    // });
+    scene.physics.add.collider(this.object, this.machineGun.object, () => {
+      this.state.currentWeapon = WEAPONS.machineGun;
+      featureMap[MachineGun.id].object.destroy();
+      this.state.ammo += featureMap[Pistol.id].state.ammo;
+    });
+    scene.physics.add.collider(this.object, this.chaingun.object, () => {
+      this.state.currentWeapon = WEAPONS.chaingun;
+      featureMap[Chaingun.id].object.destroy();
+      this.state.ammo += featureMap[Chaingun.id].state.ammo;
+    });
 
     scene.cameras.main.setZoom(0.6);
     scene.cameras.main.zoomTo(1, 550);
@@ -102,6 +111,16 @@ class Player extends IAbstarct {
           },
         ),
       },
+      machineGun: {
+        key: 'shoot_machinegun',
+        frames: scene.anims.generateFrameNumbers(
+          PARAMS.IMAGES.PLAYER.machineGun.id,
+          {
+            start: 0,
+            end: 0,
+          },
+        ),
+      },
       chaingun: {
         key: 'stand_chaingun',
         frames: scene.anims.generateFrameNumbers(
@@ -132,6 +151,10 @@ class Player extends IAbstarct {
   }
 
   actionsWithPlayer(scene) {
+    if (this.state.health <= 0) {
+      this.object.destroy();
+    }
+
     this.controller = {
       moveUp: scene.input.keyboard.addKey(controlKeys.up),
       moveRight: scene.input.keyboard.addKey(controlKeys.rigth),
@@ -230,14 +253,38 @@ class Player extends IAbstarct {
       this.state.isRunning = false;
     }
 
-    if (this.controller.doMainAttack.isDown && this.state.ammo) {
+    if (
+      this.controller.doMainAttack.isDown
+      && this.state.ammo
+      && !this.state.isShooting
+    ) {
       this.state.isShooting = true;
 
-      this.object.anims.play(this.animations.pistol.key, true);
-      // this.state.ammo -= 1;
-
-      // console.log(Weapons);
-      Weapons.shooting(scene, this, 'pistol');
+      switch (this.state.currentWeapon) {
+        case WEAPONS.pistol:
+          this.object.anims.play(this.animations.pistol.key, true);
+          Pistol.shooting(scene, this, this.featureMap);
+          setTimeout(() => {
+            this.state.isShooting = false;
+          }, 500);
+          break;
+        case WEAPONS.machineGun:
+          this.object.anims.play(this.animations.machineGun.key, true);
+          MachineGun.shooting(scene, this, this.featureMap);
+          setTimeout(() => {
+            this.state.isShooting = false;
+          }, 250);
+          break;
+        case WEAPONS.chaingun:
+          this.object.anims.play(this.animations.chaingunShoot.key, true);
+          Chaingun.shooting(scene, this, this.featureMap);
+          setTimeout(() => {
+            this.state.isShooting = false;
+          }, 50);
+          break;
+        default:
+          break;
+      }
     }
   }
 }

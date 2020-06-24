@@ -3,9 +3,9 @@ import { nanoid } from 'nanoid';
 import walk from './assets/player_walk.png';
 import run from './assets/player_run.png';
 import pistol from './assets/player_pistol.png';
+import machineGun from './assets/player_hk_stand.png';
 import chaingun from './assets/player_chaingun.png';
 import chaingunShoot from './assets/player_chaingun_shoot.png';
-// import bomb from './assets/bomb.png';
 
 const PARAMS = {
   INITIAL_COORDINATES: [6240, 6300],
@@ -35,6 +35,14 @@ const PARAMS = {
           frameHeight: 60,
         },
       },
+      machineGun: {
+        id: nanoid(),
+        img: machineGun,
+        frameSize: {
+          frameWidth: 56,
+          frameHeight: 57,
+        },
+      },
       chaingun: {
         id: nanoid(),
         img: chaingun,
@@ -52,12 +60,6 @@ const PARAMS = {
         },
       },
     },
-    // BULLET: {
-    //   bomb: {
-    //     id: nanoid(),
-    //     img: bomb,
-    //   },
-    // },
   },
 };
 
@@ -80,4 +82,12 @@ const MOVING_PARAMS = {
   },
 };
 
-export { PARAMS, MOVING_PARAMS, controlKeys };
+const WEAPONS = {
+  pistol: 'pistol',
+  machineGun: 'machine gun',
+  chaingun: 'chaingun',
+};
+
+export {
+  PARAMS, WEAPONS, MOVING_PARAMS, controlKeys,
+};

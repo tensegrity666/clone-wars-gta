@@ -45,6 +45,9 @@ class Car extends IAbstarct {
   }
 
   actionsWithCar(scene) {
+    if (this.state.health <= 0) {
+      console.log('hp car less than zero:', this.state.health);
+    }
     this.controller = {
       moveUp: scene.input.keyboard.addKey(controlKeys.up),
       moveRight: scene.input.keyboard.addKey(controlKeys.rigth),

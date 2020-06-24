@@ -1,9 +1,12 @@
 import Map from './map';
 import Player from './player';
 import Car from './cars';
-import Weapons from './weapons';
+import Pistol from './weapons/pistol';
+import MachineGun from './weapons/machine gun';
+import Chaingun from './weapons/chaingun';
+import Bullet from './weapons/bullet';
 
-const features = [Car, Weapons, Player, Map];
+const features = [Car, Pistol, Chaingun, MachineGun, Bullet, Player, Map];
 const featuresId = [];
 
 const featuresMap = features.reduce((acc, FeatureCreater) => {
