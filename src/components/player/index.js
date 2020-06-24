@@ -32,12 +32,15 @@ class Player extends IAbstarct {
   }
 
   create(scene, featureMap) {
+    this.carContainer = scene.add.container();
     this.car = featureMap[Car.id].object;
 
     this.object = scene.physics.add
       .sprite(...PARAMS.INITIAL_COORDINATES, this.constructor.id)
       .setDepth(1)
       .setScale(0.7);
+
+    this.object.body.setCircle(22.5, -4, 7);
 
     this.object.setCollideWorldBounds(true);
     scene.physics.add.collider(this.object, this.car);
@@ -139,7 +142,6 @@ class Player extends IAbstarct {
   }
 
   actionsWithPlayer(scene, featureMap) {
-    const carContainer = scene.add.container(this.car.x, this.car.y);
     this.car = featureMap[Car.id].object;
 
     this.controller = {
@@ -157,20 +159,23 @@ class Player extends IAbstarct {
       && this.isCarClose(this.car)
       && !this.state.isInsideCar
     ) {
-      carContainer.add(this.object);
+      this.object.body.enable = false;
+      this.carContainer.add(this.object);
       featureMap[Car.id].state.isPlayerInside = true;
       scene.cameras.main.startFollow(this.car);
       setTimeout(this.changePosition.bind(this), 2000);
     }
 
     if (this.controller.doAction.isDown && this.state.isInsideCar) {
-      carContainer.removeAll(this.object);
+      this.object.body.enable = true;
+      this.object = this.carContainer.getAt(0);
+      this.carContainer.removeAll();
       featureMap[Car.id].state.isPlayerInside = false;
       this.state.isInsideCar = false;
       scene.add.existing(this.object);
       scene.cameras.main.startFollow(this.object);
       this.object.x = this.car.x + 100;
-      this.object.y = this.car.y;
+      this.object.y = this.car.y + 100;
     }
 
     if (this.controller.moveLeft.isDown && !this.state.isRunning) {

@@ -1,7 +1,6 @@
 /* eslint-disable no-unused-vars */
 
 import { nanoid } from 'nanoid';
-
 import IAbstarct from '../interface';
 // import Player from '../player';
 
@@ -30,6 +29,9 @@ class Car extends IAbstarct {
       .sprite(...PARAMS.INITIAL_COORDINATES, PARAMS.IMAGES.PLAYER_CAR.id)
       .setDepth(1)
       .setScale(0.5);
+
+    this.object.body.setCircle(100, 25, 25);
+    // this.object.body.setSize(90, 180);
 
     this.object.setCollideWorldBounds(true);
 
