@@ -37,20 +37,18 @@ class Player extends IAbstarct {
 
     this.object = scene.physics.add
       .sprite(...PARAMS.INITIAL_COORDINATES, this.constructor.id)
+      .setCircle(22.5, -4, 7)
+      .setScale(0.7)
       .setDepth(1)
-      .setScale(0.7);
+      .enableBody()
+      .setMass(90)
+      .setBounce(-1, -1);
 
-    this.object.body.setCircle(22.5, -4, 7);
-
-    this.object.setCollideWorldBounds(true);
     scene.physics.add.collider(this.object, this.car);
 
-    // нужно перенести создание bullet сюда в метод create
-    // scene.physics.add.collider(this.bullet, this.car);
-
-    scene.cameras.main.setZoom(0.6);
-    scene.cameras.main.zoomTo(1, 550);
-    scene.cameras.main.startFollow(this.object);
+    // scene.cameras.main.setZoom(0.6);
+    // scene.cameras.main.zoomTo(1, 550);
+    // scene.cameras.main.startFollow(this.object);
 
     this.addAnimation(scene);
   }
