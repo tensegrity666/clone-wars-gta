@@ -12,7 +12,7 @@ import machineGun from '../weapons/assets/hk.png';
 import chaingun from '../weapons/assets/chaingun.png';
 
 const PARAMS = {
-  INITIAL_COORDINATES: [6240, 6300],
+  INITIAL_COORDINATES: [6200, 6300],
   IMAGES: {
     PLAYER: {
       walk: {
@@ -107,8 +107,14 @@ const MOVING_PARAMS = {
   PLAYER_SPEED: 160,
   SPEED_COF: 2,
   ROTATION: {
-    noRotate: 0,
-    rotate: Math.PI,
+    rotateRight: 0,
+    rotateLeft: Math.PI,
+    rotateUpAndRight: -0.75,
+    rotateUpAndLeft: (Math.PI * 5) / 4,
+    rotateUp: -(Math.PI / 2),
+    rotateDownAndRight: Math.PI / 4,
+    rotateDownAndLeft: 2.5,
+    rotateDown: Math.PI / 2,
   },
 };
 

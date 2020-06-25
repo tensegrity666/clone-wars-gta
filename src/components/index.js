@@ -1,12 +1,30 @@
 import Map from './map';
 import Player from './player';
-import Car from './cars';
 import Pistol from './weapons/pistol';
 import MachineGun from './weapons/machine gun';
 import Chaingun from './weapons/chaingun';
 import Bullet from './weapons/bullet';
+import Car from './cars/standard';
+import PoliceCar from './cars/police';
+import TaxiCar from './cars/taxi';
+import RacingCar from './cars/racing car';
+import Citizens from './bots/citizens';
+import Rednecks from './bots/rednecks';
+import Interactions from './interactions';
 
-const features = [Car, Pistol, Chaingun, MachineGun, Bullet, Map, Player];
+const features = [
+  Car,
+  Citizens,
+  Rednecks,
+  PoliceCar,
+  TaxiCar,
+  RacingCar,
+  Player,
+  Map,
+  Interactions,
+  Pistol, Chaingun, MachineGun, Bullet,
+];
+
 const featuresId = [];
 
 const featuresMap = features.reduce((acc, FeatureCreater) => {

@@ -1,6 +1,6 @@
 import { nanoid } from 'nanoid';
 
-import car from './assets/car.png';
+import car from '../assets/car.png';
 
 const PARAMS = {
   INITIAL_COORDINATES: [6000, 6450],
@@ -11,6 +11,7 @@ const PARAMS = {
       frameSize: { frameWidth: 256, frameHeight: 256 },
     },
   },
+  MAX_SPEED: 600,
 };
 
 const controlKeys = {

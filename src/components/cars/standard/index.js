@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 
 import { nanoid } from 'nanoid';
-import IAbstarct from '../interface';
+import IAbstarct from '../../interface';
 // import Player from '../player';
 
 import { PARAMS, controlKeys } from './constants';
@@ -24,20 +24,19 @@ class Car extends IAbstarct {
   }
 
   create(scene, featureMap) {
+    // this.player = featureMap[Player.id].object;
     this.object = scene.physics.add
       .sprite(...PARAMS.INITIAL_COORDINATES, PARAMS.IMAGES.PLAYER_CAR.id)
       .setDepth(1)
-      .setScale(0.5)
-      // .setCircle(100, 25, 25)
-      .enableBody()
-      .setSize(105, 125)
       .setImmovable()
-      .setMass(1200)
-      .setBounce(1, 1);
+      .setScale(0.5);
+
+    // this.object.body.setCircle(100, 25, 25);
+    this.object.body.setSize(90, 120);
 
     this.object.setCollideWorldBounds(true);
 
-    // console.log(this.object);
+    // scene.physics.add.collider(this.object, this.player);
 
     scene.cameras.main.setZoom(0.6);
     scene.cameras.main.zoomTo(1, 550);
@@ -49,9 +48,6 @@ class Car extends IAbstarct {
   }
 
   actionsWithCar(scene) {
-    if (this.state.health <= 0) {
-      console.log('hp car less than zero:', this.state.health);
-    }
     this.controller = {
       moveUp: scene.input.keyboard.addKey(controlKeys.up),
       moveRight: scene.input.keyboard.addKey(controlKeys.rigth),
@@ -65,12 +61,16 @@ class Car extends IAbstarct {
     if (
       this.controller.moveUp.isDown
       && this.state.isPlayerInside
-      && this.state.speed <= 500
+      && this.state.speed <= PARAMS.MAX_SPEED
     ) {
       this.state.speed += 10;
     }
 
-    if (this.controller.moveDown.isDown && this.state.isPlayerInside) {
+    if (
+      this.controller.moveDown.isDown
+      && this.state.isPlayerInside
+      && this.state.speed > -PARAMS.MAX_SPEED / 2
+    ) {
       this.state.speed -= 5;
     }
 
