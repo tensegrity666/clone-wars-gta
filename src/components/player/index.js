@@ -7,6 +7,7 @@ import IAbstarct from '../interface';
 import {
   PARAMS, MOVING_PARAMS, controlKeys, WEAPONS,
 } from './constants';
+
 import Car from '../cars';
 import Pistol from '../weapons/pistol';
 import MachineGun from '../weapons/machine gun';
@@ -21,12 +22,17 @@ class Player extends IAbstarct {
     health: 100,
     ammo: 0,
     currentWeapon: '',
+    currentWeaponIcon: '',
   };
 
   preload(scene) {
     const sprites = Object.values(PARAMS.IMAGES.PLAYER);
+    const spritesWeapons = Object.values(PARAMS.IMAGES.WEAPONS);
 
     sprites.forEach((sprite) => {
+      scene.load.spritesheet(sprite.id, sprite.img, sprite.frameSize);
+    });
+    spritesWeapons.forEach((sprite) => {
       scene.load.spritesheet(sprite.id, sprite.img, sprite.frameSize);
     });
   }
@@ -49,26 +55,54 @@ class Player extends IAbstarct {
       this.state.currentWeapon = WEAPONS.pistol;
       featureMap[Pistol.id].object.destroy();
       this.state.ammo += featureMap[Pistol.id].state.ammo;
+      if (this.state.currentWeaponIcon) {
+        this.state.currentWeaponIcon.destroy();
+      }
+      this.state.currentWeaponIcon = scene.add
+        .image(200, 100, PARAMS.IMAGES.WEAPONS.pistol.id)
+        .setScrollFactor(0)
+        .setScale(0.2);
     });
     scene.physics.add.collider(this.object, this.machineGun.object, () => {
       this.state.currentWeapon = WEAPONS.machineGun;
       featureMap[MachineGun.id].object.destroy();
       this.state.ammo += featureMap[Pistol.id].state.ammo;
+      if (this.state.currentWeaponIcon) {
+        this.state.currentWeaponIcon.destroy();
+      }
+      this.state.currentWeaponIcon = scene.add
+        .image(200, 100, PARAMS.IMAGES.WEAPONS.machineGun.id)
+        .setScrollFactor(0)
+        .setScale(0.2);
     });
     scene.physics.add.collider(this.object, this.chaingun.object, () => {
       this.state.currentWeapon = WEAPONS.chaingun;
       featureMap[Chaingun.id].object.destroy();
       this.state.ammo += featureMap[Chaingun.id].state.ammo;
+      if (this.state.currentWeaponIcon) {
+        this.state.currentWeaponIcon.destroy();
+      }
+      this.state.currentWeaponIcon = scene.add
+        .image(200, 100, PARAMS.IMAGES.WEAPONS.chaingun.id)
+        .setScrollFactor(0)
+        .setScale(0.2);
     });
 
     scene.cameras.main.setZoom(0.6);
     scene.cameras.main.zoomTo(1, 550);
-    scene.cameras.main.startFollow(this.object);
+    scene.cameras.main.startFollow(this.object, true);
+
+    this.hp = scene.add
+      .text(100, 0)
+      .setScrollFactor(0)
+      .setFontSize(32)
+      .setColor('#ffffff');
 
     this.addAnimation(scene);
   }
 
   update(scene) {
+    this.actionsWithCamera(scene);
     this.actionsWithPlayer(scene);
   }
 
@@ -148,6 +182,15 @@ class Player extends IAbstarct {
     const animConfig = Object.values(this.animations);
 
     animConfig.forEach((a) => scene.anims.create(a));
+  }
+
+  actionsWithCamera(scene) {
+    const camera = scene.cameras.main;
+    this.hp.setText([
+      `Health: ${this.state.health}`,
+      // `Weapon: ${this.state.currentWeapon}`,
+      `Ammo: ${this.state.ammo}`,
+    ]);
   }
 
   actionsWithPlayer(scene) {

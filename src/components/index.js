@@ -6,7 +6,7 @@ import MachineGun from './weapons/machine gun';
 import Chaingun from './weapons/chaingun';
 import Bullet from './weapons/bullet';
 
-const features = [Car, Pistol, Chaingun, MachineGun, Bullet, Player, Map];
+const features = [Car, Pistol, Chaingun, MachineGun, Bullet, Map, Player];
 const featuresId = [];
 
 const featuresMap = features.reduce((acc, FeatureCreater) => {
