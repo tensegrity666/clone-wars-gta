@@ -37,6 +37,8 @@ class Car extends IAbstarct {
 
     this.object.setCollideWorldBounds(true);
 
+    // console.log(this.object);
+
     scene.cameras.main.setZoom(0.6);
     scene.cameras.main.zoomTo(1, 550);
     scene.cameras.main.startFollow(this.object);
@@ -47,6 +49,9 @@ class Car extends IAbstarct {
   }
 
   actionsWithCar(scene) {
+    if (this.state.health <= 0) {
+      console.log('hp car less than zero:', this.state.health);
+    }
     this.controller = {
       moveUp: scene.input.keyboard.addKey(controlKeys.up),
       moveRight: scene.input.keyboard.addKey(controlKeys.rigth),

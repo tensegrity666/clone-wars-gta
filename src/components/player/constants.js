@@ -2,10 +2,14 @@ import { nanoid } from 'nanoid';
 
 import walk from './assets/player_walk.png';
 import run from './assets/player_run.png';
-import pistol from './assets/player_pistol.png';
-import chaingun from './assets/player_chaingun.png';
+import playerWithPistol from './assets/player_pistol.png';
+import playerWithMachineGun from './assets/player_hk_stand.png';
+import playerWithChaingun from './assets/player_chaingun.png';
 import chaingunShoot from './assets/player_chaingun_shoot.png';
-import bomb from './assets/bomb.png';
+
+import pistol from '../weapons/assets/pistol.png';
+import machineGun from '../weapons/assets/hk.png';
+import chaingun from '../weapons/assets/chaingun.png';
 
 const PARAMS = {
   INITIAL_COORDINATES: [6200, 6300],
@@ -29,15 +33,23 @@ const PARAMS = {
       },
       pistol: {
         id: nanoid(),
-        img: pistol,
+        img: playerWithPistol,
         frameSize: {
           frameWidth: 60,
           frameHeight: 60,
         },
       },
+      machineGun: {
+        id: nanoid(),
+        img: playerWithMachineGun,
+        frameSize: {
+          frameWidth: 56,
+          frameHeight: 57,
+        },
+      },
       chaingun: {
         id: nanoid(),
-        img: chaingun,
+        img: playerWithChaingun,
         frameSize: {
           frameWidth: 54,
           frameHeight: 32,
@@ -52,10 +64,30 @@ const PARAMS = {
         },
       },
     },
-    BULLET: {
-      bomb: {
+    WEAPONS: {
+      pistol: {
         id: nanoid(),
-        img: bomb,
+        img: pistol,
+        frameSize: {
+          frameWidth: 600,
+          frameHeight: 600,
+        },
+      },
+      machineGun: {
+        id: nanoid(),
+        img: machineGun,
+        frameSize: {
+          frameWidth: 1000,
+          frameHeight: 460,
+        },
+      },
+      chaingun: {
+        id: nanoid(),
+        img: chaingun,
+        frameSize: {
+          frameWidth: 920,
+          frameHeight: 400,
+        },
       },
     },
   },
@@ -86,4 +118,12 @@ const MOVING_PARAMS = {
   },
 };
 
-export { PARAMS, MOVING_PARAMS, controlKeys };
+const WEAPONS = {
+  pistol: 'pistol',
+  machineGun: 'machine gun',
+  chaingun: 'chaingun',
+};
+
+export {
+  PARAMS, WEAPONS, MOVING_PARAMS, controlKeys,
+};

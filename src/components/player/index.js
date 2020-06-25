@@ -5,11 +5,18 @@ import { nanoid } from 'nanoid';
 
 import IAbstarct from '../interface';
 
-import { PARAMS, MOVING_PARAMS, controlKeys } from './constants';
+import {
+  PARAMS, MOVING_PARAMS, controlKeys, WEAPONS,
+} from './constants';
+
+import Pistol from '../weapons/pistol';
+import MachineGun from '../weapons/machine gun';
+import Chaingun from '../weapons/chaingun';
 import Car from '../cars/standard';
 import RacingCar from '../cars/racing car';
 import PoliceCar from '../cars/police';
 import TaxiCar from '../cars/taxi';
+
 
 class Player extends IAbstarct {
   static id = nanoid();
@@ -19,27 +26,35 @@ class Player extends IAbstarct {
     isShooting: false,
     isInsideCar: false,
     health: 100,
+    ammo: 0,
+    currentWeapon: '',
+    currentWeaponIcon: '',
   };
 
   preload(scene) {
-    scene.load.image(
-      PARAMS.IMAGES.BULLET.bomb.id,
-      PARAMS.IMAGES.BULLET.bomb.img,
-    );
-
     const sprites = Object.values(PARAMS.IMAGES.PLAYER);
+    const spritesWeapons = Object.values(PARAMS.IMAGES.WEAPONS);
 
     sprites.forEach((sprite) => {
+      scene.load.spritesheet(sprite.id, sprite.img, sprite.frameSize);
+    });
+    spritesWeapons.forEach((sprite) => {
       scene.load.spritesheet(sprite.id, sprite.img, sprite.frameSize);
     });
   }
 
   create(scene, featureMap) {
+    this.featureMap = featureMap;
+    this.pistol = featureMap[Pistol.id];
+    this.machineGun = featureMap[MachineGun.id];
+    this.chaingun = featureMap[Chaingun.id];
+    this.car = featureMap[Car.id].object;
     this.carContainer = scene.add.container();
     this.car = featureMap[Car.id];
     this.policeCar = featureMap[PoliceCar.id];
     this.taxiCar = featureMap[TaxiCar.id];
     this.racingCar = featureMap[RacingCar.id];
+
 
     this.object = scene.physics.add
       .sprite(...PARAMS.INITIAL_COORDINATES, this.constructor.id)
@@ -51,10 +66,55 @@ class Player extends IAbstarct {
       .setBounce(1, 1);
 
     this.object.setCollideWorldBounds(true);
-    scene.physics.add.collider(this.object, this.car.object);
-    scene.physics.add.collider(this.object, this.policeCar.object);
-    scene.physics.add.collider(this.object, this.taxiCar.object);
-    scene.physics.add.collider(this.object, this.racingCar.object);
+
+    scene.physics.add.collider(this.object, this.car);
+
+    scene.physics.add.collider(this.object, this.pistol.object, () => {
+      this.state.currentWeapon = WEAPONS.pistol;
+      featureMap[Pistol.id].object.destroy();
+      this.state.ammo += featureMap[Pistol.id].state.ammo;
+      if (this.state.currentWeaponIcon) {
+        this.state.currentWeaponIcon.destroy();
+      }
+      this.state.currentWeaponIcon = scene.add
+        .image(200, 100, PARAMS.IMAGES.WEAPONS.pistol.id)
+        .setScrollFactor(0)
+        .setScale(0.2);
+    });
+    scene.physics.add.collider(this.object, this.machineGun.object, () => {
+      this.state.currentWeapon = WEAPONS.machineGun;
+      featureMap[MachineGun.id].object.destroy();
+      this.state.ammo += featureMap[Pistol.id].state.ammo;
+      if (this.state.currentWeaponIcon) {
+        this.state.currentWeaponIcon.destroy();
+      }
+      this.state.currentWeaponIcon = scene.add
+        .image(200, 100, PARAMS.IMAGES.WEAPONS.machineGun.id)
+        .setScrollFactor(0)
+        .setScale(0.2);
+    });
+    scene.physics.add.collider(this.object, this.chaingun.object, () => {
+      this.state.currentWeapon = WEAPONS.chaingun;
+      featureMap[Chaingun.id].object.destroy();
+      this.state.ammo += featureMap[Chaingun.id].state.ammo;
+      if (this.state.currentWeaponIcon) {
+        this.state.currentWeaponIcon.destroy();
+      }
+      this.state.currentWeaponIcon = scene.add
+        .image(200, 100, PARAMS.IMAGES.WEAPONS.chaingun.id)
+        .setScrollFactor(0)
+        .setScale(0.2);
+    });
+
+    scene.cameras.main.setZoom(0.6);
+    scene.cameras.main.zoomTo(1, 550);
+    scene.cameras.main.startFollow(this.object, true);
+
+    this.hp = scene.add
+      .text(100, 0)
+      .setScrollFactor(0)
+      .setFontSize(32)
+      .setColor('#ffffff');
 
     // scene.cameras.main.setZoom(0.6);
     // scene.cameras.main.zoomTo(1, 550);
@@ -63,9 +123,10 @@ class Player extends IAbstarct {
     this.addAnimation(scene);
   }
 
-  update(scene, featureMap) {
-    this.actionsWithPlayer(scene, featureMap);
-  }
+
+  update(scene) {
+    this.actionsWithCamera(scene);
+    this.actionsWithPlayer(scene);
 
   addAnimation(scene) {
     this.animations = {
@@ -106,6 +167,16 @@ class Player extends IAbstarct {
           },
         ),
       },
+      machineGun: {
+        key: 'shoot_machinegun',
+        frames: scene.anims.generateFrameNumbers(
+          PARAMS.IMAGES.PLAYER.machineGun.id,
+          {
+            start: 0,
+            end: 0,
+          },
+        ),
+      },
       chaingun: {
         key: 'stand_chaingun',
         frames: scene.anims.generateFrameNumbers(
@@ -135,6 +206,21 @@ class Player extends IAbstarct {
     animConfig.forEach((a) => scene.anims.create(a));
   }
 
+
+  actionsWithCamera(scene) {
+    const camera = scene.cameras.main;
+    this.hp.setText([
+      `Health: ${this.state.health}`,
+      // `Weapon: ${this.state.currentWeapon}`,
+      `Ammo: ${this.state.ammo}`,
+    ]);
+  }
+
+  actionsWithPlayer(scene) {
+    if (this.state.health <= 0) {
+      this.object.destroy();
+    }
+   
   getClosestCar(arrayOfCars) {
     let closestCar;
 
@@ -306,23 +392,38 @@ class Player extends IAbstarct {
       this.state.isRunning = false;
     }
 
-    if (this.controller.doMainAttack.isDown) {
+    if (
+      this.controller.doMainAttack.isDown
+      && this.state.ammo
+      && !this.state.isShooting
+    ) {
       this.state.isShooting = true;
 
-      this.object.anims.play(this.animations.chaingunShoot.key, true);
-
-      this.bullet = scene.physics.add.sprite(
-        this.object.x + Math.cos(this.object.rotation) * 20,
-        this.object.y + Math.sin(this.object.rotation) * 20,
-        PARAMS.IMAGES.BULLET.bomb.id,
-      );
-
-      scene.physics.moveTo(
-        this.bullet,
-        this.object.x + Math.cos(this.object.rotation) * 1000,
-        this.object.y + Math.sin(this.object.rotation) * 1000,
-        1000,
-      );
+      switch (this.state.currentWeapon) {
+        case WEAPONS.pistol:
+          this.object.anims.play(this.animations.pistol.key, true);
+          Pistol.shooting(scene, this, this.featureMap);
+          setTimeout(() => {
+            this.state.isShooting = false;
+          }, 500);
+          break;
+        case WEAPONS.machineGun:
+          this.object.anims.play(this.animations.machineGun.key, true);
+          MachineGun.shooting(scene, this, this.featureMap);
+          setTimeout(() => {
+            this.state.isShooting = false;
+          }, 250);
+          break;
+        case WEAPONS.chaingun:
+          this.object.anims.play(this.animations.chaingunShoot.key, true);
+          Chaingun.shooting(scene, this, this.featureMap);
+          setTimeout(() => {
+            this.state.isShooting = false;
+          }, 50);
+          break;
+        default:
+          break;
+      }
     }
   }
 }
