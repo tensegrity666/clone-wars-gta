@@ -22,7 +22,10 @@ const features = [
   Player,
   Map,
   Interactions,
-  Pistol, Chaingun, MachineGun, Bullet,
+  Pistol,
+  Chaingun,
+  MachineGun,
+  Bullet,
 ];
 
 const featuresId = [];

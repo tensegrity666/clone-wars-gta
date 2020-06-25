@@ -17,7 +17,6 @@ import RacingCar from '../cars/racing car';
 import PoliceCar from '../cars/police';
 import TaxiCar from '../cars/taxi';
 
-
 class Player extends IAbstarct {
   static id = nanoid();
 
@@ -49,12 +48,12 @@ class Player extends IAbstarct {
     this.machineGun = featureMap[MachineGun.id];
     this.chaingun = featureMap[Chaingun.id];
     this.car = featureMap[Car.id].object;
+
     this.carContainer = scene.add.container();
     this.car = featureMap[Car.id];
     this.policeCar = featureMap[PoliceCar.id];
     this.taxiCar = featureMap[TaxiCar.id];
     this.racingCar = featureMap[RacingCar.id];
-
 
     this.object = scene.physics.add
       .sprite(...PARAMS.INITIAL_COORDINATES, this.constructor.id)
@@ -123,10 +122,10 @@ class Player extends IAbstarct {
     this.addAnimation(scene);
   }
 
-
   update(scene) {
     this.actionsWithCamera(scene);
     this.actionsWithPlayer(scene);
+  }
 
   addAnimation(scene) {
     this.animations = {
@@ -206,7 +205,6 @@ class Player extends IAbstarct {
     animConfig.forEach((a) => scene.anims.create(a));
   }
 
-
   actionsWithCamera(scene) {
     const camera = scene.cameras.main;
     this.hp.setText([
@@ -216,11 +214,6 @@ class Player extends IAbstarct {
     ]);
   }
 
-  actionsWithPlayer(scene) {
-    if (this.state.health <= 0) {
-      this.object.destroy();
-    }
-   
   getClosestCar(arrayOfCars) {
     let closestCar;
 
@@ -266,6 +259,10 @@ class Player extends IAbstarct {
   }
 
   actionsWithPlayer(scene, featureMap) {
+    if (this.state.health <= 0) {
+      this.object.destroy();
+    }
+
     this.cars = [this.car, this.policeCar, this.racingCar, this.taxiCar];
     this.closestCar = this.getClosestCar(this.cars);
 
