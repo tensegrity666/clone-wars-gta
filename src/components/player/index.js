@@ -6,7 +6,10 @@ import { nanoid } from 'nanoid';
 import IAbstarct from '../interface';
 
 import { PARAMS, MOVING_PARAMS, controlKeys } from './constants';
-import Car from '../cars';
+import Car from '../cars/standard';
+import RacingCar from '../cars/racing car';
+import PoliceCar from '../cars/police';
+import TaxiCar from '../cars/taxi';
 
 class Player extends IAbstarct {
   static id = nanoid();
@@ -33,7 +36,12 @@ class Player extends IAbstarct {
 
   create(scene, featureMap) {
     this.carContainer = scene.add.container();
-
+    this.car = featureMap[Car.id];
+    this.policeCar = featureMap[PoliceCar.id];
+    this.taxiCar = featureMap[TaxiCar.id];
+    this.racingCar = featureMap[RacingCar.id];
+    
+    
     this.object = scene.physics.add
       .sprite(...PARAMS.INITIAL_COORDINATES, this.constructor.id)
       .setScale(0.7)
@@ -42,6 +50,16 @@ class Player extends IAbstarct {
       .setCircle(22.5, -4, 7)
       .setMass(90)
       .setBounce(1, 1);
+
+
+    this.object.setCollideWorldBounds(true);
+    scene.physics.add.collider(this.object, this.car.object);
+    scene.physics.add.collider(this.object, this.policeCar.object);
+    scene.physics.add.collider(this.object, this.taxiCar.object);
+    scene.physics.add.collider(this.object, this.racingCar.object);
+
+
+
 
     // scene.cameras.main.setZoom(0.6);
     // scene.cameras.main.zoomTo(1, 550);
@@ -122,6 +140,29 @@ class Player extends IAbstarct {
     animConfig.forEach((a) => scene.anims.create(a));
   }
 
+
+  getClosestCar(arrayOfCars) {
+    let closestCar;
+
+    const arrayOfDiffX = arrayOfCars.reduce((acc, car) => {
+      acc.push(Math.abs(this.object.x - car.object.x));
+      return acc;
+    }, []);
+    const arrayOfDiffY = arrayOfCars.reduce((acc, car) => {
+      acc.push(Math.abs(this.object.y - car.object.y));
+      return acc;
+    }, []);
+    let minDiff = arrayOfDiffX[0] + arrayOfDiffY[0];
+    for (let i = 0; i < arrayOfCars.length; i++) {
+      const currentDiff = arrayOfDiffX[i] + arrayOfDiffY[i];
+      if (currentDiff <= minDiff) {
+        minDiff = currentDiff;
+        closestCar = arrayOfCars[i];
+      }
+    }
+    return closestCar;
+  }
+
   isCarClose(car) {
     if (car.x + 100 < this.object.x || car.x - 100 > this.object.x) {
       return false;
@@ -136,8 +177,18 @@ class Player extends IAbstarct {
     this.state.isInsideCar = true;
   }
 
+  changeCurrentCar(car) {
+    if (car === undefined) {
+      return true;
+    }
+    this.currentCar = car;
+    return true;
+  }
+
   actionsWithPlayer(scene, featureMap) {
-    this.car = featureMap[Car.id].object;
+    this.cars = [this.car, this.policeCar, this.racingCar, this.taxiCar];
+    this.closestCar = this.getClosestCar(this.cars);
+
 
     this.controller = {
       moveUp: scene.input.keyboard.addKey(controlKeys.up),
@@ -151,26 +202,29 @@ class Player extends IAbstarct {
 
     if (
       this.controller.doAction.isDown
-      && this.isCarClose(this.car)
+
       && !this.state.isInsideCar
+      && this.changeCurrentCar(this.closestCar)
+      && this.isCarClose(this.currentCar.object)
     ) {
       this.object.body.enable = false;
       this.carContainer.add(this.object);
-      featureMap[Car.id].state.isPlayerInside = true;
-      scene.cameras.main.startFollow(this.car);
-      setTimeout(this.changePosition.bind(this), 2000);
+      this.currentCar.state.isPlayerInside = true;
+      scene.cameras.main.startFollow(this.currentCar.object);
+      setTimeout(this.changePosition.bind(this), 1000);
+
     }
 
     if (this.controller.doAction.isDown && this.state.isInsideCar) {
       this.object.body.enable = true;
       this.object = this.carContainer.getAt(0);
       this.carContainer.removeAll();
-      featureMap[Car.id].state.isPlayerInside = false;
-      this.state.isInsideCar = false;
+      this.currentCar.state.isPlayerInside = false;
       scene.add.existing(this.object);
       scene.cameras.main.startFollow(this.object);
-      this.object.x = this.car.x + 100;
-      this.object.y = this.car.y + 100;
+      this.object.x = this.currentCar.object.x + 100;
+      this.object.y = this.currentCar.object.y + 100;
+      this.state.isInsideCar = false;
     }
 
     if (this.controller.moveLeft.isDown && !this.state.isRunning) {
