@@ -6,6 +6,7 @@ import Phaser from 'phaser';
 import PARAMS from './constants';
 
 import { featuresMap, featuresId } from '../components';
+// import { interactionsMap, interactionsId } from '../interactions';
 
 class MainScene extends Phaser.Scene {
   constructor() {
@@ -26,6 +27,7 @@ class MainScene extends Phaser.Scene {
 
   create() {
     featuresId.forEach((id) => featuresMap[id].create(this, featuresMap));
+    // interactionsId.forEach((id) => interactionsMap[id].create(this, interactionsMap));
   }
 
   update() {

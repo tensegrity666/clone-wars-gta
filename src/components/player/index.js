@@ -40,13 +40,17 @@ class Player extends IAbstarct {
     this.policeCar = featureMap[PoliceCar.id];
     this.taxiCar = featureMap[TaxiCar.id];
     this.racingCar = featureMap[RacingCar.id];
-
+    
+    
     this.object = scene.physics.add
       .sprite(...PARAMS.INITIAL_COORDINATES, this.constructor.id)
+      .setScale(0.7)
       .setDepth(1)
-      .setScale(0.7);
+      .enableBody()
+      .setCircle(22.5, -4, 7)
+      .setMass(90)
+      .setBounce(1, 1);
 
-    this.object.body.setCircle(22.5, -4, 7);
 
     this.object.setCollideWorldBounds(true);
     scene.physics.add.collider(this.object, this.car.object);
@@ -54,9 +58,12 @@ class Player extends IAbstarct {
     scene.physics.add.collider(this.object, this.taxiCar.object);
     scene.physics.add.collider(this.object, this.racingCar.object);
 
-    scene.cameras.main.setZoom(0.6);
-    scene.cameras.main.zoomTo(1, 550);
-    scene.cameras.main.startFollow(this.object);
+
+
+
+    // scene.cameras.main.setZoom(0.6);
+    // scene.cameras.main.zoomTo(1, 550);
+    // scene.cameras.main.startFollow(this.object);
 
     this.addAnimation(scene);
   }
@@ -133,6 +140,7 @@ class Player extends IAbstarct {
     animConfig.forEach((a) => scene.anims.create(a));
   }
 
+
   getClosestCar(arrayOfCars) {
     let closestCar;
 
@@ -181,6 +189,7 @@ class Player extends IAbstarct {
     this.cars = [this.car, this.policeCar, this.racingCar, this.taxiCar];
     this.closestCar = this.getClosestCar(this.cars);
 
+
     this.controller = {
       moveUp: scene.input.keyboard.addKey(controlKeys.up),
       moveRight: scene.input.keyboard.addKey(controlKeys.rigth),
@@ -193,6 +202,7 @@ class Player extends IAbstarct {
 
     if (
       this.controller.doAction.isDown
+
       && !this.state.isInsideCar
       && this.changeCurrentCar(this.closestCar)
       && this.isCarClose(this.currentCar.object)
@@ -202,6 +212,7 @@ class Player extends IAbstarct {
       this.currentCar.state.isPlayerInside = true;
       scene.cameras.main.startFollow(this.currentCar.object);
       setTimeout(this.changePosition.bind(this), 1000);
+
     }
 
     if (this.controller.doAction.isDown && this.state.isInsideCar) {
