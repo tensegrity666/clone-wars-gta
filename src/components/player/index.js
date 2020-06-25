@@ -33,7 +33,6 @@ class Player extends IAbstarct {
 
   create(scene, featureMap) {
     this.carContainer = scene.add.container();
-    this.car = featureMap[Car.id].object;
 
     this.object = scene.physics.add
       .sprite(...PARAMS.INITIAL_COORDINATES, this.constructor.id)
@@ -43,8 +42,6 @@ class Player extends IAbstarct {
       .setCircle(22.5, -4, 7)
       .setMass(90)
       .setBounce(1, 1);
-
-    scene.physics.add.collider(this.object, this.car);
 
     // scene.cameras.main.setZoom(0.6);
     // scene.cameras.main.zoomTo(1, 550);

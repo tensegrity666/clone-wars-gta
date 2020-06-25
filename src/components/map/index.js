@@ -3,7 +3,7 @@ import { nanoid } from 'nanoid';
 
 import IAbstarct from '../interface';
 import PARAMS from './constants';
-import Player from '../player';
+// import Player from '../player';
 
 class Map extends IAbstarct {
   static id = nanoid();
@@ -18,9 +18,9 @@ class Map extends IAbstarct {
   }
 
   create(scene, featuresMap) {
-    this.player = featuresMap[Player.id].object;
+    // this.player = featuresMap[Player.id].object;
 
-    this.object = scene.add.tilemap(this.constructor.id);
+    this.map = scene.add.tilemap(this.constructor.id);
 
     const config = {
       key: 'waterAnimation',
@@ -35,7 +35,7 @@ class Map extends IAbstarct {
 
     scene.anims.create(config);
 
-    const waterLayer = this.object.layers[0].data;
+    const waterLayer = this.map.layers[0].data;
 
     for (let pointArr = 0; pointArr < waterLayer.length; pointArr++) {
       for (let tile = 0; tile < waterLayer[pointArr].length; tile++) {
@@ -50,26 +50,26 @@ class Map extends IAbstarct {
       }
     }
 
-    const terrain = this.object.addTilesetImage('gta-tiles', PARAMS.id);
+    const terrain = this.map.addTilesetImage('gta-tiles', PARAMS.id);
 
-    this.object.createStaticLayer('ground', [terrain], 0, 0);
-    this.object.createStaticLayer('roads', [terrain], 0, 0);
+    this.map.createStaticLayer('ground', [terrain], 0, 0);
+    this.map.createStaticLayer('roads', [terrain], 0, 0);
 
-    const boxes = this.object.createStaticLayer('box', [terrain], 0, 0);
+    this.object = this.map.createStaticLayer('box', [terrain], 0, 0);
 
-    scene.physics.add.collider(this.player, boxes);
+    // scene.physics.add.collider(this.player, this.object);
 
-    boxes.setCollisionByProperty({
+    this.object.setCollisionByProperty({
       collides: true,
     });
 
-    boxes.setCollision([894, 609]);
+    this.object.setCollision([894, 609]);
 
     scene.physics.world.setBounds(
       0,
       0,
-      this.object.widthInPixels,
-      this.object.heightInPixels,
+      this.map.widthInPixels,
+      this.map.heightInPixels,
     );
   }
 }

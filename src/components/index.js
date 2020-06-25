@@ -3,8 +3,9 @@ import Player from './player';
 import Car from './cars';
 import Citizens from './bots/citizens';
 import Rednecks from './bots/rednecks';
+import Interactions from './interactions';
 
-const features = [Car, Citizens, Rednecks, Player, Map];
+const features = [Car, Citizens, Rednecks, Player, Map, Interactions];
 const featuresId = [];
 
 const featuresMap = features.reduce((acc, FeatureCreater) => {
