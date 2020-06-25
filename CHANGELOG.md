@@ -2,6 +2,27 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.4](https://github.com/rolling-scopes-school/clonewars-gta/compare/v0.0.3...v0.0.4) (2020-06-25)
+
+
+### Features
+
+* add add interactions between player and car ([3396be4](https://github.com/rolling-scopes-school/clonewars-gta/commit/3396be415842418a05e80400e7313870807e911b))
+* add chaingun and machine gun ([d0dbe02](https://github.com/rolling-scopes-school/clonewars-gta/commit/d0dbe02411dccabc2eeddc3276adadab709bdedd))
+* add interactions feature ([84c0ced](https://github.com/rolling-scopes-school/clonewars-gta/commit/84c0cedbcd2d89293468597cff854022ccf99be6))
+* add police car, taxi, racing car ([d68ec50](https://github.com/rolling-scopes-school/clonewars-gta/commit/d68ec506a586bdd72157f6cafe19a6ca1843ea0c))
+* add weapons, health and ammo on display ([1e90de8](https://github.com/rolling-scopes-school/clonewars-gta/commit/1e90de8704c130082be53d7253ff1dd8808a1ff5))
+* add weapons(pistol) ([a368a8b](https://github.com/rolling-scopes-school/clonewars-gta/commit/a368a8bae0723987f364a416179c46b16ead4014))
+* change collider ([0a26870](https://github.com/rolling-scopes-school/clonewars-gta/commit/0a268708723649e643923e993e8c17782acf35ad))
+
+
+### Bug Fixes
+
+* change constants in player, change scale of player and car, implement correct speed for car ([5ad13a8](https://github.com/rolling-scopes-school/clonewars-gta/commit/5ad13a8718fbcdc50212fadff7542696a18712c9))
+* conflicts ([6921430](https://github.com/rolling-scopes-school/clonewars-gta/commit/69214304a3c501018aa31b74b20d8ce6f99ba9e2))
+* conflicts ([2bd61f3](https://github.com/rolling-scopes-school/clonewars-gta/commit/2bd61f35d350e4e52d8b87003b9a0966f0fbaaf4))
+* square shape of car ([a74c28a](https://github.com/rolling-scopes-school/clonewars-gta/commit/a74c28a5ca73a9b1e6d16f18db18cdb4d429576b))
+
 ### [0.0.3](https://github.com/rolling-scopes-school/clonewars-gta/compare/v0.0.2...v0.0.3) (2020-06-24)
 
 
