@@ -3,7 +3,7 @@ import { nanoid } from 'nanoid';
 import IAbstarct from '../interface';
 import Citizen from '../bots/citizens';
 import Rednecks from '../bots/rednecks';
-import Car from '../cars';
+import TaxiCar from '../cars/taxi';
 import Map from '../map';
 import Player from '../player';
 
@@ -13,7 +13,7 @@ class Interactions extends IAbstarct {
   create(scene, interactionMap) {
     const citizen = interactionMap[Citizen.id].object;
     const rednecks = interactionMap[Rednecks.id].object;
-    const car = interactionMap[Car.id].object;
+    const car = interactionMap[TaxiCar.id].object;
     const map = interactionMap[Map.id].object;
 
     this.object = interactionMap[Player.id].object;

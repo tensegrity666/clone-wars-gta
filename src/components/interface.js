@@ -2,7 +2,7 @@
 
 class IAbstract {
   object = null;
-  state = {}
+  state = {};
 
   init() {}
   preload() {}

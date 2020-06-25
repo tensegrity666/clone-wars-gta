@@ -25,13 +25,8 @@ class Rednecks extends IAbstarct {
   }
 
   create(scene, featureMap) {
-    this.citizens = featureMap[Citizens.id].object;
-    this.car = featureMap[Car.id].object;
-
     this.bots = this.createBots(scene, 99);
-
     this.object = scene.physics.add.group(this.bots);
-    scene.physics.add.collider(this.object, [this.citizens, this.car]);
 
     this.addAnimation(scene);
   }

@@ -6,8 +6,6 @@ import { nanoid } from 'nanoid';
 
 import IAbstarct from '../../interface';
 import PARAMS from './constants';
-import Car from '../../cars';
-import Player from '../../player';
 
 class Citizens extends IAbstarct {
   static id = nanoid();
@@ -25,14 +23,8 @@ class Citizens extends IAbstarct {
   }
 
   create(scene, featureMap) {
-    this.car = featureMap[Car.id].object;
-    this.player = featureMap[Player.id].object;
-
     this.bots = this.createBots(scene, 199);
-
     this.object = scene.physics.add.group(this.bots);
-
-    scene.physics.add.collider(this.object, [this.car]);
 
     this.addAnimation(scene);
   }
