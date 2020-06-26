@@ -39,8 +39,8 @@ module.exports = {
       filename: 'index.html',
     }),
     new WorkboxPlugin.GenerateSW({
-      clientsClaim: true,
-      skipWaiting: true,
+      clientsClaim: devMode ? false : true,
+      skipWaiting: devMode ? false : true,
       maximumFileSizeToCacheInBytes: 32000000,
     }),
     new MiniCssExtractPlugin({
@@ -110,7 +110,7 @@ module.exports = {
         loader: 'file-loader',
         options: {
           name(resourcePath, resourceQuery) {
-            if (process.env.NODE_ENV === 'development') {
+            if (devMode) {
               return '[path][name].[ext]';
             }
             return '[contenthash].[ext]';
