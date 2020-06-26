@@ -33,7 +33,7 @@ const config = {
 
 const loadHandler = () => {
   navigator.serviceWorker
-    .register('./worker.js', { scope: './' })
+    .register('./service-worker.js', { scope: './' })
     .then((reg) => {
       console.log(`SW is registered: ${reg.scope}`);
     })
