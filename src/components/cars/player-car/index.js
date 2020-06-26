@@ -37,9 +37,9 @@ class PlayerCar extends Car {
     };
 
     if (
-      this.controller.moveUp.isDown
-      && this.state.isPlayerInside
-      && this.state.speed <= 500
+      this.controller.moveUp.isDown &&
+      this.state.isPlayerInside &&
+      this.state.speed <= 500
     ) {
       this.state.speed += 10;
     }
@@ -87,13 +87,13 @@ class PlayerCar extends Car {
     // console.log('rotation:', this.object.rotation);
 
     this.object.setVelocityY(
-      -this.state.speed
-        * Math.cos(((this.object.rotation * 180) / Math.PI - 360) * 0.01745),
+      -this.state.speed *
+        Math.cos(((this.object.rotation * 180) / Math.PI - 360) * 0.01745)
     );
 
     this.object.setVelocityX(
-      this.state.speed
-        * Math.sin(((this.object.rotation * 180) / Math.PI - 360) * 0.01745),
+      this.state.speed *
+        Math.sin(((this.object.rotation * 180) / Math.PI - 360) * 0.01745)
     );
   }
 }
