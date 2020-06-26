@@ -1,6 +1,7 @@
 import { nanoid } from 'nanoid';
 
 import logo from './assets/images/logo.png';
+import cover from './assets/images/cover.jpg';
 import music from './assets/sounds/title.mp3';
 
 const PARAMS = {
@@ -14,6 +15,10 @@ const PARAMS = {
     LOGO: {
       id: nanoid(),
       img: logo,
+    },
+    COVER: {
+      id: nanoid(),
+      img: cover,
     },
   },
   SOUNDS: {

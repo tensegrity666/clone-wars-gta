@@ -4,7 +4,6 @@
 import Phaser from 'phaser';
 
 import PARAMS from './constants';
-import PROPERTIES from '../game-props';
 
 class LoadScene extends Phaser.Scene {
   constructor() {
@@ -47,19 +46,66 @@ class LoadScene extends Phaser.Scene {
   // }
 
   addLoader() {
-    this.loading = this.add
-      .text(PROPERTIES.width * 0.4, PROPERTIES.height * 0.4, '', {
-        font: '60px gta',
-        fill: 'orange',
-      })
-      .setOrigin(0);
+    const boxColor = [0xffa500, 0.8];
+    const barColor = [0xffffff, 1];
+    const box = [500, 370, 320, 50];
+    const barCoord = [510, 380];
+    const textCoord = [660, 300];
+    const jokesCoord = [660, 500];
+    const textStyle = {
+      font: '60px gta',
+      fill: '#ffa500',
+    };
+    const filesStyle = {
+      font: '30px gta',
+      fill: '#ffffff',
+    };
+
+    const progressBar = this.add.graphics();
+    const progressBox = this.add.graphics();
+    progressBox.fillStyle(...boxColor);
+    progressBox.fillRect(...box);
+
+    const loadingText = this.make.text({
+      x: textCoord[0],
+      y: textCoord[1],
+      style: textStyle,
+    }).setOrigin(0.5, 0.5);
+
+    const loadingJokes = this.make.text({
+      x: jokesCoord[0],
+      y: jokesCoord[1],
+      style: filesStyle,
+    }).setOrigin(0.5, 0.5);
 
     this.load.on('progress', (percent) => {
       const loadText = Math.round(percent * 100);
-      this.loading.setText(`${loadText}%`);
+      loadingText.setText(`${loadText}%`);
+
+      progressBar.clear();
+      progressBar.fillStyle(...barColor);
+      progressBar.fillRect(...barCoord, 300 * percent, 30);
+
+      if (percent < 0.1) {
+        loadingJokes.setText('Загрузка бананов в коробки');
+      }
+      if (percent > 0.1 && percent < 0.25) {
+        loadingJokes.setText('Загрузка шуток');
+      }
+      if (percent > 0.25 && percent < 0.75) {
+        loadingJokes.setText('Загрузка патронов в магазины');
+      }
+      if (percent > 0.75 && percent < 1) {
+        loadingJokes.setText('Загрузка денег в чемоданы');
+      }
     });
 
-    this.load.on('complete', () => console.log('Game is loaded'));
+    this.load.on('complete', () => {
+      progressBar.destroy();
+      progressBox.destroy();
+      loadingText.destroy();
+      loadingJokes.destroy();
+    });
   }
 }
 
