@@ -44,7 +44,12 @@ class Pistol extends IAbstarct {
 
   static shooting(scene, gunner, featureMap) {
     if (gunner.state.ammo) {
-      this.bullet = Bullet.createBullet(scene, gunner, featureMap);
+      this.bullet = new Bullet(
+        scene,
+        gunner,
+        featureMap,
+        PARAMS.IMAGES.BULLET.bullet.id,
+      );
 
       scene.physics.moveTo(
         this.bullet,

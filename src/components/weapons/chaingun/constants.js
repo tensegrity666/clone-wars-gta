@@ -1,7 +1,7 @@
 import { nanoid } from 'nanoid';
 
 import chaingun from '../assets/chaingun.png';
-import bomb from '../assets/bomb.png';
+import bullet from '../assets/bullet.png';
 
 const PARAMS = {
   INITIAL_COORDINATES: [6750, 6500],
@@ -12,9 +12,9 @@ const PARAMS = {
       frameSize: { frameWidth: 820, frameHeight: 363 },
     },
     BULLET: {
-      bomb: {
+      bullet: {
         id: nanoid(),
-        img: bomb,
+        img: bullet,
       },
     },
   },

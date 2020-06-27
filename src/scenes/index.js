@@ -28,6 +28,7 @@ class MainScene extends Phaser.Scene {
   create() {
     featuresId.forEach((id) => featuresMap[id].create(this, featuresMap));
     // interactionsId.forEach((id) => interactionsMap[id].create(this, interactionsMap));
+    this.scene.launch(PARAMS.SCENES.UIScene);
   }
 
   update() {
