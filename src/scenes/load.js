@@ -66,17 +66,21 @@ class LoadScene extends Phaser.Scene {
     progressBox.fillStyle(...boxColor);
     progressBox.fillRect(...box);
 
-    const loadingText = this.make.text({
-      x: textCoord[0],
-      y: textCoord[1],
-      style: textStyle,
-    }).setOrigin(0.5, 0.5);
+    const loadingText = this.make
+      .text({
+        x: textCoord[0],
+        y: textCoord[1],
+        style: textStyle,
+      })
+      .setOrigin(0.5, 0.5);
 
-    const loadingJokes = this.make.text({
-      x: jokesCoord[0],
-      y: jokesCoord[1],
-      style: filesStyle,
-    }).setOrigin(0.5, 0.5);
+    const loadingJokes = this.make
+      .text({
+        x: jokesCoord[0],
+        y: jokesCoord[1],
+        style: filesStyle,
+      })
+      .setOrigin(0.5, 0.5);
 
     this.load.on('progress', (percent) => {
       const loadText = Math.round(percent * 100);

@@ -3,7 +3,6 @@ import { nanoid } from 'nanoid';
 
 import IAbstarct from '../interface';
 import PARAMS from './constants';
-// import Player from '../player';
 
 class Map extends IAbstarct {
   static id = nanoid();
@@ -11,66 +10,58 @@ class Map extends IAbstarct {
   preload(scene) {
     scene.load.image(PARAMS.id, PARAMS.pic);
     scene.load.tilemapTiledJSON(this.constructor.id, PARAMS.mapJSON);
-    scene.load.spritesheet('waterSprite', PARAMS.waterPic, {
-      frameWidth: 64,
-      frameHeight: 64,
-    });
+    scene.load.spritesheet(PARAMS.waterID, PARAMS.waterPic, PARAMS.frameSize);
   }
 
-  create(scene, featuresMap) {
-    // this.player = featuresMap[Player.id].object;
-
-    this.map = scene.add.tilemap(this.constructor.id);
-
+  create(scene) {
     const config = {
-      key: 'waterAnimation',
-      frames: scene.anims.generateFrameNumbers('waterSprite', {
-        start: 43,
-        end: 45,
-      }),
+      key: PARAMS.waterAnimationID,
+      frames: scene.anims.generateFrameNumbers(
+        PARAMS.waterID,
+        PARAMS.frameBorders,
+      ),
       frameRate: 1,
       repeat: -1,
       repeatDelay: 2,
     };
 
+    const map = scene.add.tilemap(this.constructor.id);
+
     scene.anims.create(config);
 
-    const waterLayer = this.map.layers[0].data;
+    const waterLayer = map.layers[0].data;
 
     for (let pointArr = 0; pointArr < waterLayer.length; pointArr++) {
       for (let tile = 0; tile < waterLayer[pointArr].length; tile++) {
         const tileInfo = waterLayer[pointArr][tile];
         if (tileInfo.index !== -1) {
+          const width = tileInfo.x * PARAMS.frameSize.frameWidth;
+          const height = tileInfo.y * PARAMS.frameSize.frameHeight;
+          const delay = Math.random() * 3;
+
           const water = scene.add
-            .sprite(tileInfo.x * 64, tileInfo.y * 64, 'waterSprite', 23)
+            .sprite(width, height, PARAMS.waterID)
             .setOrigin(0, 0);
 
-          water.anims.delayedPlay(Math.random() * 3, 'waterAnimation');
+          water.anims.delayedPlay(delay, PARAMS.waterAnimationID);
         }
       }
     }
 
-    const terrain = this.map.addTilesetImage('gta-tiles', PARAMS.id);
+    const terrain = map.addTilesetImage(PARAMS.mainTilesID, PARAMS.id);
 
-    this.map.createStaticLayer('ground', [terrain], 0, 0);
-    this.map.createStaticLayer('roads', [terrain], 0, 0);
+    map.createStaticLayer(PARAMS.groundID, [terrain]);
+    map.createStaticLayer(PARAMS.roadsID, [terrain]);
 
-    this.object = this.map.createStaticLayer('box', [terrain], 0, 0);
-
-    // scene.physics.add.collider(this.player, this.object);
+    this.object = map.createStaticLayer(PARAMS.boxID, [terrain]);
 
     this.object.setCollisionByProperty({
       collides: true,
     });
 
-    this.object.setCollision([894, 609]);
+    this.object.setCollision(PARAMS.collisionsMap);
 
-    scene.physics.world.setBounds(
-      0,
-      0,
-      this.map.widthInPixels,
-      this.map.heightInPixels,
-    );
+    scene.physics.world.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
   }
 }
 

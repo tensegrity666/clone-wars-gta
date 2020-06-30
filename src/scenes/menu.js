@@ -44,26 +44,26 @@ class MenuScene extends Phaser.Scene {
   }
 
   openFullscreen() {
-    this.btnFullscreen.on('pointerup', () => {
-      if (this.scale.isFullscreen) {
-        this.screenMode.text = 'OFF';
-        this.screenMode.setColor('#ff0000');
-        this.scale.stopFullscreen();
-      } else {
-        this.screenMode.text = 'ON';
-        this.screenMode.setColor('#004d00');
-        this.scale.startFullscreen();
-      }
-    }, this);
+    this.btnFullscreen.on(
+      'pointerup',
+      () => {
+        if (this.scale.isFullscreen) {
+          this.screenMode.text = 'OFF';
+          this.screenMode.setColor('#ff0000');
+          this.scale.stopFullscreen();
+        } else {
+          this.screenMode.text = 'ON';
+          this.screenMode.setColor('#004d00');
+          this.scale.startFullscreen();
+        }
+      },
+      this,
+    );
   }
 
   showLogo() {
     this.add
-      .image(
-        680,
-        200,
-        PARAMS.IMAGES.LOGO.id,
-      )
+      .image(680, 200, PARAMS.IMAGES.LOGO.id)
       .setDepth(1)
       .setOrigin(0.5, 0.5)
       .setSize(400, 500);
@@ -92,40 +92,44 @@ class MenuScene extends Phaser.Scene {
       fill: '#ffa500',
     };
 
-    this.btnStart = this.make.text({
-      x: coord[0],
-      y: coord[1],
-      text: 'START GAME',
-      style: startStyle,
-    })
+    this.btnStart = this.make
+      .text({
+        x: coord[0],
+        y: coord[1],
+        text: 'START GAME',
+        style: startStyle,
+      })
       .setOrigin(0.5, 0.5)
       .setShadow(3, 1, '#000000');
 
-    this.btnFullscreen = this.make.text({
-      x: 600,
-      y: coord[2],
-      text: 'FULSCREEN:',
-      style: textStyle,
-    })
+    this.btnFullscreen = this.make
+      .text({
+        x: 600,
+        y: coord[2],
+        text: 'FULLSCREEN:',
+        style: textStyle,
+      })
       .setOrigin(0.5, 0.5)
       .setShadow(3, 1, '#000000')
       .setInteractive();
 
-    this.screenMode = this.make.text({
-      x: 820,
-      y: coord[2],
-      text: 'off',
-      style: switchStyle,
-    })
+    this.screenMode = this.make
+      .text({
+        x: 820,
+        y: coord[2],
+        text: 'off',
+        style: switchStyle,
+      })
       .setOrigin(0.5, 0.5)
       .setShadow(3, 1, '#000000');
 
-    this.btnScore = this.make.text({
-      x: coord[0],
-      y: coord[3],
-      text: 'SCORE',
-      style: textStyle,
-    })
+    this.btnScore = this.make
+      .text({
+        x: coord[0],
+        y: coord[3],
+        text: 'SCORE',
+        style: textStyle,
+      })
       .setOrigin(0.5, 0.5)
       .setShadow(3, 1, '#000000');
   }
