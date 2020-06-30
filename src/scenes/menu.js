@@ -18,7 +18,7 @@ class MenuScene extends Phaser.Scene {
   }
 
   create() {
-    this.cameras.main.fadeIn(650);
+    this.cameras.main.fadeIn(PARAMS.CAMERA.fadeTime);
     this.showLogo();
     this.showBackground();
     this.showButtons();
@@ -32,15 +32,13 @@ class MenuScene extends Phaser.Scene {
   }
 
   showCross() {
-    const lineHorizontal = [0, 660, 1360, 660];
-    const lineVertical = [1170, 0, 1170, 768];
     const graphics = this.add.graphics();
 
     graphics.clear();
-    graphics.lineStyle(2, 0xff0000, 0.3);
-    graphics.lineBetween(...lineHorizontal);
-    graphics.lineBetween(...lineVertical);
-    graphics.strokeCircle(1170, 660, 50);
+    graphics.lineStyle(...PARAMS.LINES.style);
+    graphics.lineBetween(...PARAMS.LINES.horizontal);
+    graphics.lineBetween(...PARAMS.LINES.vertical);
+    graphics.strokeCircle(...PARAMS.CIRCLE);
   }
 
   openFullscreen() {
@@ -48,12 +46,12 @@ class MenuScene extends Phaser.Scene {
       'pointerup',
       () => {
         if (this.scale.isFullscreen) {
-          this.screenMode.text = 'OFF';
-          this.screenMode.setColor('#ff0000');
+          this.screenMode.text = PARAMS.BUTTONS.text.off;
+          this.screenMode.setColor(PARAMS.BUTTONS.color.red);
           this.scale.stopFullscreen();
         } else {
-          this.screenMode.text = 'ON';
-          this.screenMode.setColor('#004d00');
+          this.screenMode.text = PARAMS.BUTTONS.text.on;
+          this.screenMode.setColor(PARAMS.BUTTONS.color.green);
           this.scale.startFullscreen();
         }
       },
@@ -63,75 +61,61 @@ class MenuScene extends Phaser.Scene {
 
   showLogo() {
     this.add
-      .image(680, 200, PARAMS.IMAGES.LOGO.id)
+      .image(...PARAMS.IMAGES.LOGO.coord, PARAMS.IMAGES.LOGO.id)
       .setDepth(1)
-      .setOrigin(0.5, 0.5)
-      .setSize(400, 500);
+      .setOrigin(...PARAMS.originCenter)
+      .setSize(...PARAMS.IMAGES.LOGO.size);
   }
 
   showBackground() {
     this.add
-      .image(0, 0, PARAMS.IMAGES.COVER.id)
+      .image(...PARAMS.IMAGES.COVER.coord, PARAMS.IMAGES.COVER.id)
       .setDepth(0)
       .setOrigin(0)
-      .setSize(1360, 768);
+      .setSize(...PARAMS.IMAGES.COVER.size);
   }
 
   showButtons() {
-    const coord = [660, 400, 470, 540];
-    const switchStyle = {
-      font: '60px gta',
-      fill: '#ff0000',
-    };
-    const startStyle = {
-      font: '80px gta',
-      fill: '#ffa500',
-    };
-    const textStyle = {
-      font: '60px gta',
-      fill: '#ffa500',
-    };
-
     this.btnStart = this.make
       .text({
-        x: coord[0],
-        y: coord[1],
-        text: 'START GAME',
-        style: startStyle,
+        x: PARAMS.BUTTONS.coord[0],
+        y: PARAMS.BUTTONS.coord[1],
+        text: PARAMS.BUTTONS.text.start,
+        style: PARAMS.BUTTONS.startStyle,
       })
-      .setOrigin(0.5, 0.5)
-      .setShadow(3, 1, '#000000');
+      .setOrigin(...PARAMS.originCenter)
+      .setShadow(...PARAMS.BUTTONS.shadow);
 
     this.btnFullscreen = this.make
       .text({
-        x: 600,
-        y: coord[2],
-        text: 'FULLSCREEN:',
-        style: textStyle,
+        x: PARAMS.BUTTONS.coord[4],
+        y: PARAMS.BUTTONS.coord[2],
+        text: PARAMS.BUTTONS.text.fullscreen,
+        style: PARAMS.BUTTONS.textStyle,
       })
-      .setOrigin(0.5, 0.5)
-      .setShadow(3, 1, '#000000')
+      .setOrigin(...PARAMS.originCenter)
+      .setShadow(...PARAMS.BUTTONS.shadow)
       .setInteractive();
 
     this.screenMode = this.make
       .text({
-        x: 820,
-        y: coord[2],
-        text: 'off',
-        style: switchStyle,
+        x: PARAMS.BUTTONS.coord[5],
+        y: PARAMS.BUTTONS.coord[2],
+        text: PARAMS.BUTTONS.text.off,
+        style: PARAMS.BUTTONS.switchStyle,
       })
-      .setOrigin(0.5, 0.5)
-      .setShadow(3, 1, '#000000');
+      .setOrigin(...PARAMS.originCenter)
+      .setShadow(...PARAMS.BUTTONS.shadow);
 
     this.btnScore = this.make
       .text({
-        x: coord[0],
-        y: coord[3],
-        text: 'SCORE',
-        style: textStyle,
+        x: PARAMS.BUTTONS.coord[0],
+        y: PARAMS.BUTTONS.coord[3],
+        text: PARAMS.BUTTONS.text.score,
+        style: PARAMS.BUTTONS.textStyle,
       })
-      .setOrigin(0.5, 0.5)
-      .setShadow(3, 1, '#000000');
+      .setOrigin(...PARAMS.originCenter)
+      .setShadow(...PARAMS.BUTTONS.shadow);
   }
 
   addMenuInteractive() {
