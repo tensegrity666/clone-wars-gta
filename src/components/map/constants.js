@@ -9,6 +9,21 @@ const PARAMS = {
   mapJSON: map,
   pic: tileSet,
   waterPic: waterSet,
+  mainTilesID: 'gta-tiles',
+  groundID: 'ground',
+  roadsID: 'roads',
+  boxID: 'box',
+  collisionsMap: [894, 609],
+  waterID: nanoid(),
+  waterAnimationID: nanoid(),
+  frameSize: {
+    frameWidth: 64,
+    frameHeight: 64,
+  },
+  frameBorders: {
+    start: 43,
+    end: 45,
+  },
 };
 
 export default PARAMS;

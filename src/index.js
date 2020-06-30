@@ -32,17 +32,12 @@ const config = {
 };
 
 const loadHandler = () => {
-  navigator.serviceWorker
-    .register('./service-worker.js', { scope: './' })
-    .then((reg) => {
-      console.log(`SW is registered: ${reg.scope}`);
-    })
-    .catch((err) => {
-      console.log(`Error: ${err}`);
-    });
+  navigator.serviceWorker.register('./service-worker.js').catch((err) => {
+    console.log(`Error: ${err}`);
+  });
 };
 
-if ('serviceWorker' in navigator) {
+if ('serviceWorker' in navigator && process.env.NODE_ENV === 'production') {
   window.addEventListener('load', loadHandler);
 }
 
