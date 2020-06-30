@@ -7,6 +7,7 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
+const WorkboxPlugin = require('workbox-webpack-plugin');
 
 const devMode = process.env.NODE_ENV !== 'production';
 
@@ -33,8 +34,14 @@ module.exports = {
       ],
     }),
     new HtmlWebpackPlugin({
+      title: 'Progressive Web Application',
       template: './src/index.html',
       filename: 'index.html',
+    }),
+    new WorkboxPlugin.GenerateSW({
+      clientsClaim: devMode ? false : true,
+      skipWaiting: devMode ? false : true,
+      maximumFileSizeToCacheInBytes: 32000000,
     }),
     new MiniCssExtractPlugin({
       filename: devMode ? '[name].css' : '[name].[contenthash].css',
@@ -46,6 +53,7 @@ module.exports = {
     }),
   ],
   optimization: {
+    moduleIds: 'hashed',
     runtimeChunk: 'single',
     splitChunks: {
       chunks: 'all',
@@ -102,7 +110,7 @@ module.exports = {
         loader: 'file-loader',
         options: {
           name(resourcePath, resourceQuery) {
-            if (process.env.NODE_ENV === 'development') {
+            if (devMode) {
               return '[path][name].[ext]';
             }
             return '[contenthash].[ext]';

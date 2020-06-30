@@ -2,6 +2,54 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.4](https://github.com/rolling-scopes-school/clonewars-gta/compare/v0.0.3...v0.0.4) (2020-06-25)
+
+
+### Features
+
+* add add interactions between player and car ([3396be4](https://github.com/rolling-scopes-school/clonewars-gta/commit/3396be415842418a05e80400e7313870807e911b))
+* add chaingun and machine gun ([d0dbe02](https://github.com/rolling-scopes-school/clonewars-gta/commit/d0dbe02411dccabc2eeddc3276adadab709bdedd))
+* add interactions feature ([84c0ced](https://github.com/rolling-scopes-school/clonewars-gta/commit/84c0cedbcd2d89293468597cff854022ccf99be6))
+* add police car, taxi, racing car ([d68ec50](https://github.com/rolling-scopes-school/clonewars-gta/commit/d68ec506a586bdd72157f6cafe19a6ca1843ea0c))
+* add weapons, health and ammo on display ([1e90de8](https://github.com/rolling-scopes-school/clonewars-gta/commit/1e90de8704c130082be53d7253ff1dd8808a1ff5))
+* add weapons(pistol) ([a368a8b](https://github.com/rolling-scopes-school/clonewars-gta/commit/a368a8bae0723987f364a416179c46b16ead4014))
+* change collider ([0a26870](https://github.com/rolling-scopes-school/clonewars-gta/commit/0a268708723649e643923e993e8c17782acf35ad))
+
+
+### Bug Fixes
+
+* change constants in player, change scale of player and car, implement correct speed for car ([5ad13a8](https://github.com/rolling-scopes-school/clonewars-gta/commit/5ad13a8718fbcdc50212fadff7542696a18712c9))
+* conflicts ([6921430](https://github.com/rolling-scopes-school/clonewars-gta/commit/69214304a3c501018aa31b74b20d8ce6f99ba9e2))
+* conflicts ([2bd61f3](https://github.com/rolling-scopes-school/clonewars-gta/commit/2bd61f35d350e4e52d8b87003b9a0966f0fbaaf4))
+* square shape of car ([a74c28a](https://github.com/rolling-scopes-school/clonewars-gta/commit/a74c28a5ca73a9b1e6d16f18db18cdb4d429576b))
+
+### [0.0.3](https://github.com/rolling-scopes-school/clonewars-gta/compare/v0.0.2...v0.0.3) (2020-06-24)
+
+
+### Features
+
+* add add interactions between player and car ([dd5f157](https://github.com/rolling-scopes-school/clonewars-gta/commit/dd5f157a1f71e39ab9657cef68f9d8551608c610))
+* add animated-tile plugin ([415026b](https://github.com/rolling-scopes-school/clonewars-gta/commit/415026b02bb0c614e635186dd996f50e41117091))
+* add buildings layer ([c478598](https://github.com/rolling-scopes-school/clonewars-gta/commit/c478598fe5ef597278b22ce9bf7287b6f5b4f66c))
+* add json-loader to webpack config ([3b91f2c](https://github.com/rolling-scopes-school/clonewars-gta/commit/3b91f2c5f06e98fd4e3720346c905887b52b978b))
+* add many bots ([287ecaf](https://github.com/rolling-scopes-school/clonewars-gta/commit/287ecafbc819c73901b5ecb4a62abdebca71a6e3))
+* add roads ([a63890d](https://github.com/rolling-scopes-school/clonewars-gta/commit/a63890d437dafb8586a81f257a7fd61bfbeb3d52))
+* add second category of bots and colliders ([da6c21a](https://github.com/rolling-scopes-school/clonewars-gta/commit/da6c21af5b9b08c696eb5f9c1b204397b0593b5f))
+* add single bot ([c3c1f6d](https://github.com/rolling-scopes-school/clonewars-gta/commit/c3c1f6d814235f34591b6a3b28bb282f1a8561c6))
+* add street tiles ([274cff0](https://github.com/rolling-scopes-school/clonewars-gta/commit/274cff06524aa302e3bcef308ef7075e2899f109))
+* add water ([a3a0073](https://github.com/rolling-scopes-school/clonewars-gta/commit/a3a007343c2cf0f526bf23eb456ab76ad6a9c22c))
+* change collider ([095a2fb](https://github.com/rolling-scopes-school/clonewars-gta/commit/095a2fb2df8684eebd8500cab77d0c0158278765))
+* rewrite on matter.js ([f88e3c6](https://github.com/rolling-scopes-school/clonewars-gta/commit/f88e3c6e1183839feb01f99ad5acf45fb525c768))
+* set size of car ([5d1f941](https://github.com/rolling-scopes-school/clonewars-gta/commit/5d1f941e0861107dbccccaaed3a198ad31be981c))
+* update dependencies, add prettier extension ([ca4a0ed](https://github.com/rolling-scopes-school/clonewars-gta/commit/ca4a0ed8afbccfc12970d7d3438286ab4d63eace))
+
+
+### Bug Fixes
+
+* bot randomizer ([7b701bd](https://github.com/rolling-scopes-school/clonewars-gta/commit/7b701bd5a6ef9b0f9edfc307aa32dbfd10336cd4))
+* change constants in player, change scale of player and car, implement correct speed for car ([a5e7307](https://github.com/rolling-scopes-school/clonewars-gta/commit/a5e730712b7ed8c682806e10ad51d21c52ec82b5))
+* webpack config ([7079036](https://github.com/rolling-scopes-school/clonewars-gta/commit/70790362741f3cd58bc29875a795588da8379bed))
+
 ### 0.0.2 (2020-06-16)
 
 

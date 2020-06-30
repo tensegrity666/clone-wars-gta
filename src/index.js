@@ -1,3 +1,5 @@
+/* eslint-disable no-console */
+
 import './index.css';
 import Phaser from 'phaser';
 
@@ -23,10 +25,25 @@ const config = {
     },
   },
   scale: {
-    // mode: Phaser.Scale.FIT,
+    mode: Phaser.Scale.FIT,
     autoCenter: Phaser.Scale.CENTER_BOTH,
   },
   scene: [LoadScene, MenuScene, MainScene, GameOverScene],
 };
+
+const loadHandler = () => {
+  navigator.serviceWorker
+    .register('./service-worker.js', { scope: './' })
+    .then((reg) => {
+      console.log(`SW is registered: ${reg.scope}`);
+    })
+    .catch((err) => {
+      console.log(`Error: ${err}`);
+    });
+};
+
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', loadHandler);
+}
 
 export default new Phaser.Game(config);
