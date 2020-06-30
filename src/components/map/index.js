@@ -68,8 +68,8 @@ class Map extends IAbstarct {
     scene.physics.world.setBounds(
       0,
       0,
-      this.map.widthInPixels,
-      this.map.heightInPixels,
+      this.object.widthInPixels,
+      this.object.heightInPixels
     );
   }
 }

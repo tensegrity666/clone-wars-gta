@@ -5,7 +5,7 @@ import { nanoid } from 'nanoid';
 import IAbstarct from '../interface';
 // import Player from '../player';
 
-import { PARAMS, controlKeys } from './constants';
+import PARAMS from './constants';
 
 class Car extends IAbstarct {
   static id = nanoid();
@@ -16,13 +16,7 @@ class Car extends IAbstarct {
     speed: 0,
   };
 
-  preload(scene) {
-    scene.load.spritesheet(
-      PARAMS.IMAGES.PLAYER_CAR.id,
-      PARAMS.IMAGES.PLAYER_CAR.img,
-      PARAMS.IMAGES.PLAYER_CAR.frameSize,
-    );
-  }
+  preload(scene) {}
 
   create(scene, featureMap) {
     this.object = scene.physics.add

@@ -27,7 +27,6 @@ const features = [
   MachineGun,
   Bullet,
 ];
-
 const featuresId = [];
 
 const featuresMap = features.reduce((acc, FeatureCreater) => {
