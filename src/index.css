@@ -177,7 +177,7 @@ template {
 .container {
   display: block;
   margin: 0 auto;
+  font-family: 'gta', sans-serif;
   font-size: 2rem;
-  font-style: 'gta', sans-serif;
   line-height: 2;
 }

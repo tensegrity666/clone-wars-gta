@@ -1,6 +1,6 @@
 import { nanoid } from 'nanoid';
 
-import car from './assets/Mini_truck.png';
+import car from '../assets/Mini_truck.png';
 
 const PARAMS = {
   IMAGES: {

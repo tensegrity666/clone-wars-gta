@@ -3,9 +3,8 @@
 
 import { nanoid } from 'nanoid';
 import IAbstarct from '../interface';
-// import Player from '../player';
 
-import PARAMS from './constants';
+import controlKeys from './constants';
 
 class Car extends IAbstarct {
   static id = nanoid();
@@ -18,26 +17,7 @@ class Car extends IAbstarct {
 
   preload(scene) {}
 
-  create(scene, featureMap) {
-    this.object = scene.physics.add
-      .sprite(...PARAMS.INITIAL_COORDINATES, PARAMS.IMAGES.PLAYER_CAR.id)
-      .setDepth(1)
-      .setScale(0.5)
-      // .setCircle(100, 25, 25)
-      .enableBody()
-      .setSize(105, 125)
-      .setImmovable()
-      .setMass(1200)
-      .setBounce(1, 1);
-
-    this.object.setCollideWorldBounds(true);
-
-    // console.log(this.object);
-
-    scene.cameras.main.setZoom(0.6);
-    scene.cameras.main.zoomTo(1, 550);
-    scene.cameras.main.startFollow(this.object);
-  }
+  create(scene, featureMap) {}
 
   update(scene) {
     this.actionsWithCar(scene);

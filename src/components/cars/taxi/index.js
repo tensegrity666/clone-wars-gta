@@ -1,12 +1,12 @@
 /* eslint-disable no-unused-vars */
 
 import { nanoid } from 'nanoid';
-import IAbstarct from '../../interface';
+import Car from '..';
 // import Player from '../player';
 
 import { PARAMS, controlKeys } from './constants';
 
-class TaxiCar extends IAbstarct {
+class TaxiCar extends Car {
   static id = nanoid();
 
   state = {

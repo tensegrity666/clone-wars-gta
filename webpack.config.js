@@ -19,8 +19,8 @@ module.exports = {
   },
   devtool: 'inline-source-map',
   performance: {
-    maxEntrypointSize: 900000,
-    maxAssetSize: 900000
+    maxEntrypointSize: 9e5,
+    maxAssetSize: 9e5
   },
   devServer: {
     open: false,
@@ -41,7 +41,7 @@ module.exports = {
     new WorkboxPlugin.GenerateSW({
       clientsClaim: devMode ? false : true,
       skipWaiting: devMode ? false : true,
-      maximumFileSizeToCacheInBytes: 32000000,
+      maximumFileSizeToCacheInBytes: devMode ? 64e3 : 32e6,
     }),
     new MiniCssExtractPlugin({
       filename: devMode ? '[name].css' : '[name].[contenthash].css',

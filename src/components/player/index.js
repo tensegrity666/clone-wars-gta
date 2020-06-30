@@ -12,7 +12,6 @@ import {
 import Pistol from '../weapons/pistol';
 import MachineGun from '../weapons/machine gun';
 import Chaingun from '../weapons/chaingun';
-import Car from '../cars/standard';
 import RacingCar from '../cars/racing car';
 import PoliceCar from '../cars/police';
 import TaxiCar from '../cars/taxi';
@@ -31,10 +30,6 @@ class Player extends IAbstarct {
   };
 
   preload(scene) {
-    scene.load.image(
-      PARAMS.IMAGES.BULLET.bomb.id,
-      PARAMS.IMAGES.BULLET.bomb.img
-    );
     const sprites = Object.values(PARAMS.IMAGES.PLAYER);
     const spritesWeapons = Object.values(PARAMS.IMAGES.WEAPONS);
 
@@ -51,10 +46,8 @@ class Player extends IAbstarct {
     this.pistol = featureMap[Pistol.id];
     this.machineGun = featureMap[MachineGun.id];
     this.chaingun = featureMap[Chaingun.id];
-    this.car = featureMap[Car.id].object;
 
     this.carContainer = scene.add.container();
-    this.car = featureMap[Car.id];
     this.policeCar = featureMap[PoliceCar.id];
     this.taxiCar = featureMap[TaxiCar.id];
     this.racingCar = featureMap[RacingCar.id];
@@ -69,8 +62,6 @@ class Player extends IAbstarct {
       .setBounce(1, 1);
 
     this.object.setCollideWorldBounds(true);
-
-    scene.physics.add.collider(this.object, this.car);
 
     scene.physics.add.collider(this.object, this.pistol.object, () => {
       this.state.currentWeapon = WEAPONS.pistol;
@@ -167,7 +158,7 @@ class Player extends IAbstarct {
           {
             start: 0,
             end: 0,
-          }
+          },
         ),
       },
       machineGun: {
@@ -187,7 +178,7 @@ class Player extends IAbstarct {
           {
             start: 0,
             end: 0,
-          }
+          },
         ),
       },
       chaingunShoot: {
@@ -197,7 +188,7 @@ class Player extends IAbstarct {
           {
             start: 0,
             end: 1,
-          }
+          },
         ),
         frameRate: 10,
         repeat: -1,
@@ -267,7 +258,7 @@ class Player extends IAbstarct {
       this.object.destroy();
     }
 
-    this.cars = [this.car, this.policeCar, this.racingCar, this.taxiCar];
+    this.cars = [this.policeCar, this.racingCar, this.taxiCar];
     this.closestCar = this.getClosestCar(this.cars);
 
     this.controller = {
@@ -348,10 +339,10 @@ class Player extends IAbstarct {
     }
 
     if (
-      !this.controller.moveLeft.isDown &&
-      !this.controller.moveRight.isDown &&
-      !this.controller.moveUp.isDown &&
-      !this.controller.moveDown.isDown
+      !this.controller.moveLeft.isDown
+      && !this.controller.moveRight.isDown
+      && !this.controller.moveUp.isDown
+      && !this.controller.moveDown.isDown
     ) {
       this.object.anims.play(this.animations.stand.key);
     }
@@ -368,22 +359,22 @@ class Player extends IAbstarct {
 
       if (this.object.body.velocity.x > 0) {
         this.object.setVelocityX(
-          MOVING_PARAMS.PLAYER_SPEED * MOVING_PARAMS.SPEED_COF
+          MOVING_PARAMS.PLAYER_SPEED * MOVING_PARAMS.SPEED_COF,
         );
       }
       if (this.object.body.velocity.x < 0) {
         this.object.setVelocityX(
-          -(MOVING_PARAMS.PLAYER_SPEED * MOVING_PARAMS.SPEED_COF)
+          -(MOVING_PARAMS.PLAYER_SPEED * MOVING_PARAMS.SPEED_COF),
         );
       }
       if (this.object.body.velocity.y > 0) {
         this.object.setVelocityY(
-          MOVING_PARAMS.PLAYER_SPEED * MOVING_PARAMS.SPEED_COF
+          MOVING_PARAMS.PLAYER_SPEED * MOVING_PARAMS.SPEED_COF,
         );
       }
       if (this.object.body.velocity.y < 0) {
         this.object.setVelocityY(
-          -(MOVING_PARAMS.PLAYER_SPEED * MOVING_PARAMS.SPEED_COF)
+          -(MOVING_PARAMS.PLAYER_SPEED * MOVING_PARAMS.SPEED_COF),
         );
       }
       this.object.anims.play(this.animations.run.key, true);

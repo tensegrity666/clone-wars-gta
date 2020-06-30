@@ -4,16 +4,17 @@ import Pistol from './weapons/pistol';
 import MachineGun from './weapons/machine gun';
 import Chaingun from './weapons/chaingun';
 import Bullet from './weapons/bullet';
-import Car from './cars/standard';
 import PoliceCar from './cars/police';
 import TaxiCar from './cars/taxi';
 import RacingCar from './cars/racing car';
 import Citizens from './bots/citizens';
 import Rednecks from './bots/rednecks';
 import Interactions from './interactions';
+import Ways from './ways';
+import OrangeCar from './cars/orange-car';
+import BlueCar from './cars/blue-car';
 
 const features = [
-  Car,
   Citizens,
   Rednecks,
   PoliceCar,
@@ -26,6 +27,9 @@ const features = [
   Chaingun,
   MachineGun,
   Bullet,
+  OrangeCar,
+  BlueCar,
+  Ways,
 ];
 const featuresId = [];
 

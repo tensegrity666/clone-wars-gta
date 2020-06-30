@@ -29,8 +29,6 @@ class Ways extends IAbstarct {
     this.path.getBounds(this.bounds);
     this.path2.getBounds(this.bounds);
 
-    scene.physics.add.collider(this.blueCar, this.orangeCar);
-
     const pathFollower = new PathFollower(this.orangeCar, {
       path: this.path,
       rotateToPath: true,
@@ -40,7 +38,7 @@ class Ways extends IAbstarct {
     const pathFollower2 = new PathFollower(this.blueCar, {
       path: this.path2,
       rotateToPath: true,
-      rotationOffset: Math.PI * 0.5,
+      rotationOffset: Math.PI / 2,
     });
 
     scene.tweens.add({
@@ -63,10 +61,10 @@ class Ways extends IAbstarct {
     this.path2.draw(this.graphics);
 
     // ! показывает координаты на карте
-    const cam = scene.cameras.main;
-    const p = scene.input.activePointer.positionToCamera(cam);
+    // const cam = scene.cameras.main;
+    // const p = scene.input.activePointer.positionToCamera(cam);
 
-    console.log(`x: ${p.x} y: ${p.y}`);
+    // console.log(`x: ${p.x} y: ${p.y}`);
   }
 }
 

@@ -17,7 +17,7 @@ class BlueCar extends Car {
     scene.load.spritesheet(
       PARAMS.IMAGES.ORANGE_CAR.id,
       PARAMS.IMAGES.ORANGE_CAR.img,
-      PARAMS.IMAGES.ORANGE_CAR.frameSize
+      PARAMS.IMAGES.ORANGE_CAR.frameSize,
     );
   }
 
