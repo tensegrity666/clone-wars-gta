@@ -1,5 +1,3 @@
-import { nanoid } from 'nanoid';
-
 import car from './assets/car.png';
 
 const PARAMS = {
