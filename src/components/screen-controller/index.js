@@ -7,18 +7,31 @@ import VirtualJoystickPlugin from 'phaser3-rex-plugins/plugins/virtualjoystick';
 
 import IAbstarct from '../interface';
 
+import PARAMS from './constants';
+
 class ScreenController extends IAbstarct {
   static id = nanoid();
 
-  preload(scene) {}
+  preload(scene) {
+    scene.load.image(PARAMS.controlId, PARAMS.controlPath);
+    scene.load.image(PARAMS.fingerId, PARAMS.fingerPath);
+  }
 
   create(scene, featureMap) {
     this.joystic = new VirtualJoystickPlugin(scene, {
       x: 200,
       y: 600,
       radius: 100,
-      base: scene.add.circle(0, 0, 100, 0x888888),
-      thumb: scene.add.circle(0, 0, 50, 0xcccccc),
+      base: scene.add.sprite(
+        PARAMS.controlSize.controlWidth,
+        PARAMS.controlSize.controlHeight,
+        PARAMS.controlId,
+      ),
+      thumb: scene.add.sprite(
+        PARAMS.fingerSize.fingerWidth,
+        PARAMS.fingerSize.fingerHeight,
+        PARAMS.fingerId,
+      ),
       dir: '8dir',
       forceMin: 16,
       enable: true,
