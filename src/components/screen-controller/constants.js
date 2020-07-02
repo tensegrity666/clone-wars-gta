@@ -10,6 +10,11 @@ const PARAMS = {
     controlWidth: 160,
     controlHeight: 160,
   },
+  startPosition: {
+    x: 200,
+    y: 600,
+  },
+  radius: 100,
   fingerId: nanoid(),
   fingerPath: fingerSprite,
   fingerSize: {
