@@ -20,6 +20,10 @@ class MachineGun extends IAbstarct {
       PARAMS.IMAGES.HK.img,
       PARAMS.IMAGES.HK.frameSize,
     );
+    scene.load.image(
+      PARAMS.IMAGES.BULLET.bullet.id,
+      PARAMS.IMAGES.BULLET.bullet.img,
+    );
   }
 
   create(scene, featureMap) {
@@ -39,7 +43,12 @@ class MachineGun extends IAbstarct {
 
   static shooting(scene, gunner, featureMap) {
     if (gunner.state.ammo) {
-      this.bullet = Bullet.createBullet(scene, gunner, featureMap);
+      this.bullet = new Bullet(
+        scene,
+        gunner,
+        featureMap,
+        PARAMS.IMAGES.BULLET.bullet.id,
+      );
 
       scene.physics.moveTo(
         this.bullet,

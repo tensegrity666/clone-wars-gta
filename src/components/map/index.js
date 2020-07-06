@@ -1,5 +1,6 @@
 /* eslint-disable no-unused-vars */
 import { nanoid } from 'nanoid';
+import Phaser from 'phaser';
 
 import IAbstarct from '../interface';
 import PARAMS from './constants';
@@ -54,14 +55,28 @@ class Map extends IAbstarct {
     map.createStaticLayer(PARAMS.roadsID, [terrain]);
 
     this.object = map.createStaticLayer(PARAMS.boxID, [terrain]);
+    this.obstacles = map.createStaticLayer(PARAMS.obstacleID, [terrain]);
 
     this.object.setCollisionByProperty({
       collides: true,
     });
 
-    this.object.setCollision(PARAMS.collisionsMap);
+    // this.object.setCollision(PARAMS.collisionsMap);
 
-    scene.physics.world.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
+    scene.physics.world.setBounds(
+      640,
+      640,
+      map.widthInPixels,
+      map.heightInPixels,
+    );
+
+    // debugging
+    const debugGraphics = scene.add.graphics().setAlpha(0.75);
+    map.renderDebug(debugGraphics, {
+      tileColor: null, // Color of non-colliding tiles
+      collidingTileColor: new Phaser.Display.Color(243, 134, 48, 255), // Color of colliding tiles
+      faceColor: new Phaser.Display.Color(40, 39, 37, 255), // Color of colliding face edges
+    });
   }
 }
 

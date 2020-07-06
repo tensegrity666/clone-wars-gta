@@ -10,6 +10,7 @@ const PARAMS = {
     loadScene: nanoid(),
     menuScene: nanoid(),
     gameOverScene: nanoid(),
+    UIScene: nanoid(),
   },
   IMAGES: {
     LOGO: {
@@ -51,7 +52,7 @@ const PARAMS = {
       score: 'SCORE',
     },
     switchStyle: {
-      fontFamily: '60px gta',
+      font: '60px gta',
       fill: '#ff0000',
     },
     startStyle: {
