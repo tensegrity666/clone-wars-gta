@@ -23,7 +23,7 @@ class Citizens extends IAbstarct {
   }
 
   create(scene, featureMap) {
-    this.bots = this.createBots(scene, 199);
+    this.bots = this.createBots(scene, 1);
     this.object = scene.physics.add.group(this.bots);
 
     this.addAnimation(scene);

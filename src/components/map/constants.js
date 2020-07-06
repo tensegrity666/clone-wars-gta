@@ -13,6 +13,7 @@ const PARAMS = {
   groundID: 'ground',
   roadsID: 'roads',
   boxID: 'box',
+  obstacleID: 'obstacle',
   collisionsMap: [894, 609],
   waterID: nanoid(),
   waterAnimationID: nanoid(),
