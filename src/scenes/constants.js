@@ -10,6 +10,7 @@ const PARAMS = {
     loadScene: nanoid(),
     menuScene: nanoid(),
     gameOverScene: nanoid(),
+    UIScene: nanoid(),
   },
   IMAGES: {
     LOGO: {
