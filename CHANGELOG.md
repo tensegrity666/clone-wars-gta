@@ -2,6 +2,41 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.5](https://github.com/rolling-scopes-school/clonewars-gta/compare/v0.0.4...v0.0.5) (2020-07-06)
+
+
+### Features
+
+* add background ([270f1bd](https://github.com/rolling-scopes-school/clonewars-gta/commit/270f1bd509ceaed0c8343b4fd447cf35030f7403))
+* add bot ways ([647908d](https://github.com/rolling-scopes-school/clonewars-gta/commit/647908d17f87d91373fdde4e89ad04ba9f294d35))
+* add car ways ([9bd9990](https://github.com/rolling-scopes-school/clonewars-gta/commit/9bd99904b1680aec36c9c76d0b8a0dccfc4398e9))
+* add character movement ([c29ac6b](https://github.com/rolling-scopes-school/clonewars-gta/commit/c29ac6b9805123847724d854cdbee6a8fb1779a0))
+* add class for ways ([e756212](https://github.com/rolling-scopes-school/clonewars-gta/commit/e7562120870c7978efdacdca996223e09b343a2a))
+* add control sprites ([6ab5ff9](https://github.com/rolling-scopes-school/clonewars-gta/commit/6ab5ff9bbb8c04d1909942e819effb205097304c))
+* add coordinates logging ([cae3aac](https://github.com/rolling-scopes-school/clonewars-gta/commit/cae3aac35c6bcc5c8e3116a014c47a0f0f7cc795))
+* add favicons and webmanifest ([5b61b0c](https://github.com/rolling-scopes-school/clonewars-gta/commit/5b61b0c2cdaffae2177595afafb6748e7f58f3de))
+* add fonts preloading ([02cb5a6](https://github.com/rolling-scopes-school/clonewars-gta/commit/02cb5a6863b93f789336ed84010afb7e18ad610f))
+* add physics ([bb73fd6](https://github.com/rolling-scopes-school/clonewars-gta/commit/bb73fd67af213bf3bb6b320b783dd42fdcd06f8e))
+* add sample of joystic ([94b18ed](https://github.com/rolling-scopes-school/clonewars-gta/commit/94b18ede8536be3311fbb79f3fa9bbc32a44c1b3))
+* add second path ([f4d9b4c](https://github.com/rolling-scopes-school/clonewars-gta/commit/f4d9b4c2af10c704dc625a4ac0269ef33a9cd194))
+* add service worker ([7000c1a](https://github.com/rolling-scopes-school/clonewars-gta/commit/7000c1acd2fd59bdf25c10c3eb9ac789eb091bf6))
+* add shoot joystick ([acf01b9](https://github.com/rolling-scopes-school/clonewars-gta/commit/acf01b945496cf210c802a89a87e074b1bd6d66d))
+* add waypoints and single path ([a6030fe](https://github.com/rolling-scopes-school/clonewars-gta/commit/a6030fec830f1822e1668962eb0395422691e39b))
+* create separate class Car and some inheriting classes ([0da847e](https://github.com/rolling-scopes-school/clonewars-gta/commit/0da847e1fa00f6764f15c4f8147993b5d6602f1f))
+* edit map ([699d452](https://github.com/rolling-scopes-school/clonewars-gta/commit/699d452419549f9f714fda38ed48debe99463dff))
+* edit map ([cc7795d](https://github.com/rolling-scopes-school/clonewars-gta/commit/cc7795db1dd93f896e8105db42a1e3869b17bf7b))
+* make PWA ([83ecb47](https://github.com/rolling-scopes-school/clonewars-gta/commit/83ecb476558748bbf003538b0dfc95769ef903c8))
+
+
+### Bug Fixes
+
+* conflicts ([965df4b](https://github.com/rolling-scopes-school/clonewars-gta/commit/965df4bef8dc2001dce719ff0efd12000ed026a5))
+* disable SW in dev mode ([494d7ba](https://github.com/rolling-scopes-school/clonewars-gta/commit/494d7ba02a44f16fc35422ed1f477b51e1abd3fe))
+* disable SW in dev mode ([06d808a](https://github.com/rolling-scopes-school/clonewars-gta/commit/06d808af28b1e587e010aef288c03ef410f7e65e))
+* fix car ways ([fd3147f](https://github.com/rolling-scopes-school/clonewars-gta/commit/fd3147ffc6729d59c5ad702dc59c4e5edad65c43))
+* implement correct weapons and cars ([6f7a1e2](https://github.com/rolling-scopes-school/clonewars-gta/commit/6f7a1e29c2d2171993239bcdb21c9d89c9497eb8))
+* pathes ([3fa662f](https://github.com/rolling-scopes-school/clonewars-gta/commit/3fa662fbf81582898234a076845f61972119d2ad))
+
 ### [0.0.4](https://github.com/rolling-scopes-school/clonewars-gta/compare/v0.0.3...v0.0.4) (2020-06-25)
 
 
