@@ -1,35 +1,41 @@
 import Map from './map';
 import Player from './player';
+import Interactions from './interactions';
+import Ways from './ways';
+
 import Pistol from './weapons/pistol';
 import MachineGun from './weapons/machine gun';
 import Chaingun from './weapons/chaingun';
-import Bullet from './weapons/bullet';
-import PoliceCar from './cars/police';
-import TaxiCar from './cars/taxi';
-import RacingCar from './cars/racing car';
+// import Bullet from './weapons/bullet';
+
 import Citizens from './bots/citizens';
 import Rednecks from './bots/rednecks';
-import Interactions from './interactions';
-import Ways from './ways';
-import OrangeCar from './cars/orange-car';
+
+import PoliceCar from './cars/police';
+import TaxiCar from './cars/taxi';
+import RacingCar from './cars/racing-car';
 import BlueCar from './cars/blue-car';
+import OrangeCar from './cars/orange-car';
+
+import ScreenController from './screen-controller';
 
 const features = [
-  Citizens,
-  Rednecks,
   PoliceCar,
   TaxiCar,
   RacingCar,
+  BlueCar,
+  OrangeCar,
+  Citizens,
+  Rednecks,
   Player,
   Map,
-  Interactions,
   Pistol,
+  ScreenController,
   Chaingun,
   MachineGun,
-  Bullet,
-  OrangeCar,
-  BlueCar,
+  // Bullet,
   Ways,
+  Interactions,
 ];
 const featuresId = [];
 
