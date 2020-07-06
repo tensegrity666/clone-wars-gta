@@ -51,7 +51,7 @@ const PARAMS = {
       score: 'SCORE',
     },
     switchStyle: {
-      fontFamily: '60px gta',
+      font: '60px gta',
       fill: '#ff0000',
     },
     startStyle: {

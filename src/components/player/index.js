@@ -10,11 +10,7 @@ import {
 } from './constants';
 
 import Pistol from '../weapons/pistol';
-import MachineGun from '../weapons/machine gun';
-import Chaingun from '../weapons/chaingun';
-import RacingCar from '../cars/racing car';
 import PoliceCar from '../cars/police';
-import TaxiCar from '../cars/taxi';
 
 class Player extends IAbstarct {
   static id = nanoid();
@@ -44,13 +40,9 @@ class Player extends IAbstarct {
   create(scene, featureMap) {
     this.featureMap = featureMap;
     this.pistol = featureMap[Pistol.id];
-    this.machineGun = featureMap[MachineGun.id];
-    this.chaingun = featureMap[Chaingun.id];
 
     this.carContainer = scene.add.container();
     this.policeCar = featureMap[PoliceCar.id];
-    this.taxiCar = featureMap[TaxiCar.id];
-    this.racingCar = featureMap[RacingCar.id];
 
     this.object = scene.physics.add
       .sprite(...PARAMS.INITIAL_COORDINATES, this.constructor.id)
@@ -72,30 +64,6 @@ class Player extends IAbstarct {
       }
       this.state.currentWeaponIcon = scene.add
         .image(200, 100, PARAMS.IMAGES.WEAPONS.pistol.id)
-        .setScrollFactor(0)
-        .setScale(0.2);
-    });
-    scene.physics.add.collider(this.object, this.machineGun.object, () => {
-      this.state.currentWeapon = WEAPONS.machineGun;
-      featureMap[MachineGun.id].object.destroy();
-      this.state.ammo += featureMap[Pistol.id].state.ammo;
-      if (this.state.currentWeaponIcon) {
-        this.state.currentWeaponIcon.destroy();
-      }
-      this.state.currentWeaponIcon = scene.add
-        .image(200, 100, PARAMS.IMAGES.WEAPONS.machineGun.id)
-        .setScrollFactor(0)
-        .setScale(0.2);
-    });
-    scene.physics.add.collider(this.object, this.chaingun.object, () => {
-      this.state.currentWeapon = WEAPONS.chaingun;
-      featureMap[Chaingun.id].object.destroy();
-      this.state.ammo += featureMap[Chaingun.id].state.ammo;
-      if (this.state.currentWeaponIcon) {
-        this.state.currentWeaponIcon.destroy();
-      }
-      this.state.currentWeaponIcon = scene.add
-        .image(200, 100, PARAMS.IMAGES.WEAPONS.chaingun.id)
         .setScrollFactor(0)
         .setScale(0.2);
     });
@@ -209,28 +177,6 @@ class Player extends IAbstarct {
     ]);
   }
 
-  getClosestCar(arrayOfCars) {
-    let closestCar;
-
-    const arrayOfDiffX = arrayOfCars.reduce((acc, car) => {
-      acc.push(Math.abs(this.object.x - car.object.x));
-      return acc;
-    }, []);
-    const arrayOfDiffY = arrayOfCars.reduce((acc, car) => {
-      acc.push(Math.abs(this.object.y - car.object.y));
-      return acc;
-    }, []);
-    let minDiff = arrayOfDiffX[0] + arrayOfDiffY[0];
-    for (let i = 0; i < arrayOfCars.length; i++) {
-      const currentDiff = arrayOfDiffX[i] + arrayOfDiffY[i];
-      if (currentDiff <= minDiff) {
-        minDiff = currentDiff;
-        closestCar = arrayOfCars[i];
-      }
-    }
-    return closestCar;
-  }
-
   isCarClose(car) {
     if (car.x + 100 < this.object.x || car.x - 100 > this.object.x) {
       return false;
@@ -257,9 +203,6 @@ class Player extends IAbstarct {
     if (this.state.health <= 0) {
       this.object.destroy();
     }
-
-    this.cars = [this.policeCar, this.racingCar, this.taxiCar];
-    this.closestCar = this.getClosestCar(this.cars);
 
     this.controller = {
       moveUp: scene.input.keyboard.addKey(controlKeys.up),
@@ -398,20 +341,6 @@ class Player extends IAbstarct {
           setTimeout(() => {
             this.state.isShooting = false;
           }, 500);
-          break;
-        case WEAPONS.machineGun:
-          this.object.anims.play(this.animations.machineGun.key, true);
-          MachineGun.shooting(scene, this, this.featureMap);
-          setTimeout(() => {
-            this.state.isShooting = false;
-          }, 250);
-          break;
-        case WEAPONS.chaingun:
-          this.object.anims.play(this.animations.chaingunShoot.key, true);
-          Chaingun.shooting(scene, this, this.featureMap);
-          setTimeout(() => {
-            this.state.isShooting = false;
-          }, 50);
           break;
         default:
           break;
