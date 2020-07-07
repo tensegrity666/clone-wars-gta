@@ -16,8 +16,7 @@ class UIScene extends Phaser.Scene {
     // this.player = interactionMap[Player.id];
   }
 
-  update() {
-  }
+  update() {}
 }
 
 export default UIScene;

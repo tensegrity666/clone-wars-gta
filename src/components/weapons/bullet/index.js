@@ -24,16 +24,16 @@ class Bullet {
   }
 
   getBullet(scene, gunner) {
-    this.newBullet = scene.physics.add
-      .sprite(gunner.object.x + Math.cos(gunner.object.rotation) * 20,
-        gunner.object.y + Math.sin(gunner.object.rotation) * 20,
-        PARAMS.IMAGES.BULLET.bullet.id);
+    this.newBullet = scene.physics.add.sprite(
+      gunner.object.x + Math.cos(gunner.object.rotation) * 20,
+      gunner.object.y + Math.sin(gunner.object.rotation) * 20,
+      PARAMS.IMAGES.BULLET.bullet.id,
+    );
     this.newBullet.rotation = gunner.object.rotation;
     return this.newBullet;
   }
 
-  update(scene) {
-  }
+  update(scene) {}
 }
 
 export default Bullet;

@@ -32,13 +32,29 @@ class Interactions extends IAbstarct {
   }
 
   create(scene, interactionMap) {
+    // eslint-disable-next-line prefer-destructuring
     this.sceneUI = scene.game.scene.scenes[4];
     const map = interactionMap[Map.id].object;
     this.player = interactionMap[Player.id];
 
-    this.score = this.sceneUI.add.text(150, 20, `score: ${this.player.state.score}`, { fontSize: '32px', fill: '#fff' });
-    this.health = this.sceneUI.add.text(150, 50, `health: ${this.player.state.health}`, { fontSize: '32px', fill: '#fff' });
-    this.ammo = this.sceneUI.add.text(150, 80, `ammo: ${this.player.state.ammo}`, { fontSize: '32px', fill: '#fff' });
+    this.score = this.sceneUI.add.text(
+      150,
+      20,
+      `score: ${this.player.state.score}`,
+      { fontSize: '32px', fill: '#fff' },
+    );
+    this.health = this.sceneUI.add.text(
+      150,
+      50,
+      `health: ${this.player.state.health}`,
+      { fontSize: '32px', fill: '#fff' },
+    );
+    this.ammo = this.sceneUI.add.text(
+      150,
+      80,
+      `ammo: ${this.player.state.ammo}`,
+      { fontSize: '32px', fill: '#fff' },
+    );
 
     this.interactionMap = interactionMap;
     this.carContainer = scene.add.container();
@@ -73,8 +89,9 @@ class Interactions extends IAbstarct {
       if (this.player.state.currentWeaponIcon) {
         this.player.state.currentWeaponIcon.destroy(this.sceneUI);
       }
-      this.player.state.currentWeaponIcon = this.sceneUI.add.image(220, 150,
-        PARAMS.IMAGES.WEAPONS.pistol.id).setScale(0.2);
+      this.player.state.currentWeaponIcon = this.sceneUI.add
+        .image(220, 150, PARAMS.IMAGES.WEAPONS.pistol.id)
+        .setScale(0.2);
     });
     scene.physics.add.collider(
       this.player.object,
@@ -86,8 +103,9 @@ class Interactions extends IAbstarct {
         if (this.player.state.currentWeaponIcon) {
           this.player.state.currentWeaponIcon.destroy(this.sceneUI);
         }
-        this.player.state.currentWeaponIcon = this.sceneUI.add.image(220, 150,
-          PARAMS.IMAGES.WEAPONS.machineGun.id).setScale(0.2);
+        this.player.state.currentWeaponIcon = this.sceneUI.add
+          .image(220, 150, PARAMS.IMAGES.WEAPONS.machineGun.id)
+          .setScale(0.2);
       },
     );
     scene.physics.add.collider(this.player.object, this.chaingun.object, () => {
@@ -97,14 +115,19 @@ class Interactions extends IAbstarct {
       if (this.player.state.currentWeaponIcon) {
         this.player.state.currentWeaponIcon.destroy(this.sceneUI);
       }
-      this.player.state.currentWeaponIcon = this.sceneUI.add.image(220, 150,
-        PARAMS.IMAGES.WEAPONS.chaingun.id).setScale(0.2);
+      this.player.state.currentWeaponIcon = this.sceneUI.add
+        .image(220, 150, PARAMS.IMAGES.WEAPONS.chaingun.id)
+        .setScale(0.2);
     });
 
     this.allCars.forEach((car) => {
-      scene.physics.add.collider(car.object, [this.citizen.object, this.citizen.rednecks, map], () => {
-        // урон ботам когда на них наезжают
-      });
+      scene.physics.add.collider(
+        car.object,
+        [this.citizen.object, this.citizen.rednecks, map],
+        () => {
+          // урон ботам когда на них наезжают
+        },
+      );
       scene.physics.add.collider(
         car.object,
         this.allCars.reduce((acc, currCar) => {
@@ -135,28 +158,52 @@ class Interactions extends IAbstarct {
       scene.physics.add.collider(this.bullet.newBullet, this.car.object, () => {
         this.actionWithBulletsAndCars(this.bullet.newBullet, this.car);
       });
-      scene.physics.add.collider(this.bullet.newBullet, this.policeCar.object, () => {
-        this.actionWithBulletsAndCars(this.bullet.newBullet, this.policeCar);
-      });
-      scene.physics.add.collider(this.bullet.newBullet, this.racingCar.object, () => {
-        this.actionWithBulletsAndCars(this.bullet.newBullet, this.racingCar);
-      });
-      scene.physics.add.collider(this.bullet.newBullet, this.taxiCar.object, () => {
-        this.actionWithBulletsAndCars(this.bullet.newBullet, this.taxiCar);
-      });
+      scene.physics.add.collider(
+        this.bullet.newBullet,
+        this.policeCar.object,
+        () => {
+          this.actionWithBulletsAndCars(this.bullet.newBullet, this.policeCar);
+        },
+      );
+      scene.physics.add.collider(
+        this.bullet.newBullet,
+        this.racingCar.object,
+        () => {
+          this.actionWithBulletsAndCars(this.bullet.newBullet, this.racingCar);
+        },
+      );
+      scene.physics.add.collider(
+        this.bullet.newBullet,
+        this.taxiCar.object,
+        () => {
+          this.actionWithBulletsAndCars(this.bullet.newBullet, this.taxiCar);
+        },
+      );
 
       // map
-      scene.physics.add.collider(this.bullet.newBullet, interactionMap[Map.id].object, () => {
-        this.bullet.newBullet.destroy();
-      });
+      scene.physics.add.collider(
+        this.bullet.newBullet,
+        interactionMap[Map.id].object,
+        () => {
+          this.bullet.newBullet.destroy();
+        },
+      );
 
       // citizens
-      scene.physics.add.collider(this.bullet.newBullet, this.citizen.object, () => {
-        this.bullet.newBullet.destroy();
-      });
-      scene.physics.add.collider(this.bullet.newBullet, this.rednecks.object, () => {
-        this.bullet.newBullet.destroy();
-      });
+      scene.physics.add.collider(
+        this.bullet.newBullet,
+        this.citizen.object,
+        () => {
+          this.bullet.newBullet.destroy();
+        },
+      );
+      scene.physics.add.collider(
+        this.bullet.newBullet,
+        this.rednecks.object,
+        () => {
+          this.bullet.newBullet.destroy();
+        },
+      );
     }
   }
 

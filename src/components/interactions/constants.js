@@ -42,6 +42,4 @@ const WEAPONS = {
   chaingun: 'chaingun',
 };
 
-export {
-  PARAMS, WEAPONS,
-};
+export { PARAMS, WEAPONS };
