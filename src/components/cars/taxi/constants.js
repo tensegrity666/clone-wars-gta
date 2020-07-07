@@ -1,6 +1,7 @@
 import { nanoid } from 'nanoid';
 
 import car from '../assets/taxi.png';
+import explosion from '../assets/explosion.png';
 
 const PARAMS = {
   INITIAL_COORDINATES: [6000, 5550],
@@ -9,6 +10,14 @@ const PARAMS = {
       id: nanoid(),
       img: car,
       frameSize: { frameWidth: 256, frameHeight: 256 },
+    },
+    EXPLOSION: {
+      id: nanoid(),
+      img: explosion,
+      frameSize: {
+        frameWidth: 256,
+        frameHeight: 128,
+      },
     },
   },
   MAX_SPEED: 400,

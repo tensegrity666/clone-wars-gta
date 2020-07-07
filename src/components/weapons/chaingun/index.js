@@ -20,10 +20,6 @@ class Chaingun extends IAbstarct {
       PARAMS.IMAGES.CHAINGUN.img,
       PARAMS.IMAGES.CHAINGUN.frameSize,
     );
-    scene.load.image(
-      PARAMS.IMAGES.BULLET.bullet.id,
-      PARAMS.IMAGES.BULLET.bullet.img,
-    );
   }
 
   create(scene, featureMap) {
@@ -43,12 +39,7 @@ class Chaingun extends IAbstarct {
 
   static shooting(scene, gunner, featureMap) {
     if (gunner.state.ammo) {
-      this.bullet = new Bullet(
-        scene,
-        gunner,
-        featureMap,
-        PARAMS.IMAGES.BULLET.bullet.id,
-      );
+      this.bullet = featureMap[Bullet.id].getBullet(scene, gunner);
 
       scene.physics.moveTo(
         this.bullet,
