@@ -43,12 +43,7 @@ class MachineGun extends IAbstarct {
 
   static shooting(scene, gunner, featureMap) {
     if (gunner.state.ammo) {
-      this.bullet = new Bullet(
-        scene,
-        gunner,
-        featureMap,
-        PARAMS.IMAGES.BULLET.bullet.id,
-      );
+      this.bullet = featureMap[Bullet.id].getBullet(scene, gunner);
 
       scene.physics.moveTo(
         this.bullet,
@@ -56,7 +51,7 @@ class MachineGun extends IAbstarct {
         gunner.object.y + Math.sin(gunner.object.rotation) * 1000,
         1000,
       );
-      gunner.state.ammo -= 3;
+      gunner.state.ammo -= 1;
     }
   }
 }

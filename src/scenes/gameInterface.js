@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 
 import Phaser from 'phaser';
-
+// import Player from '../components/player';
 import PARAMS from './constants';
 
 class UIScene extends Phaser.Scene {
@@ -12,9 +12,11 @@ class UIScene extends Phaser.Scene {
   }
 
   create() {
-    this.scene.add.text(6200, 6200, 'hello');
-    // Phaser.GameObjects.Text.call(this, scene, x, y, text,
-    //  { color: '#ffffff', align: 'left', fontSize: 15 });
+    console.log('load UIScene');
+    // this.player = interactionMap[Player.id];
+  }
+
+  update() {
   }
 }
 

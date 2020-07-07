@@ -3,7 +3,7 @@ import Player from './player';
 import Pistol from './weapons/pistol';
 import MachineGun from './weapons/machine gun';
 import Chaingun from './weapons/chaingun';
-// import Bullet from './weapons/bullet';
+import Bullet from './weapons/bullet';
 import Car from './cars/standard';
 import PoliceCar from './cars/police';
 import TaxiCar from './cars/taxi';
@@ -21,10 +21,10 @@ const features = [
   RacingCar,
   Player,
   Map,
+  Bullet,
   Pistol,
   Chaingun,
   MachineGun,
-  // Bullet,
   Interactions,
 ];
 

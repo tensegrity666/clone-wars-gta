@@ -20,6 +20,7 @@ class Player extends IAbstarct {
     ammo: 0,
     currentWeapon: '',
     currentWeaponIcon: '',
+    score: 0,
   };
 
   preload(scene) {
@@ -59,15 +60,10 @@ class Player extends IAbstarct {
       .setFontSize(32)
       .setColor('#ffffff');
 
-    // scene.cameras.main.setZoom(0.6);
-    // scene.cameras.main.zoomTo(1, 550);
-    // scene.cameras.main.startFollow(this.object);
-
     this.addAnimation(scene);
   }
 
   update(scene) {
-    this.actionsWithCamera(scene);
     this.actionsWithPlayer(scene);
   }
 
@@ -149,15 +145,6 @@ class Player extends IAbstarct {
     animConfig.forEach((a) => scene.anims.create(a));
   }
 
-  actionsWithCamera(scene) {
-    const camera = scene.cameras.main;
-    this.hp.setText([
-      `Health: ${this.state.health}`,
-      // `Weapon: ${this.state.currentWeapon}`,
-      `Ammo: ${this.state.ammo}`,
-    ]);
-  }
-
   actionsWithPlayer(scene, featureMap) {
     if (this.state.health <= 0) {
       this.object.destroy();
@@ -177,14 +164,12 @@ class Player extends IAbstarct {
     if (this.controller.moveLeft.isDown && !this.state.isRunning) {
       this.object.setVelocityX(-MOVING_PARAMS.PLAYER_SPEED);
       this.object.anims.play(this.animations.walk.key, true);
-
       this.object.rotation = MOVING_PARAMS.ROTATION.rotateLeft;
     }
 
     if (this.controller.moveRight.isDown && !this.state.isRunning) {
       this.object.setVelocityX(MOVING_PARAMS.PLAYER_SPEED);
       this.object.anims.play(this.animations.walk.key, true);
-
       this.object.rotation = MOVING_PARAMS.ROTATION.rotateRight;
     }
 

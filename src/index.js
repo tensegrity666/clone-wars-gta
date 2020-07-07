@@ -6,6 +6,7 @@ import MainScene from './scenes';
 import MenuScene from './scenes/menu';
 import LoadScene from './scenes/load';
 import GameOverScene from './scenes/gameover';
+import UIScene from './scenes/gameInterface';
 
 const config = {
   parent: 'container',
@@ -26,7 +27,7 @@ const config = {
     // mode: Phaser.Scale.FIT,
     autoCenter: Phaser.Scale.CENTER_BOTH,
   },
-  scene: [LoadScene, MenuScene, MainScene, GameOverScene],
+  scene: [LoadScene, MenuScene, MainScene, GameOverScene, UIScene],
 };
 
 export default new Phaser.Game(config);
