@@ -28,26 +28,26 @@ class Map extends IAbstarct {
 
     const map = scene.add.tilemap(this.constructor.id);
 
-    scene.anims.create(config);
+    // scene.anims.create(config);
 
-    const waterLayer = map.layers[0].data;
+    // const waterLayer = map.layers[0].data;
 
-    for (let pointArr = 0; pointArr < waterLayer.length; pointArr++) {
-      for (let tile = 0; tile < waterLayer[pointArr].length; tile++) {
-        const tileInfo = waterLayer[pointArr][tile];
-        if (tileInfo.index !== -1) {
-          const width = tileInfo.x * PARAMS.frameSize.frameWidth;
-          const height = tileInfo.y * PARAMS.frameSize.frameHeight;
-          const delay = Math.random() * 3;
+    // for (let pointArr = 0; pointArr < waterLayer.length; pointArr++) {
+    //   for (let tile = 0; tile < waterLayer[pointArr].length; tile++) {
+    //     const tileInfo = waterLayer[pointArr][tile];
+    //     if (tileInfo.index !== -1) {
+    //       const width = tileInfo.x * PARAMS.frameSize.frameWidth;
+    //       const height = tileInfo.y * PARAMS.frameSize.frameHeight;
+    //       const delay = Math.random() * 3;
 
-          const water = scene.add
-            .sprite(width, height, PARAMS.waterID)
-            .setOrigin(0, 0);
+    //       const water = scene.add
+    //         .sprite(width, height, PARAMS.waterID)
+    //         .setOrigin(0, 0);
 
-          water.anims.delayedPlay(delay, PARAMS.waterAnimationID);
-        }
-      }
-    }
+    //       water.anims.delayedPlay(delay, PARAMS.waterAnimationID);
+    //     }
+    //   }
+    // }
 
     const terrain = map.addTilesetImage(PARAMS.mainTilesID, PARAMS.id);
 
