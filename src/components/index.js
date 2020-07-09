@@ -17,6 +17,8 @@ import BlueCar from './cars/blue-car';
 import OrangeCar from './cars/orange-car';
 import Car from './cars';
 
+import TimeQuest from './quests/time-quest';
+
 import ScreenController from './screen-controller';
 
 const features = [
@@ -35,6 +37,7 @@ const features = [
   ScreenController,
   Chaingun,
   MachineGun,
+  TimeQuest,
   Interactions,
   Ways,
 ];

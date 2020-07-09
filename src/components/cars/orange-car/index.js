@@ -11,14 +11,14 @@ class OrangeCar extends Car {
 
   state = {
     health: 100,
+    isDestroyed: false,
   };
 
   preload(scene) {
-    scene.load.spritesheet(
-      PARAMS.IMAGES.ORANGE_CAR.id,
-      PARAMS.IMAGES.ORANGE_CAR.img,
-      PARAMS.IMAGES.ORANGE_CAR.frameSize,
-    );
+    const sprites = Object.values(PARAMS.IMAGES);
+    sprites.forEach((sprite) => {
+      scene.load.spritesheet(sprite.id, sprite.img, sprite.frameSize);
+    });
   }
 
   create(scene, featureMap) {
@@ -32,6 +32,34 @@ class OrangeCar extends Car {
       .setMass(1000);
 
     this.object.setCollideWorldBounds(true);
+
+    this.animations = {
+      explosion: {
+        key: 'explosion',
+        frames: scene.anims.generateFrameNumbers(PARAMS.IMAGES.EXPLOSION.id, {
+          start: 0,
+          end: 11,
+        }),
+        frameRate: 10,
+      },
+    };
+    const animConfig = Object.values(this.animations);
+
+    animConfig.forEach((a) => scene.anims.create(a));
+  }
+
+  update() {
+    // eslint-disable-next-line no-empty
+    if (this.state.health > 0) {
+    } else {
+      if (!this.state.isDestroyed) {
+        this.object.anims.play(this.animations.explosion.key, true);
+      }
+      setTimeout(() => {
+        this.object.destroy();
+        this.state.isDestroyed = true;
+      }, 1000);
+    }
   }
 }
 

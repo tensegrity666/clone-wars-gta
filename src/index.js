@@ -9,6 +9,7 @@ import MenuScene from './scenes/menu';
 import LoadScene from './scenes/load';
 import GameOverScene from './scenes/gameover';
 import UIScene from './scenes/gameInterface';
+import TimeQuestScene from './scenes/timequest';
 
 const config = {
   parent: 'container',
@@ -29,7 +30,14 @@ const config = {
     mode: Phaser.Scale.FIT,
     autoCenter: Phaser.Scale.CENTER_BOTH,
   },
-  scene: [LoadScene, MenuScene, MainScene, GameOverScene, UIScene],
+  scene: [
+    LoadScene,
+    MenuScene,
+    MainScene,
+    GameOverScene,
+    UIScene,
+    TimeQuestScene,
+  ],
 };
 
 const loadHandler = () => {

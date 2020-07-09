@@ -11,6 +11,7 @@ const PARAMS = {
     menuScene: nanoid(),
     gameOverScene: nanoid(),
     UIScene: nanoid(),
+    timeQuestScene: nanoid(),
   },
   IMAGES: {
     LOGO: {

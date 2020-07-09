@@ -1,7 +1,6 @@
 /* eslint-disable no-console */
 
 import Phaser from 'phaser';
-// import Player from '../components/player';
 import PARAMS from './constants';
 
 class UIScene extends Phaser.Scene {
@@ -13,7 +12,6 @@ class UIScene extends Phaser.Scene {
 
   create() {
     console.log('load UIScene');
-    // this.player = interactionMap[Player.id];
   }
 
   update() {}

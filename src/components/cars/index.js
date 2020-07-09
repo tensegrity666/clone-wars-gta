@@ -39,6 +39,20 @@ class Car extends IAbstarct {
     scene.cameras.main.setZoom(0.6);
     scene.cameras.main.zoomTo(1, 550);
     scene.cameras.main.startFollow(this.object);
+
+    this.animations = {
+      explosion: {
+        key: 'explosion',
+        frames: scene.anims.generateFrameNumbers(PARAMS.IMAGES.EXPLOSION.id, {
+          start: 0,
+          end: 11,
+        }),
+        frameRate: 10,
+      },
+    };
+    const animConfig = Object.values(this.animations);
+
+    animConfig.forEach((a) => scene.anims.create(a));
   }
 
   update(scene) {

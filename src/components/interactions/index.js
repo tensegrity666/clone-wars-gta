@@ -1,3 +1,4 @@
+/* eslint-disable prefer-destructuring */
 /* eslint-disable no-param-reassign */
 import { nanoid } from 'nanoid';
 
@@ -14,6 +15,8 @@ import Pistol from '../weapons/pistol';
 import MachineGun from '../weapons/machine gun';
 import Chaingun from '../weapons/chaingun';
 import Bullet from '../weapons/bullet';
+
+import TimeQuest from '../quests/time-quest';
 
 import { PARAMS } from './constants';
 
@@ -32,8 +35,8 @@ class Interactions extends IAbstarct {
   }
 
   create(scene, interactionMap) {
-    // eslint-disable-next-line prefer-destructuring
     this.sceneUI = scene.game.scene.scenes[4];
+    this.timeQuestScene = scene.game.scene.scenes[5];
     const map = interactionMap[Map.id].object;
     this.player = interactionMap[Player.id];
 
@@ -58,6 +61,10 @@ class Interactions extends IAbstarct {
 
     this.interactionMap = interactionMap;
     this.carContainer = scene.add.container();
+    this.carContainer.visible = false;
+    this.timeQuestContainer = scene.add.container();
+    this.timeQuestContainer.visible = false;
+
     this.citizen = interactionMap[Citizen.id];
     this.rednecks = interactionMap[Rednecks.id];
 
@@ -71,6 +78,23 @@ class Interactions extends IAbstarct {
     this.pistol = interactionMap[Pistol.id];
     this.machineGun = interactionMap[MachineGun.id];
     this.chaingun = interactionMap[Chaingun.id];
+
+    this.timeQuest = interactionMap[TimeQuest.id];
+    // this.timeQuestContainer.add(this.timeQuest.finishObj);
+    // this.timeQuest.finishObj.visible = false;
+    // this.timeQuest.finishObj.enable = false;
+
+    scene.physics.add.collider(
+      this.player.object,
+      this.timeQuest.startObj,
+      () => {
+        scene.scene.launch(this.timeQuestScene);
+        this.timeQuest.state.isStarted = true;
+        // this.finishObj = this.timeQuestContainer.getAt(0);
+        // this.timeQuestContainer.removeAll();
+        // this.timeQuestContainer.add(this.timeQuest.startObj);
+      },
+    );
 
     scene.physics.add.collider(this.player.object, [
       this.citizen.object,
@@ -141,6 +165,24 @@ class Interactions extends IAbstarct {
     });
   }
 
+  actionsWithQuests(scene) {
+    if (this.timeQuest.finishObj.visible) {
+      scene.physics.add.collider(
+        this.player.object,
+        this.timeQuest.finishObj,
+        () => {
+          this.timeQuest.state.isFinished = true;
+          if (this.timeQuest.state.time > 0) {
+            scene.scene.remove(this.timeQuestScene);
+            this.player.state.score += 1000;
+            this.timeQuest.state.isActive = false;
+          }
+          this.timeQuest.finishObj.destroy();
+        },
+      );
+    }
+  }
+
   actionsWithUI() {
     this.score.setText(`score: ${this.player.state.score}`);
     this.health.setText(`health: ${this.player.state.health}`);
@@ -194,6 +236,7 @@ class Interactions extends IAbstarct {
         this.bullet.newBullet,
         this.citizen.object,
         () => {
+          this.player.state.score += 10;
           this.bullet.newBullet.destroy();
         },
       );
@@ -201,6 +244,7 @@ class Interactions extends IAbstarct {
         this.bullet.newBullet,
         this.rednecks.object,
         () => {
+          this.player.state.score += 10;
           this.bullet.newBullet.destroy();
         },
       );
@@ -211,6 +255,7 @@ class Interactions extends IAbstarct {
     this.actionsWithBullets(scene, interactionMap);
     this.actionsWithPlayer(scene);
     this.actionsWithUI();
+    this.actionsWithQuests(scene);
   }
 
   getClosestCar(arrayOfCars) {
