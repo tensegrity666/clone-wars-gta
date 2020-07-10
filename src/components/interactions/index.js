@@ -37,6 +37,7 @@ class Interactions extends IAbstarct {
   create(scene, interactionMap) {
     this.sceneUI = scene.game.scene.scenes[4];
     this.timeQuestScene = scene.game.scene.scenes[5];
+    scene.scene.launch(this.timeQuestScene);
     const map = interactionMap[Map.id].object;
     this.player = interactionMap[Player.id];
 
@@ -80,21 +81,6 @@ class Interactions extends IAbstarct {
     this.chaingun = interactionMap[Chaingun.id];
 
     this.timeQuest = interactionMap[TimeQuest.id];
-    // this.timeQuestContainer.add(this.timeQuest.finishObj);
-    // this.timeQuest.finishObj.visible = false;
-    // this.timeQuest.finishObj.enable = false;
-
-    scene.physics.add.collider(
-      this.player.object,
-      this.timeQuest.startObj,
-      () => {
-        scene.scene.launch(this.timeQuestScene);
-        this.timeQuest.state.isStarted = true;
-        // this.finishObj = this.timeQuestContainer.getAt(0);
-        // this.timeQuestContainer.removeAll();
-        // this.timeQuestContainer.add(this.timeQuest.startObj);
-      },
-    );
 
     scene.physics.add.collider(this.player.object, [
       this.citizen.object,
@@ -166,6 +152,15 @@ class Interactions extends IAbstarct {
   }
 
   actionsWithQuests(scene) {
+    if (this.timeQuest.startObj.visible) {
+      scene.physics.add.collider(
+        this.player.object,
+        this.timeQuest.startObj,
+        () => {
+          this.timeQuest.state.isStarted = true;
+        },
+      );
+    }
     if (this.timeQuest.finishObj.visible) {
       scene.physics.add.collider(
         this.player.object,
@@ -178,6 +173,7 @@ class Interactions extends IAbstarct {
             this.timeQuest.state.isActive = false;
           }
           this.timeQuest.finishObj.destroy();
+          this.timeQuest.startObj.destroy();
         },
       );
     }

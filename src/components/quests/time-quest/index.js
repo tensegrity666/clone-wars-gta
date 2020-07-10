@@ -14,7 +14,7 @@ class TimeQuest extends IAbstarct {
   static id = nanoid();
 
   state = {
-    time: 60,
+    time: 30,
     isStarted: false,
     isCreated: false,
     isFinished: false,
@@ -30,6 +30,7 @@ class TimeQuest extends IAbstarct {
 
   create(scene, interactionMap) {
     this.player = interactionMap[Player.id];
+
     this.startObj = scene.physics.add
       .sprite(
         ...PARAMS.INITIAL_COORDINATES_START,
@@ -44,10 +45,10 @@ class TimeQuest extends IAbstarct {
       )
       .setDepth(1)
       .setImmovable();
-    this.timeQuestScene = scene.game.scene.scenes[5];
-    this.container = this.timeQuestScene.add.container();
-    // this.container.add(this.finishObj);
     this.finishObj.visible = false;
+
+    this.timeQuestScene = scene.game.scene.scenes[5];
+    this.container = scene.add.container();
   }
 
   showArrow() {
@@ -73,15 +74,30 @@ class TimeQuest extends IAbstarct {
     this.showArrow();
   }
 
+  restartQuest(scene) {
+    this.time.destroy();
+    this.arrow.destroy();
+    this.state.isStarted = false;
+    this.state.isCreated = false;
+    this.state.isFinished = false;
+    this.state.time = 5;
+    this.startObj.body.enable = true;
+    this.startObj.visible = true;
+    this.finishObj.body.enable = false;
+    this.finishObj.visible = false;
+  }
+
   update(scene) {
     if (this.state.isActive) {
+      if (this.state.time <= 0) {
+        this.restartQuest(scene);
+        clearInterval(this.timeInterval);
+      }
       if (this.state.isStarted && !this.state.isCreated) {
         this.startObj.body.enable = false;
-        // this.finishObj = this.container.getAt(0);
-        // this.container.removeAll();
-        this.finishObj.visible = true;
-        this.container.add(this.startObj);
         this.startObj.visible = false;
+        this.finishObj.visible = true;
+        this.finishObj.body.enable = true;
 
         this.time = this.timeQuestScene.add.text(
           600,
@@ -89,7 +105,7 @@ class TimeQuest extends IAbstarct {
           `time: ${this.state.time}`,
           { fontSize: '32px', fill: '#fff' },
         );
-        setInterval(() => {
+        this.timeInterval = setInterval(() => {
           this.state.time -= 1;
         }, 1000);
 
@@ -101,17 +117,6 @@ class TimeQuest extends IAbstarct {
 
       if (this.state.isStarted && this.state.isCreated) {
         this.questActive();
-      }
-
-      if (this.state.isFinished) {
-        // if (this.state.time > 0) {
-        // this.player.state.score += 1000;
-        // this.state.isActive = false;
-        // }
-        // this.finishObj.body.enable = false;
-        // this.container.removeAll();
-        // this.startObj.body.enable = true;
-        // this.container.add(this.finishObj);
       }
     }
   }

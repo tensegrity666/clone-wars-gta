@@ -6,7 +6,7 @@ import arrowIcon from '../assets/arrow.png';
 
 const PARAMS = {
   INITIAL_COORDINATES_START: [6450, 6500],
-  INITIAL_COORDINATES_FINISH: [2250, 9000],
+  INITIAL_COORDINATES_FINISH: [6550, 7000],
   IMAGES: {
     TIME_QUEST_START_ICON: {
       id: nanoid(),
