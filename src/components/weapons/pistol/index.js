@@ -50,7 +50,7 @@ class Pistol extends IAbstarct {
         this.bullet,
         gunner.object.x + Math.cos(gunner.object.rotation) * 1000,
         gunner.object.y + Math.sin(gunner.object.rotation) * 1000,
-        1000,
+        600,
       );
       gunner.state.ammo -= 1;
     }

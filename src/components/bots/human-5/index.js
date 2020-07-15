@@ -43,6 +43,36 @@ class Human5 extends IAbstarct {
 
   update() {
     this.object.play(this.animations.walk.key);
+
+    if (this.object.body.velocity.y < 0) {
+      if (this.object.body.velocity.x === 0) {
+        this.object.rotation = -(Math.PI / 2);
+      }
+      if (this.object.body.velocity.x > 0) {
+        this.object.rotation = -0.75;
+      }
+      if (this.object.body.velocity.y < 0) {
+        this.object.rotation = (Math.PI * 5) / 4;
+      }
+    }
+    if (this.object.body.velocity.y > 0) {
+      if (this.object.body.velocity.x === 0) {
+        this.object.rotation = Math.PI / 2;
+      }
+      if (this.object.body.velocity.x > 0) {
+        this.object.rotation = Math.PI / 4;
+      }
+      if (this.object.body.velocity.y < 0) {
+        this.object.rotation = 2.5;
+      }
+    }
+    if (this.object.body.velocity.x && this.object.body.velocity.y) {
+      if (this.object.body.velocity.x > 0) {
+        this.object.rotation = 0;
+      } else {
+        this.object.rotation = Math.PI;
+      }
+    }
   }
 
   addAnimation(scene) {

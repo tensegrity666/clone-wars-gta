@@ -31,6 +31,36 @@ class Rednecks extends IAbstarct {
 
   update(scene) {
     this.object.playAnimation(this.animations.walk.key, true);
+
+    if (this.bot.body.velocity.y < 0) {
+      if (this.bot.body.velocity.x === 0) {
+        this.bot.rotation = -(Math.PI / 2);
+      }
+      if (this.bot.body.velocity.x > 0) {
+        this.bot.rotation = -0.75;
+      }
+      if (this.bot.body.velocity.y < 0) {
+        this.bot.rotation = (Math.PI * 5) / 4;
+      }
+    }
+    if (this.bot.body.velocity.y > 0) {
+      if (this.bot.body.velocity.x === 0) {
+        this.bot.rotation = Math.PI / 2;
+      }
+      if (this.bot.body.velocity.x > 0) {
+        this.bot.rotation = Math.PI / 4;
+      }
+      if (this.bot.body.velocity.y < 0) {
+        this.bot.rotation = 2.5;
+      }
+    }
+    if (this.bot.body.velocity.x && this.bot.body.velocity.y) {
+      if (this.bot.body.velocity.x > 0) {
+        this.bot.rotation = 0;
+      } else {
+        this.bot.rotation = Math.PI;
+      }
+    }
   }
 
   addAnimation(scene) {

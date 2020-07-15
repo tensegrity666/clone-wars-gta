@@ -1,3 +1,5 @@
+/* eslint-disable no-console */
+
 import Phaser from 'phaser';
 import PARAMS from './constants';
 

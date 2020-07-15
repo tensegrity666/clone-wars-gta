@@ -14,7 +14,7 @@ class TimeQuest extends IAbstarct {
   static id = nanoid();
 
   state = {
-    time: 30,
+    time: PARAMS.TIME_FOR_QUEST,
     isStarted: false,
     isCreated: false,
     isFinished: false,
@@ -80,7 +80,7 @@ class TimeQuest extends IAbstarct {
     this.state.isStarted = false;
     this.state.isCreated = false;
     this.state.isFinished = false;
-    this.state.time = 5;
+    this.state.time = PARAMS.TIME_FOR_QUEST;
     this.startObj.body.enable = true;
     this.startObj.visible = true;
     this.finishObj.body.enable = false;
@@ -112,7 +112,7 @@ class TimeQuest extends IAbstarct {
         this.state.isCreated = true;
         this.arrow = this.timeQuestScene.add
           .image(700, 200, PARAMS.IMAGES.ARROW_ICON.id)
-          .setScale(0.3);
+          .setScale(0.15);
       }
 
       if (this.state.isStarted && this.state.isCreated) {

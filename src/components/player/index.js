@@ -50,8 +50,7 @@ class Player extends IAbstarct {
       .enableBody()
       .setSize(15, 25)
       .setOffset(10, 15)
-      .setMass(90)
-      .setBounce(1, 1);
+      .setMass(90);
 
     this.object.setCollideWorldBounds(true);
 
@@ -239,7 +238,7 @@ class Player extends IAbstarct {
           -(MOVING_PARAMS.PLAYER_SPEED * MOVING_PARAMS.SPEED_COF),
         );
       }
-      this.object.anims.play(this.animations.run.key, true);
+      // this.object.anims.play(this.animations.run.key, true);
     }
 
     if (this.controller.run.isUp) {

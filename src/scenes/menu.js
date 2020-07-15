@@ -193,16 +193,6 @@ class MenuScene extends Phaser.Scene {
       })
       .setOrigin(...PARAMS.originCenter)
       .setShadow(...PARAMS.BUTTONS.shadow);
-
-    this.btnLogin = this.make
-      .text({
-        x: PARAMS.BUTTONS.coord[0],
-        y: PARAMS.BUTTONS.coord[4],
-        text: PARAMS.BUTTONS.text.login,
-        style: PARAMS.BUTTONS.textStyle,
-      })
-      .setOrigin(...PARAMS.originCenter)
-      .setShadow(...PARAMS.BUTTONS.shadow);
   }
 
   addMenuInteractive() {

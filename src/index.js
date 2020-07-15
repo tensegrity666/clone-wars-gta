@@ -44,6 +44,7 @@ const config = {
     GameOverScene,
     InctructionScene,
   ],
+  disableContextMenu: true,
 };
 
 const loadHandler = () => {

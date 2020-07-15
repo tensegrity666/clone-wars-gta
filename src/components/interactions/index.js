@@ -3,13 +3,30 @@
 import { nanoid } from 'nanoid';
 
 import IAbstarct from '../interface';
+
 import Citizen from '../bots/citizens';
+import Human from '../bots/human';
+import Human2 from '../bots/human-2';
+import Human3 from '../bots/human-3';
+import Human4 from '../bots/human-4';
+import Human5 from '../bots/human-5';
+import Human6 from '../bots/human-6';
+import Human7 from '../bots/human-7';
+import Human8 from '../bots/human-8';
+import Human9 from '../bots/human-9';
 import Rednecks from '../bots/rednecks';
 
 import TaxiCar from '../cars/taxi';
+import TaxiCar2 from '../cars/taxi-2';
+import TaxiCar3 from '../cars/taxi-3';
 import PoliceCar from '../cars/police';
+import PoliceCar2 from '../cars/police-2';
 import RacingCar from '../cars/racing-car';
+import RacingCar2 from '../cars/racing-car-2';
 import Car from '../cars/orange-car-2';
+import Car2 from '../cars/orange-car';
+import BlueCar from '../cars/blue-car';
+import BlueCar2 from '../cars/blue-car-2';
 
 import Pistol from '../weapons/pistol';
 import MachineGun from '../weapons/machine gun';
@@ -79,13 +96,56 @@ class Interactions extends IAbstarct {
     this.timeQuestContainer.visible = false;
 
     this.citizen = interactionMap[Citizen.id];
+    this.human = interactionMap[Human.id];
+    this.human2 = interactionMap[Human2.id];
+    this.human3 = interactionMap[Human3.id];
+    this.human4 = interactionMap[Human4.id];
+    this.human5 = interactionMap[Human5.id];
+    this.human6 = interactionMap[Human6.id];
+    this.human7 = interactionMap[Human7.id];
+    this.human8 = interactionMap[Human8.id];
+    this.human9 = interactionMap[Human9.id];
     this.rednecks = interactionMap[Rednecks.id];
 
     this.taxiCar = interactionMap[TaxiCar.id];
+    this.taxiCar2 = interactionMap[TaxiCar2.id];
+    this.taxiCar3 = interactionMap[TaxiCar3.id];
     this.policeCar = interactionMap[PoliceCar.id];
+    this.policeCar2 = interactionMap[PoliceCar2.id];
     this.racingCar = interactionMap[RacingCar.id];
+    this.racingCar2 = interactionMap[RacingCar2.id];
     this.car = interactionMap[Car.id];
-    this.allCars = [this.car, this.policeCar, this.racingCar, this.taxiCar];
+    this.car2 = interactionMap[Car2.id];
+    this.blueCar = interactionMap[BlueCar.id];
+    this.blueCar2 = interactionMap[BlueCar2.id];
+    this.allCars = [
+      this.taxiCar,
+      this.taxiCar2,
+      this.taxiCar3,
+      this.policeCar,
+      this.policeCar2,
+      this.racingCar,
+      this.racingCar2,
+      this.car,
+      this.car2,
+      this.blueCar,
+      this.blueCar2,
+    ];
+    this.allCarsObjects = this.allCars.map((car) => car.object);
+    this.allCitizens = [
+      this.citizen,
+      this.human,
+      this.human2,
+      this.human3,
+      this.human4,
+      this.human5,
+      this.human6,
+      this.human7,
+      this.human8,
+      this.human9,
+      this.rednecks,
+    ];
+    this.allCitizensObjects = this.allCitizens.map((citizen) => citizen.object);
 
     this.bullet = interactionMap[Bullet.id];
     this.pistol = interactionMap[Pistol.id];
@@ -100,12 +160,8 @@ class Interactions extends IAbstarct {
     ]);
 
     scene.physics.add.collider(this.player.object, [
-      this.citizen.object,
-      this.rednecks.object,
-      this.car.object,
-      this.taxiCar.object,
-      this.policeCar.object,
-      this.racingCar.object,
+      ...this.allCitizensObjects,
+      ...this.allCarsObjects,
       map,
     ]);
 
@@ -152,7 +208,7 @@ class Interactions extends IAbstarct {
     this.allCars.forEach((car) => {
       scene.physics.add.collider(
         car.object,
-        [this.citizen.object, this.citizen.rednecks, map],
+        [...this.allCitizensObjects, this.player, map],
         () => {
           // урон ботам когда на них наезжают
         },
@@ -247,22 +303,12 @@ class Interactions extends IAbstarct {
       );
 
       // citizens
-      scene.physics.add.collider(
-        this.bullet.newBullet,
-        this.citizen.object,
-        () => {
+      this.allCitizensObjects.forEach((citizen) => {
+        scene.physics.add.collider(citizen, this.bullet.newBullet, () => {
           currentPlayer.score += 10;
           this.bullet.newBullet.destroy();
-        },
-      );
-      scene.physics.add.collider(
-        this.bullet.newBullet,
-        this.rednecks.object,
-        () => {
-          currentPlayer.score += 10;
-          this.bullet.newBullet.destroy();
-        },
-      );
+        });
+      });
     }
   }
 
@@ -297,14 +343,14 @@ class Interactions extends IAbstarct {
 
   isCarClose(car) {
     if (
-      car.x + 100 < this.player.object.x
-      || car.x - 100 > this.player.object.x
+      car.x + 50 < this.player.object.x
+      || car.x - 50 > this.player.object.x
     ) {
       return false;
     }
     if (
-      car.y + 100 < this.player.object.y
-      || car.y - 100 > this.player.object.y
+      car.y + 50 < this.player.object.y
+      || car.y - 50 > this.player.object.y
     ) {
       return false;
     }
@@ -351,8 +397,8 @@ class Interactions extends IAbstarct {
       this.player.currentCar.state.isPlayerInside = false;
       scene.add.existing(this.player.object);
       scene.cameras.main.startFollow(this.player.object);
-      this.player.object.x = this.player.currentCar.object.x + 100;
-      this.player.object.y = this.player.currentCar.object.y + 100;
+      this.player.object.x = this.player.currentCar.object.x + 51;
+      this.player.object.y = this.player.currentCar.object.y + 51;
       this.player.state.isInsideCar = false;
     }
 
@@ -373,7 +419,7 @@ class Interactions extends IAbstarct {
           Pistol.shooting(scene, this.player, this.interactionMap);
           setTimeout(() => {
             this.player.state.isShooting = false;
-          }, 500);
+          }, 750);
           break;
         case this.player.WEAPONS.machineGun:
           this.player.object.anims.play(
@@ -383,7 +429,7 @@ class Interactions extends IAbstarct {
           MachineGun.shooting(scene, this.player, this.interactionMap);
           setTimeout(() => {
             this.player.state.isShooting = false;
-          }, 250);
+          }, 500);
           break;
         case this.player.WEAPONS.chaingun:
           this.player.object.anims.play(
@@ -393,7 +439,7 @@ class Interactions extends IAbstarct {
           Chaingun.shooting(scene, this.player, this.interactionMap);
           setTimeout(() => {
             this.player.state.isShooting = false;
-          }, 50);
+          }, 350);
           break;
         default:
           break;

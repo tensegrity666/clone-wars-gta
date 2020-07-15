@@ -20,7 +20,7 @@ const PARAMS = {
       },
     },
   },
-  MAX_SPEED: 1000,
+  MAX_SPEED: 800,
 };
 
 const controlKeys = {
