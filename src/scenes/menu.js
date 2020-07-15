@@ -18,12 +18,22 @@ class MenuScene extends Phaser.Scene {
     this.showBackground();
     this.showButtons();
 
+    this.music = this.sound.add(PARAMS.SOUNDS.MENU.id, {
+      loop: true,
+      volume: 0.004,
+    });
+
+    this.music.play();
     this.sound.pauseOnBlur = false;
-    this.sound.play(PARAMS.SOUNDS.MENU.id, { loop: true });
+
+    this.soundEffectMenu = this.sound.add(PARAMS.SOUNDS.EFFECT.id, {
+      volume: 0.01,
+    });
 
     this.addMenuInteractive();
     this.showCross();
     this.openFullscreen();
+    this.setMusicMode();
 
     if (localStorage.currentPlayerName) {
       this.greet(localStorage.currentPlayerName);
@@ -54,6 +64,29 @@ class MenuScene extends Phaser.Scene {
           this.screenMode.text = PARAMS.BUTTONS.text.on;
           this.screenMode.setColor(PARAMS.BUTTONS.color.green);
           this.scale.startFullscreen();
+        }
+      },
+      this,
+    );
+  }
+
+  setMusicMode() {
+    let { mute } = this.music;
+
+    this.btnMusic.on(
+      'pointerup',
+      () => {
+        if (!mute) {
+          console.log(this.music);
+          this.musicMode.text = PARAMS.BUTTONS.text.off;
+          this.musicMode.setColor(PARAMS.BUTTONS.color.red);
+          mute = true;
+          this.music.setMute(true);
+        } else {
+          this.musicMode.text = PARAMS.BUTTONS.text.on;
+          this.musicMode.setColor(PARAMS.BUTTONS.color.green);
+          mute = false;
+          this.music.setMute(false);
         }
       },
       this,
@@ -116,6 +149,49 @@ class MenuScene extends Phaser.Scene {
         style: PARAMS.BUTTONS.textStyle,
       })
       .setOrigin(...PARAMS.originCenter)
+      .setShadow(...PARAMS.BUTTONS.shadow)
+      .setInteractive();
+
+    this.btnLogin = this.make
+      .text({
+        x: PARAMS.BUTTONS.coord[0],
+        y: PARAMS.BUTTONS.coord[4],
+        text: PARAMS.BUTTONS.text.login,
+        style: PARAMS.BUTTONS.textStyle,
+      })
+      .setOrigin(...PARAMS.originCenter)
+      .setShadow(...PARAMS.BUTTONS.shadow);
+
+    this.btnMusic = this.make
+      .text({
+        x: PARAMS.BUTTONS.coord[0],
+        y: PARAMS.BUTTONS.coord[7],
+        text: PARAMS.BUTTONS.text.sound,
+        style: PARAMS.BUTTONS.textStyle,
+      })
+      .setOrigin(...PARAMS.originCenter)
+      .setShadow(...PARAMS.BUTTONS.shadow)
+      .setInteractive();
+
+    this.musicMode = this.make
+      .text({
+        x: PARAMS.BUTTONS.coord[6],
+        y: PARAMS.BUTTONS.coord[7],
+        text: PARAMS.BUTTONS.text.on,
+        style: PARAMS.BUTTONS.switchMusicStyle,
+      })
+      .setOrigin(...PARAMS.originCenter)
+      .setShadow(...PARAMS.BUTTONS.shadow);
+
+    this.btnInstruction = this.make
+      .text({
+        x: PARAMS.BUTTONS.coord[0],
+
+        y: PARAMS.BUTTONS.coord[8],
+        text: PARAMS.BUTTONS.text.instruction,
+        style: PARAMS.BUTTONS.textControlsStyle,
+      })
+      .setOrigin(...PARAMS.originCenter)
       .setShadow(...PARAMS.BUTTONS.shadow);
 
     this.btnLogin = this.make
@@ -137,6 +213,8 @@ class MenuScene extends Phaser.Scene {
       this.btnFullscreen,
       this.btnScore,
       this.btnLogin,
+      this.btnMusic,
+      this.btnInstruction,
     ];
 
     menu.forEach((element) => {
@@ -144,6 +222,7 @@ class MenuScene extends Phaser.Scene {
 
       element.on('pointerover', () => {
         element.setScale(1.05);
+        this.soundEffectMenu.play();
       });
 
       element.on('pointerout', () => {
@@ -166,6 +245,10 @@ class MenuScene extends Phaser.Scene {
 
     this.btnScore.on('pointerup', () => {
       this.scene.switch(PARAMS.SCENES.score);
+    });
+
+    this.btnInstruction.on('pointerup', () => {
+      this.scene.switch(PARAMS.SCENES.instructionScene);
     });
   }
 

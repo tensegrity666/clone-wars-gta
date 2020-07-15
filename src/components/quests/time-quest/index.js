@@ -100,10 +100,10 @@ class TimeQuest extends IAbstarct {
         this.finishObj.body.enable = true;
 
         this.time = this.timeQuestScene.add.text(
-          600,
-          20,
-          `time: ${this.state.time}`,
-          { fontSize: '32px', fill: '#fff' },
+          PARAMS.textCoords[0],
+          PARAMS.textCoords[1],
+          `Time: ${this.state.time}`,
+          PARAMS.textStyle,
         );
         this.timeInterval = setInterval(() => {
           this.state.time -= 1;

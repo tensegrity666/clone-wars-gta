@@ -17,7 +17,7 @@ class LoadScene extends Phaser.Scene {
   }
 
   create() {
-    this.scene.start(PARAMS.SCENES.menuScene, '%USERNAME%');
+    this.scene.start(PARAMS.SCENES.menuScene);
   }
 
   loadImages() {
@@ -78,16 +78,22 @@ class LoadScene extends Phaser.Scene {
       progressBar.fillRect(...barCoord, 300 * percent, 30);
 
       if (percent < 0.1) {
-        loadingJokes.setText('Загрузка бананов в коробки');
+        loadingJokes.setText('Optimizing the optimizer...');
       }
-      if (percent > 0.1 && percent < 0.35) {
-        loadingJokes.setText('Загрузка шуток');
+      if (percent > 0.1 && percent < 0.3) {
+        loadingJokes.setText('Pushing pixels...');
       }
-      if (percent > 0.35 && percent < 0.75) {
-        loadingJokes.setText('Загрузка патронов в магазины');
+      if (percent > 0.3 && percent < 0.5) {
+        loadingJokes.setText('Updating the updater...');
       }
-      if (percent > 0.75 && percent < 1) {
-        loadingJokes.setText('Загрузка денег в чемоданы');
+      if (percent > 0.5 && percent < 0.7) {
+        loadingJokes.setText('Shooting in feet...');
+      }
+      if (percent > 0.7 && percent < 0.9) {
+        loadingJokes.setText('Dividing by zero...');
+      }
+      if (percent > 0.9 && percent < 1) {
+        loadingJokes.setText('Mining some bitcoins...');
       }
     });
 

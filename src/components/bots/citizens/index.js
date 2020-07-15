@@ -81,8 +81,8 @@ class Citizens extends IAbstarct {
     for (let i = 0; i <= qnt; i++) {
       const SPEED_X = Phaser.Math.Between(10, 100);
       const SPEED_Y = Phaser.Math.Between(10, 100);
-      const COORD_X = Phaser.Math.Between(4000, 7000);
-      const COORD_Y = Phaser.Math.Between(4000, 7000);
+      const COORD_X = Phaser.Math.Between(2000, 8000);
+      const COORD_Y = Phaser.Math.Between(2000, 9000);
       const MASS = Phaser.Math.Between(50, 140);
 
       this.bot = scene.physics.add
@@ -96,7 +96,7 @@ class Citizens extends IAbstarct {
         .setMass(MASS)
         .setVelocity(SPEED_X, SPEED_Y)
         // .setAngle()
-        .setMaxVelocity(100, 100);
+        .setMaxVelocity(20, 20);
 
       arr.push(this.bot);
 

@@ -12,6 +12,7 @@ import UIScene from './scenes/player-interface';
 import ButtonsScene from './scenes/buttons';
 import TimeQuestScene from './scenes/timequest';
 import StatisticsScene from './scenes/statistics';
+import InctructionScene from './scenes/instruction';
 
 const config = {
   parent: 'container',
@@ -41,6 +42,7 @@ const config = {
     TimeQuestScene,
     StatisticsScene,
     GameOverScene,
+    InctructionScene,
   ],
 };
 

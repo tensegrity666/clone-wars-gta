@@ -24,6 +24,11 @@ const PARAMS = {
       frameSize: { frameWidth: 512, frameHeight: 512 },
     },
   },
+  textCoords: [635, 60],
+  textStyle: {
+    font: '56px gta',
+    fill: '#ff0000',
+  },
 };
 
 export default PARAMS;

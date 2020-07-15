@@ -2,6 +2,54 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.3.0](https://github.com/rolling-scopes-school/clonewars-gta/compare/v1.2.0...v1.3.0) (2020-07-15)
+
+
+### Features
+
+* add border to minimap ([b39588d](https://github.com/rolling-scopes-school/clonewars-gta/commit/b39588d8404ac27732394379d1d3b65ac041eb95))
+* add new objects to map ([732544b](https://github.com/rolling-scopes-school/clonewars-gta/commit/732544b86369bb264c00f19dfd5669d8df83bdf0))
+* add new scene ([89f12ac](https://github.com/rolling-scopes-school/clonewars-gta/commit/89f12ac7400e155e00ffe8b93b512083a54de57d))
+
+## [1.2.0](https://github.com/rolling-scopes-school/clonewars-gta/compare/v0.1.0...v1.2.0) (2020-07-14)
+
+
+### Features
+
+* add back button ([82ce76f](https://github.com/rolling-scopes-school/clonewars-gta/commit/82ce76fc871a9c92f14e39e54db091e2ef77b0bd))
+* add bots ([dcd1220](https://github.com/rolling-scopes-school/clonewars-gta/commit/dcd1220b107ccd34fe857f7f771cf9f5ac124c78))
+* add bots and cars ([fe0ae1a](https://github.com/rolling-scopes-school/clonewars-gta/commit/fe0ae1a5e38f9fbd1b7f2f6d785eb44b447bcd71))
+* add license ([3c03038](https://github.com/rolling-scopes-school/clonewars-gta/commit/3c0303810789ae2be03dc8b18e302f2ef781170f))
+* add music toggler ([1bb3d32](https://github.com/rolling-scopes-school/clonewars-gta/commit/1bb3d329ddb02b6118d680fd5392bb2fa1956d4f))
+* add sounds ([5098f17](https://github.com/rolling-scopes-school/clonewars-gta/commit/5098f171151358b5032fb98978234fc1f2698c87))
+* change music ([eb9648e](https://github.com/rolling-scopes-school/clonewars-gta/commit/eb9648eb90e09c397732d3c953c8d2bf40ec6d25))
+* edit fonts, add player name ([e0b1529](https://github.com/rolling-scopes-school/clonewars-gta/commit/e0b1529fabf9cc527d24dcf11c87bd555c2d24e5))
+* update dependencies ([957ed10](https://github.com/rolling-scopes-school/clonewars-gta/commit/957ed1094e1a3cb6142d5fa84cdf774a433b858c))
+
+
+### Bug Fixes
+
+* default username ([653a035](https://github.com/rolling-scopes-school/clonewars-gta/commit/653a0353811fb0d5dfc3e03efebdf600e2710f22))
+* minor fixes ([429a58d](https://github.com/rolling-scopes-school/clonewars-gta/commit/429a58d979356df59aa2ef721629f170c2dec922))
+* remove debugging ([b8ac9f3](https://github.com/rolling-scopes-school/clonewars-gta/commit/b8ac9f3b3c28f9466ea6cf9cda3e25784db41ad6))
+* timer ([147a4b0](https://github.com/rolling-scopes-school/clonewars-gta/commit/147a4b08f97467300c42647e99aa0be2b099646b))
+* water animation ([69d4d54](https://github.com/rolling-scopes-school/clonewars-gta/commit/69d4d540e316d43642fbacd612220831798a8616))
+
+## [1.1.0](https://github.com/rolling-scopes-school/clonewars-gta/compare/v1.0.0...v1.1.0) (2020-07-13)
+
+
+### Features
+
+* add back button ([82ce76f](https://github.com/rolling-scopes-school/clonewars-gta/commit/82ce76fc871a9c92f14e39e54db091e2ef77b0bd))
+* edit fonts, add player name ([e0b1529](https://github.com/rolling-scopes-school/clonewars-gta/commit/e0b1529fabf9cc527d24dcf11c87bd555c2d24e5))
+
+
+### Bug Fixes
+
+* minor fixes ([429a58d](https://github.com/rolling-scopes-school/clonewars-gta/commit/429a58d979356df59aa2ef721629f170c2dec922))
+* remove debugging ([b8ac9f3](https://github.com/rolling-scopes-school/clonewars-gta/commit/b8ac9f3b3c28f9466ea6cf9cda3e25784db41ad6))
+* timer ([d20cb23](https://github.com/rolling-scopes-school/clonewars-gta/commit/d20cb23d46278d0fa58b60912966ea51d1a274ef))
+
 ## [1.0.0](https://github.com/rolling-scopes-school/clonewars-gta/compare/v0.1.0...v1.0.0) (2020-07-12)
 
 

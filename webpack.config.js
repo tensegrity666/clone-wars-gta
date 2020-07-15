@@ -7,7 +7,7 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
-const WorkboxPlugin = require('workbox-webpack-plugin');
+const { GenerateSW } = require('workbox-webpack-plugin');
 
 const devMode = process.env.NODE_ENV !== 'production';
 
@@ -38,7 +38,7 @@ module.exports = {
       template: './src/index.html',
       filename: 'index.html',
     }),
-    new WorkboxPlugin.GenerateSW({
+    new GenerateSW({
       skipWaiting: false,
       maximumFileSizeToCacheInBytes: devMode ? 64e3 : 32e6,
     }),

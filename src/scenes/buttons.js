@@ -13,6 +13,10 @@ class ButtonsScene extends Phaser.Scene {
 
     this.addButtonaBack();
     this.addButtonPause();
+
+    this.soundEffectMenu = this.sound.add(PARAMS.SOUNDS.EFFECT.id, {
+      volume: 0.01,
+    });
   }
 
   addButtonaBack() {
@@ -30,6 +34,8 @@ class ButtonsScene extends Phaser.Scene {
 
     this.btnBack.on('pointerover', () => {
       this.btnBack.setScale(1.05);
+
+      this.soundEffectMenu.play();
     });
 
     this.btnBack.on('pointerout', () => {
@@ -59,6 +65,8 @@ class ButtonsScene extends Phaser.Scene {
 
     this.btnPause.on('pointerover', () => {
       this.btnPause.setScale(1.05);
+
+      this.soundEffectMenu.play();
     });
 
     this.btnPause.on('pointerout', () => {

@@ -1,5 +1,3 @@
-/* eslint-disable no-console */
-
 import Phaser from 'phaser';
 import PARAMS from './constants';
 
@@ -11,10 +9,18 @@ class UIScene extends Phaser.Scene {
   }
 
   create() {
-    console.log('load UIScene');
-  }
+    const respect = this.sound.add(PARAMS.SOUNDS.START.id, {
+      volume: 0.01,
+    });
 
-  update() {}
+    const city = this.sound.add(PARAMS.SOUNDS.CITY.id, {
+      volume: 0.007,
+      loop: true,
+    });
+
+    respect.play();
+    city.play();
+  }
 }
 
 export default UIScene;

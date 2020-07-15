@@ -21,7 +21,7 @@ class Map extends IAbstarct {
       key: PARAMS.waterAnimationID,
       frames: scene.anims.generateFrameNumbers(
         PARAMS.waterID,
-        PARAMS.frameBorders,
+        PARAMS.frameWater,
       ),
       frameRate: 1,
       repeat: -1,
@@ -62,8 +62,6 @@ class Map extends IAbstarct {
       collides: true,
     });
 
-    // this.object.setCollision(PARAMS.collisionsMap);
-
     scene.physics.world.setBounds(
       640,
       640,
@@ -71,30 +69,69 @@ class Map extends IAbstarct {
       map.heightInPixels - 1000,
     );
 
-    // debugging
-    // const debugGraphics = scene.add.graphics().setAlpha(0.75);
-    // map.renderDebug(debugGraphics, {
-    //   tileColor: null,
-    //   collidingTileColor: new Phaser.Display.Color(243, 134, 48, 255),
-    //   faceColor: new Phaser.Display.Color(40, 39, 37, 255),
-    // });
+    this.border = scene.cameras
+      .add(
+        PARAMS.positionBorder.x,
+        PARAMS.positionBorder.y,
+        PARAMS.sizeBorder.width,
+        PARAMS.sizeBorder.height,
+      )
+      .setZoom(PARAMS.minimapZoom)
+      .setName(PARAMS.nameBorder);
+    this.border.transparent = PARAMS.transparentMinimap;
+    this.border.setBackgroundColor(
+      PARAMS.backgroundBorder.r,
+      PARAMS.backgroundBorder.g,
+      PARAMS.backgroundBorder.b,
+      PARAMS.backgroundBorder.a,
+    );
+    this.border.setScene(scene);
+    this.border.scrollX = PARAMS.scrollXMinimap;
+    this.border.scrollY = PARAMS.scrollYMinimap;
+    this.border.fadeOut(
+      PARAMS.fadeTimeBorder,
+      PARAMS.backgroundBorder.r,
+      PARAMS.backgroundBorder.g,
+      PARAMS.backgroundBorder.b,
+    );
+    this.border.alpha = PARAMS.alphaBorder;
 
     this.minimap = scene.cameras
-      .add(1150, 10, 200, 200)
-      .setZoom(0.05)
-      .setName('miniCameras');
-    this.minimap.setBackgroundColor(0x3a5b77);
+      .add(
+        PARAMS.positionMinimap.x,
+        PARAMS.positionMinimap.y,
+        PARAMS.sizeMinimap.width,
+        PARAMS.sizeMinimap.height,
+      )
+      .setZoom(PARAMS.minimapZoom)
+      .setName(PARAMS.nameMinimap);
+    this.minimap.transparent = PARAMS.transparentMinimap;
+    this.minimap.setBackgroundColor(
+      PARAMS.backgroundMinimap.r,
+      PARAMS.backgroundMinimap.g,
+      PARAMS.backgroundMinimap.b,
+      PARAMS.backgroundMinimap.a,
+    );
     this.minimap.setScene(scene);
-    this.minimap.scrollX = 6200;
-    this.minimap.scrollY = 6300;
+    this.minimap.scrollX = PARAMS.scrollXMinimap;
+    this.minimap.scrollY = PARAMS.scrollYMinimap;
+    this.minimap.tintFill = PARAMS.tintFillMinimap;
+    this.minimap.setTint(
+      PARAMS.tintMinimap.topLeft,
+      PARAMS.tintMinimap.topRight,
+      PARAMS.tintMinimap.bottomLeft,
+      PARAMS.tintMinimap.bottomRight,
+    );
+    this.minimap.fadeIn();
+    this.minimap.alpha = PARAMS.alphaMinimap;
   }
 
   update(scene, featureMap) {
     const gameObject = featureMap[Player.id];
     const player = gameObject.object;
 
-    this.minimap.scrollX = player.x;
-    this.minimap.scrollY = player.y;
+    this.minimap.scrollX = player.x - 100;
+    this.minimap.scrollY = player.y - 100;
   }
 }
 

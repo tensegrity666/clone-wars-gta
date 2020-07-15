@@ -70,7 +70,7 @@ class PoliceCar extends IAbstract {
         && this.state.isPlayerInside
         && this.state.speed <= PARAMS.MAX_SPEED
       ) {
-        this.state.speed += 10;
+        this.state.speed += 0;
       }
 
       if (
@@ -109,7 +109,7 @@ class PoliceCar extends IAbstract {
       );
 
       if (this.controller.moveUp.isUp && this.controller.moveDown.isUp) {
-        this.state.speed += (0 - this.state.speed) * 0.01;
+        this.state.speed += 0;
       }
     } else {
       if (!this.state.isDestroyed) {
