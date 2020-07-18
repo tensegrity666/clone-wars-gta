@@ -4,8 +4,6 @@
 
 import { nanoid } from 'nanoid';
 
-import Phaser, { Scene } from 'phaser';
-
 import VirtualJoystickPlugin from 'phaser3-rex-plugins/plugins/virtualjoystick';
 
 import IAbstarct from '../interface';
@@ -14,12 +12,7 @@ import JOYSTISK_PARAMS from './constants';
 
 import Player from '../player';
 
-import {
-  PARAMS as PLAYER_PARAM,
-  MOVING_PARAMS,
-  controlKeys,
-  WEAPONS,
-} from '../player/constants';
+import { PARAMS as PLAYER_PARAM, MOVING_PARAMS } from '../player/constants';
 
 let player;
 

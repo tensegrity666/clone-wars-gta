@@ -1,6 +1,5 @@
 /* eslint-disable no-unused-vars */
 import { nanoid } from 'nanoid';
-import Phaser from 'phaser';
 
 import Player from '../player';
 

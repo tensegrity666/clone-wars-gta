@@ -1,5 +1,5 @@
+## [Homepage](https://gta-phaser-promo.netlify.app/)
 ## [Changelog ](https://github.com/rolling-scopes-school/clonewars-gta/blob/dev/CHANGELOG.md)
-## [Deployed sample (updated as it develops)](https://gta-phaser.web.app/)
 
 * "npm run lint" выполняется автоматически перед любым коммитом.
   * __если сразу после коммита появились несохранённые изменения, значит сработал eslint autofix.__
