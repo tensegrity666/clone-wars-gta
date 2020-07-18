@@ -1,4 +1,6 @@
 ## [Homepage](https://gta-phaser-promo.netlify.app/)
+## [Article on Medium](https://medium.com/@loremipsumrrr/clonewars-gta-8c1da4e202ba)
+
 ## [Changelog ](https://github.com/rolling-scopes-school/clonewars-gta/blob/dev/CHANGELOG.md)
 
 * "npm run lint" выполняется автоматически перед любым коммитом.
