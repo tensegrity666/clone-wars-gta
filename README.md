@@ -27,8 +27,5 @@
 #### Show linting errors
 * npm run show-errors
 
-#### Run tests
-* npm test
-
 #### Build project
 * npm run build
