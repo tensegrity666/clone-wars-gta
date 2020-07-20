@@ -47,20 +47,6 @@ class BlueCar2 extends IAbstarct {
 
     animConfig.forEach((a) => scene.anims.create(a));
   }
-
-  // update() {
-  //   // eslint-disable-next-line no-empty
-  //   if (this.state.health > 0) {
-  //   } else {
-  //     if (!this.state.isDestroyed) {
-  //       this.object.anims.play(this.animations.explosion.key, true);
-  //     }
-  //     setTimeout(() => {
-  //       this.object.destroy();
-  //       this.state.isDestroyed = true;
-  //     }, 1000);
-  //   }
-  // }
 }
 
 export default BlueCar2;

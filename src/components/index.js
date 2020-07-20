@@ -34,8 +34,6 @@ import Human9 from './bots/human-9';
 
 import TimeQuest from './quests/time-quest';
 
-// import ScreenController from './screen-controller';
-
 const features = [
   Car,
   PoliceCar,
@@ -63,7 +61,6 @@ const features = [
   Map,
   Bullet,
   Pistol,
-  // ScreenController,
   Chaingun,
   MachineGun,
   TimeQuest,

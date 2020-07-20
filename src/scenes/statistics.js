@@ -12,7 +12,7 @@ class StatisticsScene extends Phaser.Scene {
     super(PARAMS.SCENES.score);
   }
 
-  init(data) {
+  init() {
     this.leaderboard = new LeaderBoard({
       root: 'leaderboard',
     });

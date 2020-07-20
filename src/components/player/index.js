@@ -146,7 +146,6 @@ class Player extends IAbstarct {
   actionsWithPlayer(scene, featureMap) {
     if (this.state.health <= 0) {
       this.object.destroy();
-      // TODO Game over ...
     }
 
     this.controller = {
@@ -238,7 +237,6 @@ class Player extends IAbstarct {
           -(MOVING_PARAMS.PLAYER_SPEED * MOVING_PARAMS.SPEED_COF),
         );
       }
-      // this.object.anims.play(this.animations.run.key, true);
     }
 
     if (this.controller.run.isUp) {

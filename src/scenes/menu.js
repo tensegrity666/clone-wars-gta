@@ -1,5 +1,4 @@
 /* eslint-disable no-undef */
-/* eslint-disable no-unused-vars */
 /* eslint-disable no-console */
 import Phaser from 'phaser';
 
@@ -264,7 +263,7 @@ class MenuScene extends Phaser.Scene {
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
-        const { credential } = error;
+        console.log(errorCode, errorMessage);
       });
   }
 

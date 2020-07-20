@@ -209,9 +209,7 @@ class Interactions extends IAbstarct {
       scene.physics.add.collider(
         car.object,
         [...this.allCitizensObjects, this.player, map],
-        () => {
-          // урон ботам когда на них наезжают
-        },
+        () => {},
       );
       scene.physics.add.collider(
         car.object,
@@ -219,9 +217,7 @@ class Interactions extends IAbstarct {
           acc.push(currCar.object);
           return acc;
         }, []),
-        () => {
-          // урон машинам при аварии
-        },
+        () => {},
       );
     });
   }
@@ -267,7 +263,6 @@ class Interactions extends IAbstarct {
 
   actionsWithBullets(scene, interactionMap) {
     if (this.bullet.newBullet) {
-      // cars
       scene.physics.add.collider(this.bullet.newBullet, this.car.object, () => {
         this.actionWithBulletsAndCars(this.bullet.newBullet, this.car);
       });
@@ -293,7 +288,6 @@ class Interactions extends IAbstarct {
         },
       );
 
-      // map
       scene.physics.add.collider(
         this.bullet.newBullet,
         interactionMap[Map.id].object,
@@ -302,7 +296,6 @@ class Interactions extends IAbstarct {
         },
       );
 
-      // citizens
       this.allCitizensObjects.forEach((citizen) => {
         scene.physics.add.collider(citizen, this.bullet.newBullet, () => {
           currentPlayer.score += 10;
@@ -370,7 +363,6 @@ class Interactions extends IAbstarct {
   }
 
   actionsWithPlayer(scene) {
-    // cars
     this.player.closestCar = this.getClosestCar(this.allCars);
 
     if (
@@ -402,7 +394,6 @@ class Interactions extends IAbstarct {
       this.player.state.isInsideCar = false;
     }
 
-    // weapons
     if (
       this.player.controller.doMainAttack.isDown
       && this.player.state.ammo

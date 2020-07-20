@@ -49,8 +49,8 @@ class BlueCar extends IAbstarct {
   }
 
   update() {
-    // eslint-disable-next-line no-empty
     if (this.state.health > 0) {
+      // TODO
     } else {
       if (!this.state.isDestroyed) {
         this.object.anims.play(this.animations.explosion.key, true);

@@ -45,8 +45,6 @@ class ButtonsScene extends Phaser.Scene {
     this.btnBack.on('pointerup', () => {
       this.gameScene.scene.switch(PARAMS.SCENES.menuScene);
       this.scene.setVisible(false);
-      // gameScene.scene.pause();
-      // this.scene.switch(PARAMS.SCENES.menuScene);
     });
   }
 

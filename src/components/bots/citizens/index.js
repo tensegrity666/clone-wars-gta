@@ -124,7 +124,6 @@ class Citizens extends IAbstarct {
         .setBounce(1, 1)
         .setMass(MASS)
         .setVelocity(SPEED_X, SPEED_Y)
-        // .setAngle()
         .setMaxVelocity(20, 20);
 
       arr.push(this.bot);

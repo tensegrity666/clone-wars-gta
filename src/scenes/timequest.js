@@ -15,9 +15,7 @@ class TimeQuestScene extends Phaser.Scene {
 
   preload() {}
 
-  create() {
-    // console.log('time quest scene loaded');
-  }
+  create() {}
 
   update() {}
 }

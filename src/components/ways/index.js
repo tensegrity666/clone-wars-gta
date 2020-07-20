@@ -53,8 +53,6 @@ class Ways extends IAbstarct {
     this.Human8 = featureMap[Human8.id].object;
     this.Human9 = featureMap[Human9.id].object;
 
-    // this.graphics = scene.add.graphics();
-
     this.path = new Phaser.Curves.Spline(PARAMS.WAYPOINTS.bigCircle);
     this.path2 = new Phaser.Curves.Spline(PARAMS.WAYPOINTS.zigzag);
     this.path3 = new Phaser.Curves.Spline(PARAMS.WAYPOINTS.square);
@@ -73,11 +71,6 @@ class Ways extends IAbstarct {
     this.path16 = new Phaser.Curves.Spline(PARAMS.WAYPOINTS.botWay7);
     this.path17 = new Phaser.Curves.Spline(PARAMS.WAYPOINTS.botWay8);
     this.path18 = new Phaser.Curves.Spline(PARAMS.WAYPOINTS.botWay9);
-
-    // this.bounds = new Phaser.Geom.Rectangle();
-    // this.path.getBounds(this.bounds);
-    // this.path2.getBounds(this.bounds);
-    // this.path3.getBounds(this.bounds);
 
     const pathFollower = new PathFollower(this.taxiCar, {
       path: this.path,
@@ -217,30 +210,6 @@ class Ways extends IAbstarct {
       yoyo: true,
       repeatDelay: 0,
     });
-  }
-
-  update(scene) {
-    // this.graphics.clear();
-    // this.graphics.lineStyle(1, 0x00ff00, 0.1).strokeRectShape(this.bounds);
-    // this.graphics.lineStyle(1, 0xffffff, 0.1);
-    // this.path.draw(this.graphics);
-    // this.path2.draw(this.graphics);
-    // this.path3.draw(this.graphics);
-    // this.path4.draw(this.graphics);
-    // this.path5.draw(this.graphics);
-    // this.path6.draw(this.graphics);
-    // this.path7.draw(this.graphics);
-    // this.path8.draw(this.graphics);
-    // this.path9.draw(this.graphics);
-    // this.path10.draw(this.graphics);
-    // this.path11.draw(this.graphics);
-    // this.path12.draw(this.graphics);
-    // this.path13.draw(this.graphics);
-    // this.path14.draw(this.graphics);
-    // this.path15.draw(this.graphics);
-    // this.path16.draw(this.graphics);
-    // this.path17.draw(this.graphics);
-    // this.path18.draw(this.graphics);
   }
 }
 

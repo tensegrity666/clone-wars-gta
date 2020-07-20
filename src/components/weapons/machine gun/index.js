@@ -26,7 +26,7 @@ class MachineGun extends IAbstarct {
     );
   }
 
-  create(scene, featureMap) {
+  create(scene) {
     this.object = scene.physics.add
       .sprite(...PARAMS.INITIAL_COORDINATES, PARAMS.IMAGES.HK.id)
       .setDepth(1)
@@ -39,7 +39,7 @@ class MachineGun extends IAbstarct {
     this.actionsWithWeapon(scene);
   }
 
-  actionsWithWeapon(scene) {}
+  actionsWithWeapon() {}
 
   static shooting(scene, gunner, featureMap) {
     if (gunner.state.ammo) {

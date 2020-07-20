@@ -1,7 +1,6 @@
 /* eslint-disable no-unused-vars */
 
 import Phaser from 'phaser';
-import { nanoid } from 'nanoid';
 
 import PARAMS from './constants';
 
@@ -10,7 +9,7 @@ class InctructionScene extends Phaser.Scene {
     super(PARAMS.SCENES.instructionScene);
   }
 
-  preload(scene) {
+  preload() {
     this.load.image(
       PARAMS.spritesJoystick.controlId,
       PARAMS.spritesJoystick.controlPath,
@@ -37,7 +36,7 @@ class InctructionScene extends Phaser.Scene {
     );
   }
 
-  init(data) {}
+  init() {}
 
   async create() {
     this.cameras.main.fadeIn(PARAMS.CAMERA.fadeTime);
@@ -78,7 +77,6 @@ class InctructionScene extends Phaser.Scene {
       PARAMS.STATS.score,
     );
     textFirstJoystick.setDepth(101);
-    // textFirstJoystick.setOrigin(-0.5, -0.5);
 
     const spriteSecondJoystick = this.add
       .sprite(x, y + 200, PARAMS.spritesJoystick.controlId)
@@ -105,7 +103,6 @@ class InctructionScene extends Phaser.Scene {
       PARAMS.STATS.score,
     );
     textSecondJoystick.setDepth(101);
-    // textSecondJoystick.setOrigin(-0.5, -0.5);
 
     const spriteActionButton = this.add
       .sprite(x, y + 350, PARAMS.spritesJoystick.actionId)
@@ -119,7 +116,6 @@ class InctructionScene extends Phaser.Scene {
       PARAMS.STATS.score,
     );
     textActionKeyboard.setDepth(101);
-    // textActionButton.setOrigin(-0.5, -0.5);
 
     const textActionButton = this.add.text(
       x + 200,
@@ -149,42 +145,6 @@ class InctructionScene extends Phaser.Scene {
       PARAMS.STATS.score,
     );
     textRunButton.setDepth(101);
-    // textRunButton.setOrigin(-0.5, -0.5);
-
-    /*
-    for (let i = 0; i < tableRows; ++i) {
-      const num = this.add
-        .text(x, y, `${i + 1}.`, PARAMS.STATS.score)
-        .setOrigin(0, 0.5)
-        .setDepth(2);
-
-      if (i < this.scores.length) {
-        const scoreItem = this.scores[i];
-
-        const name = this.add
-          .text(
-            num.x + num.width + padding,
-            y,
-            scoreItem.userName,
-            PARAMS.STATS.name,
-          )
-          .setOrigin(0, 0.5)
-          .setDepth(2);
-
-        const nameWidth = 400;
-        this.add
-          .text(
-            name.x + nameWidth + padding,
-            y,
-            scoreItem.score.toString(),
-            PARAMS.STATS.score,
-          )
-          .setOrigin(0, 0.5)
-          .setDepth(2);
-      }
-
-      y += verticalGap;
-    } */
 
     this.showBackground();
     this.backToMenu();

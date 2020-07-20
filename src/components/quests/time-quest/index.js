@@ -74,7 +74,7 @@ class TimeQuest extends IAbstarct {
     this.showArrow();
   }
 
-  restartQuest(scene) {
+  restartQuest() {
     this.time.destroy();
     this.arrow.destroy();
     this.state.isStarted = false;

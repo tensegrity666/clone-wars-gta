@@ -29,7 +29,7 @@ class Rednecks extends IAbstarct {
     this.addAnimation(scene);
   }
 
-  update(scene) {
+  update() {
     this.object.playAnimation(this.animations.walk.key, true);
 
     if (this.bot.body.velocity.y < 0) {
@@ -117,7 +117,6 @@ class Rednecks extends IAbstarct {
 
       this.bot = scene.physics.add
         .sprite(COORD_X, COORD_Y, nanoid())
-        // .setRandomPosition()
         .setDepth(1)
         .setScale(0.8)
         .setTint(0xff0000)
@@ -128,7 +127,6 @@ class Rednecks extends IAbstarct {
         .setMass(MASS)
         .setVelocity(SPEED_X, SPEED_Y)
         .setMaxVelocity(90, 90);
-      // .setAngle()
 
       arr.push(this.bot);
 
