@@ -2,6 +2,7 @@ import { nanoid } from 'nanoid';
 
 import hk from '../assets/hk.png';
 import bullet from '../assets/bullet.png';
+import shot from '../assets/1shot.mp3';
 
 const PARAMS = {
   INITIAL_COORDINATES: [6550, 6500],
@@ -16,6 +17,12 @@ const PARAMS = {
         id: nanoid(),
         img: bullet,
       },
+    },
+  },
+  SOUNDS: {
+    pistol: {
+      id: nanoid(),
+      file: shot,
     },
   },
 };

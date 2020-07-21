@@ -48,9 +48,6 @@ class InctructionScene extends Phaser.Scene {
 
     const x = 350;
     const y = 100;
-    const tableRows = 15;
-    const padding = 10;
-    const verticalGap = 40;
 
     const spriteFirstJoystick = this.add
       .sprite(x, y, PARAMS.spritesJoystick.controlId)
@@ -91,7 +88,7 @@ class InctructionScene extends Phaser.Scene {
     const textFireKeyboard = this.add.text(
       x + 200,
       y + 250,
-      'or J',
+      'or Mouse Button',
       PARAMS.STATS.score,
     );
     textFireKeyboard.setDepth(101);

@@ -154,7 +154,6 @@ class Player extends IAbstarct {
       moveDown: scene.input.keyboard.addKey(controlKeys.down),
       moveLeft: scene.input.keyboard.addKey(controlKeys.left),
       run: scene.input.keyboard.addKey(controlKeys.run),
-      doMainAttack: scene.input.keyboard.addKey(controlKeys.attackMain),
       doAction: scene.input.keyboard.addKey(controlKeys.action),
     };
 

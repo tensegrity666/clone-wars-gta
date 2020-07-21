@@ -8,6 +8,12 @@ import effect from './assets/sounds/menu.mp3';
 import start from './assets/sounds/RespectIs.mp3';
 import city from './assets/sounds/goroda.mp3';
 
+import controlSprite from '../components/screen-controller/assets/control.png';
+import directionThumpSprite from '../components/screen-controller/assets/directionThump.png';
+import shootThumpSprite from '../components/screen-controller/assets/shootThump.png';
+import actionSprite from '../components/screen-controller/assets/action.png';
+import runSprite from '../components/screen-controller/assets/run.png';
+
 const PARAMS = {
   SCENES: {
     gameScene: nanoid(),
@@ -126,6 +132,30 @@ const PARAMS = {
     fadeTime: 650,
   },
   originCenter: [0.5, 0.5],
+
+  spritesJoystick: {
+    controlId: nanoid(),
+    controlPath: controlSprite,
+
+    directionId: nanoid(),
+    directionPath: directionThumpSprite,
+
+    shootId: nanoid(),
+    shootPath: shootThumpSprite,
+
+    actionId: nanoid(),
+    actionPath: actionSprite,
+
+    runId: nanoid(),
+    runPath: runSprite,
+  },
+
+  textJoystick: {
+    firstJoystick: 'control character movement',
+    secondJoystick: 'line of fire',
+    actionButton: 'action',
+    runButton: 'run',
+  },
 };
 
 export default PARAMS;

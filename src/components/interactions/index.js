@@ -51,11 +51,16 @@ class Interactions extends IAbstarct {
     sprites.forEach((sprite) => {
       scene.load.spritesheet(sprite.id, sprite.img, sprite.frameSize);
     });
+
+    const snd = Object.values(PARAMS.SOUNDS);
+
+    snd.forEach((element) => scene.load.audio(element.id, element.file));
   }
 
   create(scene, interactionMap) {
     this.sceneUI = scene.game.scene.scenes[4];
     this.timeQuestScene = scene.game.scene.scenes[5];
+
     scene.scene.launch(this.timeQuestScene);
     const map = interactionMap[Map.id].object;
 
@@ -118,6 +123,7 @@ class Interactions extends IAbstarct {
     this.car2 = interactionMap[Car2.id];
     this.blueCar = interactionMap[BlueCar.id];
     this.blueCar2 = interactionMap[BlueCar2.id];
+
     this.allCars = [
       this.taxiCar,
       this.taxiCar2,
@@ -165,8 +171,15 @@ class Interactions extends IAbstarct {
       map,
     ]);
 
+    this.pistolSoundEffect = scene.sound.add(PARAMS.SOUNDS.pistol.id, {
+      volume: 0.01,
+    });
+
     scene.physics.add.collider(this.player.object, this.pistol.object, () => {
       this.player.state.currentWeapon = this.player.WEAPONS.pistol;
+
+      this.pistolSoundEffect.play();
+
       interactionMap[Pistol.id].object.destroy();
       this.player.state.ammo = interactionMap[Pistol.id].state.ammo;
       if (this.player.state.currentWeaponIcon) {
@@ -177,11 +190,18 @@ class Interactions extends IAbstarct {
         .setScale(0.2);
     });
 
+    this.macGunSoundEffect = scene.sound.add(PARAMS.SOUNDS.macgun.id, {
+      volume: 0.01,
+    });
+
     scene.physics.add.collider(
       this.player.object,
       this.machineGun.object,
       () => {
         this.player.state.currentWeapon = this.player.WEAPONS.machineGun;
+
+        this.macGunSoundEffect.play();
+
         interactionMap[MachineGun.id].object.destroy();
         this.player.state.ammo = interactionMap[MachineGun.id].state.ammo;
         if (this.player.state.currentWeaponIcon) {
@@ -195,7 +215,11 @@ class Interactions extends IAbstarct {
 
     scene.physics.add.collider(this.player.object, this.chaingun.object, () => {
       this.player.state.currentWeapon = this.player.WEAPONS.chaingun;
+
+      this.macGunSoundEffect.play();
+
       interactionMap[Chaingun.id].object.destroy();
+
       this.player.state.ammo = interactionMap[Chaingun.id].state.ammo;
       if (this.player.state.currentWeaponIcon) {
         this.player.state.currentWeaponIcon.destroy(this.sceneUI);
@@ -209,25 +233,40 @@ class Interactions extends IAbstarct {
       scene.physics.add.collider(
         car.object,
         [...this.allCitizensObjects, this.player, map],
-        () => {},
+        () => {
+          // TODO урон ботам когда на них наезжают
+        },
       );
+
       scene.physics.add.collider(
         car.object,
         this.allCars.reduce((acc, currCar) => {
           acc.push(currCar.object);
           return acc;
         }, []),
-        () => {},
+        () => {
+          // TODO урон машинам при аварии
+        },
       );
     });
   }
 
   actionsWithQuests(scene) {
+    this.startSoundEffect = scene.sound.add(PARAMS.SOUNDS.start.id, {
+      volume: 0.01,
+    });
+
+    this.finishSoundEffect = scene.sound.add(PARAMS.SOUNDS.finish.id, {
+      volume: 0.01,
+    });
+
     if (this.timeQuest.startObj.visible) {
       scene.physics.add.collider(
         this.player.object,
         this.timeQuest.startObj,
         () => {
+          this.startSoundEffect.play();
+
           this.timeQuest.state.isStarted = true;
         },
       );
@@ -237,6 +276,8 @@ class Interactions extends IAbstarct {
         this.player.object,
         this.timeQuest.finishObj,
         () => {
+          this.finishSoundEffect.play();
+
           this.timeQuest.state.isFinished = true;
           if (this.timeQuest.state.time > 0) {
             scene.scene.remove(this.timeQuestScene);
@@ -266,6 +307,7 @@ class Interactions extends IAbstarct {
       scene.physics.add.collider(this.bullet.newBullet, this.car.object, () => {
         this.actionWithBulletsAndCars(this.bullet.newBullet, this.car);
       });
+
       scene.physics.add.collider(
         this.bullet.newBullet,
         this.policeCar.object,
@@ -273,6 +315,7 @@ class Interactions extends IAbstarct {
           this.actionWithBulletsAndCars(this.bullet.newBullet, this.policeCar);
         },
       );
+
       scene.physics.add.collider(
         this.bullet.newBullet,
         this.racingCar.object,
@@ -280,6 +323,7 @@ class Interactions extends IAbstarct {
           this.actionWithBulletsAndCars(this.bullet.newBullet, this.racingCar);
         },
       );
+
       scene.physics.add.collider(
         this.bullet.newBullet,
         this.taxiCar.object,
@@ -363,6 +407,11 @@ class Interactions extends IAbstarct {
   }
 
   actionsWithPlayer(scene) {
+    this.getCarSoundEffect = scene.sound.add(PARAMS.SOUNDS.car.id, {
+      volume: 0.01,
+    });
+
+    const pointer = scene.input.activePointer;
     this.player.closestCar = this.getClosestCar(this.allCars);
 
     if (
@@ -371,6 +420,8 @@ class Interactions extends IAbstarct {
       && this.changeCurrentCar(this.player.closestCar)
       && this.isCarClose(this.player.currentCar.object)
     ) {
+      this.getCarSoundEffect.play();
+
       this.player.object.body.enable = false;
       this.carContainer.add(this.player.object);
       this.player.currentCar.state.isPlayerInside = true;
@@ -395,7 +446,7 @@ class Interactions extends IAbstarct {
     }
 
     if (
-      this.player.controller.doMainAttack.isDown
+      pointer.isDown
       && this.player.state.ammo
       && !this.player.state.isShooting
     ) {

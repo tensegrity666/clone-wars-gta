@@ -20,6 +20,8 @@ class Chaingun extends IAbstarct {
       PARAMS.IMAGES.CHAINGUN.img,
       PARAMS.IMAGES.CHAINGUN.frameSize,
     );
+
+    scene.load.audio(PARAMS.SOUNDS.pistol.id, PARAMS.SOUNDS.pistol.file);
   }
 
   create(scene, featureMap) {
@@ -39,6 +41,10 @@ class Chaingun extends IAbstarct {
 
   static shooting(scene, gunner, featureMap) {
     if (gunner.state.ammo) {
+      this.soundEffect = scene.sound.add(PARAMS.SOUNDS.pistol.id, {
+        volume: 0.01,
+      });
+      this.soundEffect.play();
       this.bullet = featureMap[Bullet.id].getBullet(scene, gunner);
 
       scene.physics.moveTo(

@@ -21,10 +21,13 @@ class Pistol extends IAbstarct {
       PARAMS.IMAGES.PISTOL.img,
       PARAMS.IMAGES.PISTOL.frameSize,
     );
+
     scene.load.image(
       PARAMS.IMAGES.BULLET.bullet.id,
       PARAMS.IMAGES.BULLET.bullet.img,
     );
+
+    scene.load.audio(PARAMS.SOUNDS.pistol.id, PARAMS.SOUNDS.pistol.file);
   }
 
   create(scene) {
@@ -44,6 +47,11 @@ class Pistol extends IAbstarct {
 
   static shooting(scene, gunner, featureMap) {
     if (gunner.state.ammo) {
+      this.soundEffect = scene.sound.add(PARAMS.SOUNDS.pistol.id, {
+        volume: 0.01,
+      });
+      this.soundEffect.play();
+
       this.bullet = featureMap[Bullet.id].getBullet(scene, gunner);
 
       scene.physics.moveTo(

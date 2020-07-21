@@ -24,6 +24,8 @@ class MachineGun extends IAbstarct {
       PARAMS.IMAGES.BULLET.bullet.id,
       PARAMS.IMAGES.BULLET.bullet.img,
     );
+
+    scene.load.audio(PARAMS.SOUNDS.pistol.id, PARAMS.SOUNDS.pistol.file);
   }
 
   create(scene) {
@@ -43,6 +45,10 @@ class MachineGun extends IAbstarct {
 
   static shooting(scene, gunner, featureMap) {
     if (gunner.state.ammo) {
+      this.soundEffect = scene.sound.add(PARAMS.SOUNDS.pistol.id, {
+        volume: 0.01,
+      });
+      this.soundEffect.play();
       this.bullet = featureMap[Bullet.id].getBullet(scene, gunner);
 
       scene.physics.moveTo(

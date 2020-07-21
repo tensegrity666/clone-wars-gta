@@ -76,7 +76,6 @@ class MenuScene extends Phaser.Scene {
       'pointerup',
       () => {
         if (!mute) {
-          console.log(this.music);
           this.musicMode.text = PARAMS.BUTTONS.text.off;
           this.musicMode.setColor(PARAMS.BUTTONS.color.red);
           mute = true;

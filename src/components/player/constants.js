@@ -99,7 +99,6 @@ const controlKeys = {
   left: 'A',
   rigth: 'D',
   run: 'SPACE',
-  attackMain: 'J',
   action: 'ENTER',
 };
 

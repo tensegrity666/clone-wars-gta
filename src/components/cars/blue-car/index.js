@@ -20,7 +20,7 @@ class BlueCar extends IAbstarct {
     });
   }
 
-  create(scene, featureMap) {
+  create(scene) {
     this.object = scene.physics.add
       .sprite(0, 0, PARAMS.IMAGES.BLUE.id)
       .setDepth(1)
