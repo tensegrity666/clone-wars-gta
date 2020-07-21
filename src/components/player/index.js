@@ -5,9 +5,7 @@ import { nanoid } from 'nanoid';
 
 import IAbstarct from '../interface';
 
-import {
-  PARAMS, MOVING_PARAMS, controlKeys, WEAPONS,
-} from './constants';
+import { PARAMS, MOVING_PARAMS, controlKeys, WEAPONS } from './constants';
 
 import currentPlayer from '../../player-state';
 
@@ -101,7 +99,7 @@ class Player extends IAbstarct {
           {
             start: 0,
             end: 0,
-          },
+          }
         ),
       },
       machineGun: {
@@ -111,7 +109,7 @@ class Player extends IAbstarct {
           {
             start: 0,
             end: 0,
-          },
+          }
         ),
       },
       chaingun: {
@@ -121,7 +119,7 @@ class Player extends IAbstarct {
           {
             start: 0,
             end: 0,
-          },
+          }
         ),
       },
       chaingunShoot: {
@@ -131,7 +129,7 @@ class Player extends IAbstarct {
           {
             start: 0,
             end: 1,
-          },
+          }
         ),
         frameRate: 10,
         repeat: -1,
@@ -198,10 +196,10 @@ class Player extends IAbstarct {
     }
 
     if (
-      !this.controller.moveLeft.isDown
-      && !this.controller.moveRight.isDown
-      && !this.controller.moveUp.isDown
-      && !this.controller.moveDown.isDown
+      !this.controller.moveLeft.isDown &&
+      !this.controller.moveRight.isDown &&
+      !this.controller.moveUp.isDown &&
+      !this.controller.moveDown.isDown
     ) {
       this.object.anims.play(this.animations.stand.key);
     }
@@ -218,22 +216,22 @@ class Player extends IAbstarct {
 
       if (this.object.body.velocity.x > 0) {
         this.object.setVelocityX(
-          MOVING_PARAMS.PLAYER_SPEED * MOVING_PARAMS.SPEED_COF,
+          MOVING_PARAMS.PLAYER_SPEED * MOVING_PARAMS.SPEED_COF
         );
       }
       if (this.object.body.velocity.x < 0) {
         this.object.setVelocityX(
-          -(MOVING_PARAMS.PLAYER_SPEED * MOVING_PARAMS.SPEED_COF),
+          -(MOVING_PARAMS.PLAYER_SPEED * MOVING_PARAMS.SPEED_COF)
         );
       }
       if (this.object.body.velocity.y > 0) {
         this.object.setVelocityY(
-          MOVING_PARAMS.PLAYER_SPEED * MOVING_PARAMS.SPEED_COF,
+          MOVING_PARAMS.PLAYER_SPEED * MOVING_PARAMS.SPEED_COF
         );
       }
       if (this.object.body.velocity.y < 0) {
         this.object.setVelocityY(
-          -(MOVING_PARAMS.PLAYER_SPEED * MOVING_PARAMS.SPEED_COF),
+          -(MOVING_PARAMS.PLAYER_SPEED * MOVING_PARAMS.SPEED_COF)
         );
       }
     }

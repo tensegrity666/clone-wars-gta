@@ -29,7 +29,7 @@ class Human3 extends IAbstarct {
       .sprite(
         Phaser.Math.Between(4500, 6500),
         Phaser.Math.Between(4500, 6500),
-        PARAMS.IMAGES.CITIZEN.walk.id,
+        PARAMS.IMAGES.CITIZEN.walk.id
       )
       .setDepth(1)
       .setScale(0.8)
@@ -85,7 +85,7 @@ class Human3 extends IAbstarct {
           {
             start: 0,
             end: 0,
-          },
+          }
         ),
         frameRate: 10,
         repeat: -1,
@@ -97,7 +97,7 @@ class Human3 extends IAbstarct {
           {
             start: 0,
             end: 5,
-          },
+          }
         ),
         frameRate: 10,
         repeat: -1,

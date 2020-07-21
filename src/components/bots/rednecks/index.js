@@ -72,7 +72,7 @@ class Rednecks extends IAbstarct {
           {
             start: 0,
             end: 0,
-          },
+          }
         ),
         frameRate: 10,
         repeat: -1,
@@ -84,7 +84,7 @@ class Rednecks extends IAbstarct {
           {
             start: 0,
             end: 5,
-          },
+          }
         ),
         frameRate: 10,
         repeat: -1,

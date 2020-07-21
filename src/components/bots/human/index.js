@@ -82,7 +82,7 @@ class Human extends IAbstarct {
           {
             start: 0,
             end: 0,
-          },
+          }
         ),
         frameRate: 10,
         repeat: -1,
@@ -94,7 +94,7 @@ class Human extends IAbstarct {
           {
             start: 0,
             end: 5,
-          },
+          }
         ),
         frameRate: 10,
         repeat: -1,

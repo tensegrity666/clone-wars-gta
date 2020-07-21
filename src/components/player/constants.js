@@ -123,6 +123,4 @@ const WEAPONS = {
   chaingun: 'chaingun',
 };
 
-export {
-  PARAMS, WEAPONS, MOVING_PARAMS, controlKeys,
-};
+export { PARAMS, WEAPONS, MOVING_PARAMS, controlKeys };

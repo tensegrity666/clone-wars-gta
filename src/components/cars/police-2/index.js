@@ -66,9 +66,9 @@ class PoliceCar2 extends IAbstract {
       };
 
       if (
-        this.controller.moveUp.isDown
-        && this.state.isPlayerInside
-        && this.state.speed <= 500
+        this.controller.moveUp.isDown &&
+        this.state.isPlayerInside &&
+        this.state.speed <= 500
       ) {
         this.state.speed += 0;
       }
@@ -95,13 +95,13 @@ class PoliceCar2 extends IAbstract {
       }
 
       this.object.setVelocityY(
-        -this.state.speed
-          * Math.cos(((this.object.rotation * 180) / Math.PI - 360) * 0.01745),
+        -this.state.speed *
+          Math.cos(((this.object.rotation * 180) / Math.PI - 360) * 0.01745)
       );
 
       this.object.setVelocityX(
-        this.state.speed
-          * Math.sin(((this.object.rotation * 180) / Math.PI - 360) * 0.01745),
+        this.state.speed *
+          Math.sin(((this.object.rotation * 180) / Math.PI - 360) * 0.01745)
       );
 
       if (this.controller.moveUp.isUp && this.controller.moveDown.isUp) {
