@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.4.0](https://github.com/rolling-scopes-school/clonewars-gta/compare/v1.0.0...v1.4.0) (2020-07-21)
+
+
+### Features
+
+* final merge ([7bc33ee](https://github.com/rolling-scopes-school/clonewars-gta/commit/7bc33eed122fb05e8a60822bc2dddd2bb9b49063))
+
+
+### Bug Fixes
+
+* map ([11afd1d](https://github.com/rolling-scopes-school/clonewars-gta/commit/11afd1d45e790251bc241c51bf3622ac4b99085b))
+
 ## [1.3.0](https://github.com/rolling-scopes-school/clonewars-gta/compare/v1.2.0...v1.3.0) (2020-07-15)
 
 
