@@ -2,9 +2,9 @@
 /* eslint-disable no-console */
 /* eslint-disable no-unused-vars */
 
-import { nanoid } from 'nanoid';
+// import { nanoid } from 'nanoid';
 
-import VirtualJoystickPlugin from 'phaser3-rex-plugins/plugins/virtualjoystick';
+// import VirtualJoystickPlugin from 'phaser3-rex-plugins/plugins/virtualjoystick';
 
 import IAbstarct from '../interface';
 
@@ -17,7 +17,7 @@ import { PARAMS as PLAYER_PARAM, MOVING_PARAMS } from '../player/constants';
 let player;
 
 class ScreenController extends IAbstarct {
-  static id = nanoid();
+  // static id = nanoid();
 
   // preload(scene) {
   //   const sprites = Object.values(PLAYER_PARAM.IMAGES.PLAYER);
@@ -208,7 +208,7 @@ class ScreenController extends IAbstarct {
   }
 
   update(scene) {
-    const pointer = scene.input.activePointer;
+    // const pointer = scene.input.activePointer;
 
     const directionCursorKeys = this.directionJoystick.createCursorKeys();
 
