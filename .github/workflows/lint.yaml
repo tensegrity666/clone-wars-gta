@@ -17,10 +17,3 @@ jobs:
 
     - name: lint
       run: npm run lint
-
-    - name: check if src has changed
-      run: echo ::set-env name=DIFF::$(git diff  --stat -- 'src')
-
-    - name: commit files
-      if: ${{ env.DIFF }}
-      run: git add -A && git commit -m 'build action'
