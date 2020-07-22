@@ -1,25 +1,26 @@
 name: Lint-on-push
+
 on: [pull_request, push]
 
 jobs:
-lint-job:
-  runs-on: ubuntu-latest
-  steps:
-  - uses: actions/checkout@v2
-  - uses: actions/setup-node@v1
-    name: setup node
-    with:
-      node-version: '13.x'
+  lint-job:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: actions/setup-node@v1
+      name: setup node
+      with:
+        node-version: '13.x'
 
-  - name: install
-    run: npm ci
+    - name: install
+      run: npm ci
 
-  - name: lint
-    run: npm run lint
+    - name: lint
+      run: npm run lint
 
-  - name: check if src has changed
-    run: echo ::set-env name=DIFF::$(git diff  --stat -- 'src')
+    - name: check if src has changed
+      run: echo ::set-env name=DIFF::$(git diff  --stat -- 'src')
 
-  - name: commit files
-    if: ${{ env.DIFF }}
-    run: git add -A && git commit -m 'build action'
+    - name: commit files
+      if: ${{ env.DIFF }}
+      run: git add -A && git commit -m 'build action'
