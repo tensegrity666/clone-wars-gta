@@ -34,14 +34,14 @@ class TimeQuest extends IAbstarct {
     this.startObj = scene.physics.add
       .sprite(
         ...PARAMS.INITIAL_COORDINATES_START,
-        PARAMS.IMAGES.TIME_QUEST_START_ICON.id
+        PARAMS.IMAGES.TIME_QUEST_START_ICON.id,
       )
       .setDepth(1)
       .setImmovable();
     this.finishObj = scene.physics.add
       .sprite(
         ...PARAMS.INITIAL_COORDINATES_FINISH,
-        PARAMS.IMAGES.TIME_QUEST_FINISH_ICON.id
+        PARAMS.IMAGES.TIME_QUEST_FINISH_ICON.id,
       )
       .setDepth(1)
       .setImmovable();
@@ -103,7 +103,7 @@ class TimeQuest extends IAbstarct {
           PARAMS.textCoords[0],
           PARAMS.textCoords[1],
           `Time: ${this.state.time}`,
-          PARAMS.textStyle
+          PARAMS.textStyle,
         );
         this.timeInterval = setInterval(() => {
           this.state.time -= 1;

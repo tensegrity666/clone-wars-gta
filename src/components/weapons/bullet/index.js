@@ -11,7 +11,7 @@ class Bullet {
     scene.load.spritesheet(
       PARAMS.IMAGES.BULLET.bullet.id,
       PARAMS.IMAGES.BULLET.bullet.img,
-      PARAMS.IMAGES.BULLET.bullet.frameSize
+      PARAMS.IMAGES.BULLET.bullet.frameSize,
     );
   }
 
@@ -28,7 +28,7 @@ class Bullet {
       .sprite(
         gunner.object.x + Math.cos(gunner.object.rotation) * 20,
         gunner.object.y + Math.sin(gunner.object.rotation) * 20,
-        PARAMS.IMAGES.BULLET.bullet.id
+        PARAMS.IMAGES.BULLET.bullet.id,
       )
       .setScale(0.33);
     this.newBullet.rotation = gunner.object.rotation;

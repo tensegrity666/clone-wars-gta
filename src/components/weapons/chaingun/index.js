@@ -18,7 +18,7 @@ class Chaingun extends IAbstarct {
     scene.load.spritesheet(
       PARAMS.IMAGES.CHAINGUN.id,
       PARAMS.IMAGES.CHAINGUN.img,
-      PARAMS.IMAGES.CHAINGUN.frameSize
+      PARAMS.IMAGES.CHAINGUN.frameSize,
     );
 
     scene.load.audio(PARAMS.SOUNDS.pistol.id, PARAMS.SOUNDS.pistol.file);
@@ -51,7 +51,7 @@ class Chaingun extends IAbstarct {
         this.bullet,
         gunner.object.x + Math.cos(gunner.object.rotation) * 1000,
         gunner.object.y + Math.sin(gunner.object.rotation) * 1000,
-        800
+        800,
       );
       gunner.state.ammo -= 1;
     }

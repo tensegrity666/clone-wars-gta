@@ -19,12 +19,12 @@ class Pistol extends IAbstarct {
     scene.load.spritesheet(
       PARAMS.IMAGES.PISTOL.id,
       PARAMS.IMAGES.PISTOL.img,
-      PARAMS.IMAGES.PISTOL.frameSize
+      PARAMS.IMAGES.PISTOL.frameSize,
     );
 
     scene.load.image(
       PARAMS.IMAGES.BULLET.bullet.id,
-      PARAMS.IMAGES.BULLET.bullet.img
+      PARAMS.IMAGES.BULLET.bullet.img,
     );
 
     scene.load.audio(PARAMS.SOUNDS.pistol.id, PARAMS.SOUNDS.pistol.file);
@@ -58,7 +58,7 @@ class Pistol extends IAbstarct {
         this.bullet,
         gunner.object.x + Math.cos(gunner.object.rotation) * 1000,
         gunner.object.y + Math.sin(gunner.object.rotation) * 1000,
-        600
+        600,
       );
       gunner.state.ammo -= 1;
     }

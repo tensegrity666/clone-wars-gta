@@ -8,7 +8,7 @@ import VirtualJoystickPlugin from 'phaser3-rex-plugins/plugins/virtualjoystick';
 
 import IAbstarct from '../interface';
 
-import JOYSTISK_PARAMS from './constants';
+// import JOYSTISK_PARAMS from './constants';
 
 import Player from '../player';
 
@@ -19,100 +19,100 @@ let player;
 class ScreenController extends IAbstarct {
   static id = nanoid();
 
-  preload(scene) {
-    const sprites = Object.values(PLAYER_PARAM.IMAGES.PLAYER);
-    scene.load.image(
-      JOYSTISK_PARAMS.directionId,
-      JOYSTISK_PARAMS.directionPath
-    );
-    scene.load.image(JOYSTISK_PARAMS.shootId, JOYSTISK_PARAMS.shootPath);
-    scene.load.image(
-      JOYSTISK_PARAMS.directionThumbId,
-      JOYSTISK_PARAMS.directionThumbPath
-    );
-    scene.load.image(
-      JOYSTISK_PARAMS.shootThumbId,
-      JOYSTISK_PARAMS.shootThumbPath
-    );
-    scene.load.image(JOYSTISK_PARAMS.actionId, JOYSTISK_PARAMS.actionPath);
-  }
+  // preload(scene) {
+  //   const sprites = Object.values(PLAYER_PARAM.IMAGES.PLAYER);
+  //   scene.load.image(
+  //     JOYSTISK_PARAMS.directionId,
+  //     JOYSTISK_PARAMS.directionPath,
+  //   );
+  //   scene.load.image(JOYSTISK_PARAMS.shootId, JOYSTISK_PARAMS.shootPath);
+  //   scene.load.image(
+  //     JOYSTISK_PARAMS.directionThumbId,
+  //     JOYSTISK_PARAMS.directionThumbPath,
+  //   );
+  //   scene.load.image(
+  //     JOYSTISK_PARAMS.shootThumbId,
+  //     JOYSTISK_PARAMS.shootThumbPath,
+  //   );
+  //   scene.load.image(JOYSTISK_PARAMS.actionId, JOYSTISK_PARAMS.actionPath);
+  // }
 
-  create(scene, featureMap) {
-    player = featureMap[Player.id];
+  // create(scene, featureMap) {
+  //   player = featureMap[Player.id];
 
-    this.directionJoystick = new VirtualJoystickPlugin(scene, {
-      x: JOYSTISK_PARAMS.directionPosition.x,
-      y: JOYSTISK_PARAMS.directionPosition.y,
-      radius: JOYSTISK_PARAMS.directionRadius,
-      base: scene.add
-        .sprite(
-          JOYSTISK_PARAMS.directionSize.width,
-          JOYSTISK_PARAMS.directionSize.height,
-          JOYSTISK_PARAMS.directionId
-        )
-        .setDepth(JOYSTISK_PARAMS.joystickDepth),
-      thumb: scene.add
-        .sprite(
-          JOYSTISK_PARAMS.directionThumbSize.width,
-          JOYSTISK_PARAMS.directionThumbSize.height,
-          JOYSTISK_PARAMS.directionThumbId
-        )
-        .setDepth(JOYSTISK_PARAMS.joystickDepth),
-      dir: '8dir',
-      forceMin: 16,
-      enable: true,
-    }).on('update', this.dumpDirectionJoystickState, this);
+  //   this.directionJoystick = new VirtualJoystickPlugin(scene, {
+  //     x: JOYSTISK_PARAMS.directionPosition.x,
+  //     y: JOYSTISK_PARAMS.directionPosition.y,
+  //     radius: JOYSTISK_PARAMS.directionRadius,
+  //     base: scene.add
+  //       .sprite(
+  //         JOYSTISK_PARAMS.directionSize.width,
+  //         JOYSTISK_PARAMS.directionSize.height,
+  //         JOYSTISK_PARAMS.directionId,
+  //       )
+  //       .setDepth(JOYSTISK_PARAMS.joystickDepth),
+  //     thumb: scene.add
+  //       .sprite(
+  //         JOYSTISK_PARAMS.directionThumbSize.width,
+  //         JOYSTISK_PARAMS.directionThumbSize.height,
+  //         JOYSTISK_PARAMS.directionThumbId,
+  //       )
+  //       .setDepth(JOYSTISK_PARAMS.joystickDepth),
+  //     dir: '8dir',
+  //     forceMin: 16,
+  //     enable: true,
+  //   }).on('update', this.dumpDirectionJoystickState, this);
 
-    this.shootJoystick = new VirtualJoystickPlugin(scene, {
-      x: JOYSTISK_PARAMS.shootPosition.x,
-      y: JOYSTISK_PARAMS.shootPosition.y,
-      radius: JOYSTISK_PARAMS.shootRadius,
-      base: scene.add
-        .sprite(
-          JOYSTISK_PARAMS.shootSize.width,
-          JOYSTISK_PARAMS.shootSize.height,
-          JOYSTISK_PARAMS.shootId
-        )
-        .setDepth(JOYSTISK_PARAMS.joystickDepth),
-      thumb: scene.add
-        .sprite(
-          JOYSTISK_PARAMS.shootThumbSize.width,
-          JOYSTISK_PARAMS.shootThumbSize.height,
-          JOYSTISK_PARAMS.shootThumbId
-        )
-        .setDepth(JOYSTISK_PARAMS.joystickDepth),
-      dir: '8dir',
-      forceMin: 16,
-      enable: true,
-    }).on('update', this.dumpShootJoystickState, this);
+  //   this.shootJoystick = new VirtualJoystickPlugin(scene, {
+  //     x: JOYSTISK_PARAMS.shootPosition.x,
+  //     y: JOYSTISK_PARAMS.shootPosition.y,
+  //     radius: JOYSTISK_PARAMS.shootRadius,
+  //     base: scene.add
+  //       .sprite(
+  //         JOYSTISK_PARAMS.shootSize.width,
+  //         JOYSTISK_PARAMS.shootSize.height,
+  //         JOYSTISK_PARAMS.shootId,
+  //       )
+  //       .setDepth(JOYSTISK_PARAMS.joystickDepth),
+  //     thumb: scene.add
+  //       .sprite(
+  //         JOYSTISK_PARAMS.shootThumbSize.width,
+  //         JOYSTISK_PARAMS.shootThumbSize.height,
+  //         JOYSTISK_PARAMS.shootThumbId,
+  //       )
+  //       .setDepth(JOYSTISK_PARAMS.joystickDepth),
+  //     dir: '8dir',
+  //     forceMin: 16,
+  //     enable: true,
+  //   }).on('update', this.dumpShootJoystickState, this);
 
-    this.actionJoystick = new VirtualJoystickPlugin(scene, {
-      x: JOYSTISK_PARAMS.actionPosition.x,
-      y: JOYSTISK_PARAMS.actionPosition.y,
-      radius: JOYSTISK_PARAMS.actionRadius,
-      base: scene.add
-        .sprite(
-          JOYSTISK_PARAMS.actionSize.width,
-          JOYSTISK_PARAMS.actionSize.height,
-          JOYSTISK_PARAMS.actionId
-        )
-        .setDepth(JOYSTISK_PARAMS.joystickDepth),
-      thumb: scene.add
-        .sprite(
-          JOYSTISK_PARAMS.shootThumbSize.width,
-          JOYSTISK_PARAMS.shootThumbSize.height,
-          JOYSTISK_PARAMS.shootThumbId
-        )
-        .setAlpha(0),
-      dir: 'up&down',
-      forceMin: 0,
-      enable: true,
-    }).on('update', this.dumpShootJoystickState, this);
+  //   this.actionJoystick = new VirtualJoystickPlugin(scene, {
+  //     x: JOYSTISK_PARAMS.actionPosition.x,
+  //     y: JOYSTISK_PARAMS.actionPosition.y,
+  //     radius: JOYSTISK_PARAMS.actionRadius,
+  //     base: scene.add
+  //       .sprite(
+  //         JOYSTISK_PARAMS.actionSize.width,
+  //         JOYSTISK_PARAMS.actionSize.height,
+  //         JOYSTISK_PARAMS.actionId,
+  //       )
+  //       .setDepth(JOYSTISK_PARAMS.joystickDepth),
+  //     thumb: scene.add
+  //       .sprite(
+  //         JOYSTISK_PARAMS.shootThumbSize.width,
+  //         JOYSTISK_PARAMS.shootThumbSize.height,
+  //         JOYSTISK_PARAMS.shootThumbId,
+  //       )
+  //       .setAlpha(0),
+  //     dir: 'up&down',
+  //     forceMin: 0,
+  //     enable: true,
+  //   }).on('update', this.dumpShootJoystickState, this);
 
-    this.dumpDirectionJoystickState();
-    this.dumpShootJoystickState();
-    this.dumpActionJoystickState();
-  }
+  //   this.dumpDirectionJoystickState();
+  //   this.dumpShootJoystickState();
+  //   this.dumpActionJoystickState();
+  // }
 
   dumpDirectionJoystickState() {}
 
@@ -129,7 +129,7 @@ class ScreenController extends IAbstarct {
           {
             start: 0,
             end: 0,
-          }
+          },
         ),
         frameRate: 10,
         repeat: -1,
@@ -141,7 +141,7 @@ class ScreenController extends IAbstarct {
           {
             start: 0,
             end: 5,
-          }
+          },
         ),
         frameRate: 10,
         repeat: -1,
@@ -153,7 +153,7 @@ class ScreenController extends IAbstarct {
           {
             start: 0,
             end: 5,
-          }
+          },
         ),
         frameRate: 10,
         repeat: -1,
@@ -165,7 +165,7 @@ class ScreenController extends IAbstarct {
           {
             start: 0,
             end: 0,
-          }
+          },
         ),
       },
       machineGun: {
@@ -175,7 +175,7 @@ class ScreenController extends IAbstarct {
           {
             start: 0,
             end: 0,
-          }
+          },
         ),
       },
       chaingun: {
@@ -185,7 +185,7 @@ class ScreenController extends IAbstarct {
           {
             start: 0,
             end: 0,
-          }
+          },
         ),
       },
       chaingunShoot: {
@@ -195,7 +195,7 @@ class ScreenController extends IAbstarct {
           {
             start: 0,
             end: 1,
-          }
+          },
         ),
         frameRate: 10,
         repeat: -1,
@@ -218,22 +218,22 @@ class ScreenController extends IAbstarct {
 
         if (name === 'right') {
           player.object.setVelocityX(
-            MOVING_PARAMS.PLAYER_SPEED * MOVING_PARAMS.SPEED_COF
+            MOVING_PARAMS.PLAYER_SPEED * MOVING_PARAMS.SPEED_COF,
           );
         }
         if (name === 'left') {
           player.object.setVelocityX(
-            -(MOVING_PARAMS.PLAYER_SPEED * MOVING_PARAMS.SPEED_COF)
+            -(MOVING_PARAMS.PLAYER_SPEED * MOVING_PARAMS.SPEED_COF),
           );
         }
         if (name === 'down') {
           player.object.setVelocityY(
-            MOVING_PARAMS.PLAYER_SPEED * MOVING_PARAMS.SPEED_COF
+            MOVING_PARAMS.PLAYER_SPEED * MOVING_PARAMS.SPEED_COF,
           );
         }
         if (name === 'up') {
           player.object.setVelocityY(
-            -(MOVING_PARAMS.PLAYER_SPEED * MOVING_PARAMS.SPEED_COF)
+            -(MOVING_PARAMS.PLAYER_SPEED * MOVING_PARAMS.SPEED_COF),
           );
         }
         player.object.anims.play(player.animations.run.key, true);

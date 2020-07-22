@@ -20,7 +20,7 @@ class Map extends IAbstarct {
       key: PARAMS.waterAnimationID,
       frames: scene.anims.generateFrameNumbers(
         PARAMS.waterID,
-        PARAMS.frameWater
+        PARAMS.frameWater,
       ),
       frameRate: 1,
       repeat: -1,
@@ -65,7 +65,7 @@ class Map extends IAbstarct {
       640,
       640,
       map.widthInPixels - 1000,
-      map.heightInPixels - 1000
+      map.heightInPixels - 1000,
     );
 
     this.border = scene.cameras
@@ -73,7 +73,7 @@ class Map extends IAbstarct {
         PARAMS.positionBorder.x,
         PARAMS.positionBorder.y,
         PARAMS.sizeBorder.width,
-        PARAMS.sizeBorder.height
+        PARAMS.sizeBorder.height,
       )
       .setZoom(PARAMS.minimapZoom)
       .setName(PARAMS.nameBorder);
@@ -82,7 +82,7 @@ class Map extends IAbstarct {
       PARAMS.backgroundBorder.r,
       PARAMS.backgroundBorder.g,
       PARAMS.backgroundBorder.b,
-      PARAMS.backgroundBorder.a
+      PARAMS.backgroundBorder.a,
     );
     this.border.setScene(scene);
     this.border.scrollX = PARAMS.scrollXMinimap;
@@ -91,7 +91,7 @@ class Map extends IAbstarct {
       PARAMS.fadeTimeBorder,
       PARAMS.backgroundBorder.r,
       PARAMS.backgroundBorder.g,
-      PARAMS.backgroundBorder.b
+      PARAMS.backgroundBorder.b,
     );
     this.border.alpha = PARAMS.alphaBorder;
 
@@ -100,7 +100,7 @@ class Map extends IAbstarct {
         PARAMS.positionMinimap.x,
         PARAMS.positionMinimap.y,
         PARAMS.sizeMinimap.width,
-        PARAMS.sizeMinimap.height
+        PARAMS.sizeMinimap.height,
       )
       .setZoom(PARAMS.minimapZoom)
       .setName(PARAMS.nameMinimap);
@@ -109,7 +109,7 @@ class Map extends IAbstarct {
       PARAMS.backgroundMinimap.r,
       PARAMS.backgroundMinimap.g,
       PARAMS.backgroundMinimap.b,
-      PARAMS.backgroundMinimap.a
+      PARAMS.backgroundMinimap.a,
     );
     this.minimap.setScene(scene);
     this.minimap.scrollX = PARAMS.scrollXMinimap;
@@ -119,7 +119,7 @@ class Map extends IAbstarct {
       PARAMS.tintMinimap.topLeft,
       PARAMS.tintMinimap.topRight,
       PARAMS.tintMinimap.bottomLeft,
-      PARAMS.tintMinimap.bottomRight
+      PARAMS.tintMinimap.bottomRight,
     );
     this.minimap.fadeIn();
     this.minimap.alpha = PARAMS.alphaMinimap;

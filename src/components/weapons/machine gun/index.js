@@ -18,11 +18,11 @@ class MachineGun extends IAbstarct {
     scene.load.spritesheet(
       PARAMS.IMAGES.HK.id,
       PARAMS.IMAGES.HK.img,
-      PARAMS.IMAGES.HK.frameSize
+      PARAMS.IMAGES.HK.frameSize,
     );
     scene.load.image(
       PARAMS.IMAGES.BULLET.bullet.id,
-      PARAMS.IMAGES.BULLET.bullet.img
+      PARAMS.IMAGES.BULLET.bullet.img,
     );
 
     scene.load.audio(PARAMS.SOUNDS.pistol.id, PARAMS.SOUNDS.pistol.file);
@@ -55,7 +55,7 @@ class MachineGun extends IAbstarct {
         this.bullet,
         gunner.object.x + Math.cos(gunner.object.rotation) * 1000,
         gunner.object.y + Math.sin(gunner.object.rotation) * 1000,
-        700
+        700,
       );
       gunner.state.ammo -= 1;
     }

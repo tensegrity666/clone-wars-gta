@@ -70,28 +70,28 @@ class Interactions extends IAbstarct {
       PARAMS.textCoords[0],
       PARAMS.textCoords[2],
       `Score: ${currentPlayer.score}`,
-      PARAMS.textStyle
+      PARAMS.textStyle,
     );
 
     this.name = this.sceneUI.add.text(
       PARAMS.textCoords[1],
       PARAMS.textCoords[2],
       `${localStorage.currentPlayerName || currentPlayer.name}`,
-      PARAMS.textStyle
+      PARAMS.textStyle,
     );
 
     this.health = this.sceneUI.add.text(
       PARAMS.textCoords[0],
       PARAMS.textCoords[3],
       `Health: ${this.player.state.health}`,
-      PARAMS.textStyle
+      PARAMS.textStyle,
     );
 
     this.ammo = this.sceneUI.add.text(
       PARAMS.textCoords[0],
       PARAMS.textCoords[4],
       `Ammo: ${this.player.state.ammo}`,
-      PARAMS.textStyle
+      PARAMS.textStyle,
     );
 
     this.interactionMap = interactionMap;
@@ -210,7 +210,7 @@ class Interactions extends IAbstarct {
         this.player.state.currentWeaponIcon = this.sceneUI.add
           .image(220, 150, PARAMS.IMAGES.WEAPONS.machineGun.id)
           .setScale(0.2);
-      }
+      },
     );
 
     scene.physics.add.collider(this.player.object, this.chaingun.object, () => {
@@ -235,7 +235,7 @@ class Interactions extends IAbstarct {
         [...this.allCitizensObjects, this.player, map],
         () => {
           // TODO урон ботам когда на них наезжают
-        }
+        },
       );
 
       scene.physics.add.collider(
@@ -246,7 +246,7 @@ class Interactions extends IAbstarct {
         }, []),
         () => {
           // TODO урон машинам при аварии
-        }
+        },
       );
     });
   }
@@ -268,7 +268,7 @@ class Interactions extends IAbstarct {
           this.startSoundEffect.play();
 
           this.timeQuest.state.isStarted = true;
-        }
+        },
       );
     }
     if (this.timeQuest.finishObj.visible) {
@@ -286,7 +286,7 @@ class Interactions extends IAbstarct {
           }
           this.timeQuest.finishObj.destroy();
           this.timeQuest.startObj.destroy();
-        }
+        },
       );
     }
   }
@@ -313,7 +313,7 @@ class Interactions extends IAbstarct {
         this.policeCar.object,
         () => {
           this.actionWithBulletsAndCars(this.bullet.newBullet, this.policeCar);
-        }
+        },
       );
 
       scene.physics.add.collider(
@@ -321,7 +321,7 @@ class Interactions extends IAbstarct {
         this.racingCar.object,
         () => {
           this.actionWithBulletsAndCars(this.bullet.newBullet, this.racingCar);
-        }
+        },
       );
 
       scene.physics.add.collider(
@@ -329,7 +329,7 @@ class Interactions extends IAbstarct {
         this.taxiCar.object,
         () => {
           this.actionWithBulletsAndCars(this.bullet.newBullet, this.taxiCar);
-        }
+        },
       );
 
       scene.physics.add.collider(
@@ -337,7 +337,7 @@ class Interactions extends IAbstarct {
         interactionMap[Map.id].object,
         () => {
           this.bullet.newBullet.destroy();
-        }
+        },
       );
 
       this.allCitizensObjects.forEach((citizen) => {
@@ -380,14 +380,14 @@ class Interactions extends IAbstarct {
 
   isCarClose(car) {
     if (
-      car.x + 50 < this.player.object.x ||
-      car.x - 50 > this.player.object.x
+      car.x + 50 < this.player.object.x
+      || car.x - 50 > this.player.object.x
     ) {
       return false;
     }
     if (
-      car.y + 50 < this.player.object.y ||
-      car.y - 50 > this.player.object.y
+      car.y + 50 < this.player.object.y
+      || car.y - 50 > this.player.object.y
     ) {
       return false;
     }
@@ -415,10 +415,10 @@ class Interactions extends IAbstarct {
     this.player.closestCar = this.getClosestCar(this.allCars);
 
     if (
-      this.player.controller.doAction.isDown &&
-      !this.player.state.isInsideCar &&
-      this.changeCurrentCar(this.player.closestCar) &&
-      this.isCarClose(this.player.currentCar.object)
+      this.player.controller.doAction.isDown
+      && !this.player.state.isInsideCar
+      && this.changeCurrentCar(this.player.closestCar)
+      && this.isCarClose(this.player.currentCar.object)
     ) {
       this.getCarSoundEffect.play();
 
@@ -431,8 +431,8 @@ class Interactions extends IAbstarct {
     }
 
     if (
-      this.player.controller.doAction.isDown &&
-      this.player.state.isInsideCar
+      this.player.controller.doAction.isDown
+      && this.player.state.isInsideCar
     ) {
       this.player.object.body.enable = true;
       this.player.object = this.carContainer.getAt(0);
@@ -446,9 +446,9 @@ class Interactions extends IAbstarct {
     }
 
     if (
-      pointer.isDown &&
-      this.player.state.ammo &&
-      !this.player.state.isShooting
+      pointer.isDown
+      && this.player.state.ammo
+      && !this.player.state.isShooting
     ) {
       this.player.state.isShooting = true;
 
@@ -456,7 +456,7 @@ class Interactions extends IAbstarct {
         case this.player.WEAPONS.pistol:
           this.player.object.anims.play(
             this.player.animations.pistol.key,
-            true
+            true,
           );
           Pistol.shooting(scene, this.player, this.interactionMap);
           setTimeout(() => {
@@ -466,7 +466,7 @@ class Interactions extends IAbstarct {
         case this.player.WEAPONS.machineGun:
           this.player.object.anims.play(
             this.player.animations.machineGun.key,
-            true
+            true,
           );
           MachineGun.shooting(scene, this.player, this.interactionMap);
           setTimeout(() => {
@@ -476,7 +476,7 @@ class Interactions extends IAbstarct {
         case this.player.WEAPONS.chaingun:
           this.player.object.anims.play(
             this.player.animations.chaingunShoot.key,
-            true
+            true,
           );
           Chaingun.shooting(scene, this.player, this.interactionMap);
           setTimeout(() => {
