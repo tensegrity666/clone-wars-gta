@@ -22,7 +22,7 @@ class TaxiCar extends IAbstarct {
     });
   }
 
-  create(scene, featureMap) {
+  create(scene) {
     this.object = scene.physics.add
       .sprite(...PARAMS.INITIAL_COORDINATES, PARAMS.IMAGES.PLAYER_CAR.id)
       .setDepth(1)
