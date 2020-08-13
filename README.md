@@ -1,3 +1,6 @@
+# [PLAY!](https://gta-phaser.firebaseapp.com/)
+[_backup link_](https://gta-phaser.web.app/)
+
 ## [Homepage](https://gta-phaser-promo.netlify.app/)
 ## [Article on Medium](https://medium.com/@loremipsumrrr/clonewars-gta-8c1da4e202ba)
 
